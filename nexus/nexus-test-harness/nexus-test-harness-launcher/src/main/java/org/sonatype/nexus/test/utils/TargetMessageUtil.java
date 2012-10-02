@@ -12,8 +12,8 @@
  */
 package org.sonatype.nexus.test.utils;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.sonatype.nexus.test.utils.NexusRequestMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.sonatype.nexus.test.utils.NexusRequestMatchers.isSuccessful;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.codehaus.plexus.util.StringUtils;
+import org.junit.Assert;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Response;
@@ -37,7 +38,6 @@ import org.sonatype.nexus.rest.model.RepositoryTargetListResourceResponse;
 import org.sonatype.nexus.rest.model.RepositoryTargetResource;
 import org.sonatype.nexus.rest.model.RepositoryTargetResourceResponse;
 import org.sonatype.plexus.rest.representation.XStreamRepresentation;
-import org.testng.Assert;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -68,12 +68,15 @@ public class TargetMessageUtil
     {
         Response response = null;
         String entityText;
-        try {
+        try
+        {
             response = this.sendMessage( update ? Method.PUT : Method.POST, target );
             entityText = response.getEntity().getText();
-            assertThat(response, isSuccessful());
-        } finally {
-            RequestFacade.releaseResponse(response);
+            assertThat( response, isSuccessful() );
+        }
+        finally
+        {
+            RequestFacade.releaseResponse( response );
         }
 
         // get the Resource object
@@ -95,6 +98,7 @@ public class TargetMessageUtil
 
         return responseResource;
     }
+
     /**
      * IMPORTANT: Make sure to release the Response in a finally block when you are done with it.
      */
@@ -220,8 +224,8 @@ public class TargetMessageUtil
 
         List<CRepositoryTarget> repoTargets = config.getRepositoryTargets();
         // check to see if the size matches
-        Assert.assertTrue( repoTargets.size() == targets.size(), "Configuration had a different number: (" + repoTargets.size()
-                + ") of targets then expected: (" + targets.size() + ")" );
+        Assert.assertTrue( "Configuration had a different number: (" + repoTargets.size()
+            + ") of targets then expected: (" + targets.size() + ")", repoTargets.size() == targets.size() );
 
         // look for the target by id
 
@@ -263,7 +267,7 @@ public class TargetMessageUtil
         {
             Status status =
                 RequestFacade.sendMessage( "service/local/repo_targets/" + target.getId(), Method.DELETE ).getStatus();
-            Assert.assertTrue( status.isSuccess(), "Failt to delete: " + status.getDescription() );
+            Assert.assertTrue( "Failed to delete: " + status.getDescription(), status.isSuccess() );
         }
     }
 
@@ -285,7 +289,7 @@ public class TargetMessageUtil
     public static RepositoryTargetResource get( String targetId )
         throws IOException
     {
-        String responseText = RequestFacade.doGetForText("service/local/repo_targets/" + targetId);
+        String responseText = RequestFacade.doGetForText( "service/local/repo_targets/" + targetId );
         LOG.debug( "responseText: \n" + responseText );
 
         XStreamRepresentation representation =
@@ -299,13 +303,14 @@ public class TargetMessageUtil
 
     /**
      * Deletes the target id and ensures the delete was successful
+     * 
      * @param targetId
      * @throws IOException
      */
     public static void delete( String targetId )
         throws IOException
     {
-        RequestFacade.doDelete("service/local/repo_targets/" + targetId, isSuccessful());
+        RequestFacade.doDelete( "service/local/repo_targets/" + targetId, isSuccessful() );
     }
 
 }

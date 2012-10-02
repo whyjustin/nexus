@@ -128,11 +128,6 @@
 
     <!-- Test frameworks: we use TestNG but some tests refers to JUnit annos still -->
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.sonatype.nexus</groupId>
       <artifactId>nexus-test-common</artifactId>
       <scope>compile</scope>
@@ -178,11 +173,7 @@
       <exclusions>
         <exclusion>
           <groupId>junit</groupId>
-          <artifactId>junit-dep</artifactId>
-        </exclusion>
-        <exclusion>
           <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
         </exclusion>
       </exclusions>
     </dependency>

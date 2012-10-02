@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Response;
@@ -25,11 +26,8 @@ import org.sonatype.nexus.configuration.model.CRepository;
 import org.sonatype.nexus.integrationtests.AbstractNexusIntegrationTest;
 import org.sonatype.nexus.integrationtests.RequestFacade;
 import org.sonatype.nexus.rest.model.RepositoryGroupListResource;
-import org.sonatype.nexus.rest.model.RepositoryGroupListResourceResponse;
 import org.sonatype.nexus.rest.model.RepositoryGroupMemberRepository;
 import org.sonatype.nexus.rest.model.RepositoryGroupResource;
-import org.sonatype.plexus.rest.representation.XStreamRepresentation;
-import org.testng.Assert;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -85,8 +83,8 @@ public class GroupMessageUtil
     public void validateRepoLists( List<RepositoryGroupMemberRepository> expected, List<?> actual )
     {
 
-        Assert.assertEquals( actual.size(), expected.size(), "Size of groups repository list, \nexpected: " + this.repoListToStringList( expected )
-                + "\nactual: " + this.repoListToStringList( actual ) + "\n" );
+        Assert.assertEquals( "Size of groups repository list, \nexpected: " + this.repoListToStringList( expected )
+            + "\nactual: " + this.repoListToStringList( actual ) + "\n", actual.size(), expected.size() );
 
         for ( int ii = 0; ii < expected.size(); ii++ )
         {

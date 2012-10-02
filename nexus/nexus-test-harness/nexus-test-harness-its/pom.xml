@@ -205,20 +205,6 @@
       </exclusions>
     </dependency>
 
-    <!-- TestNG used on runtime -->
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>6.1.1</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
     <!-- Matchers et al -->
     <dependency>
       <groupId>org.sonatype.http-testing-harness</groupId>

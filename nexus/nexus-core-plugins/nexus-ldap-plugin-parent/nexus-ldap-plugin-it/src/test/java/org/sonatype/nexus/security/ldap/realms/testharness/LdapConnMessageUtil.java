@@ -15,6 +15,7 @@ package org.sonatype.nexus.security.ldap.realms.testharness;
 import java.io.IOException;
 
 import org.hamcrest.Matcher;
+import org.junit.Assert;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Response;
@@ -27,7 +28,6 @@ import org.sonatype.nexus.security.ldap.realms.api.dto.LdapConnectionInfoRespons
 import org.sonatype.nexus.test.utils.GroupMessageUtil;
 import org.sonatype.plexus.rest.representation.XStreamRepresentation;
 import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
-import org.testng.Assert;
 
 import com.thoughtworks.xstream.XStream;
 

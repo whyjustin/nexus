@@ -12,6 +12,9 @@
  */
 package org.sonatype.nexus.security.ldap.realms.testharness.nxcm147;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.restlet.data.MediaType;
 import org.restlet.data.Response;
 import org.restlet.data.Status;
@@ -22,9 +25,6 @@ import org.sonatype.nexus.security.ldap.realms.testharness.AbstractLdapIntegrati
 import org.sonatype.nexus.security.ldap.realms.testharness.LdapConnMessageUtil;
 import org.sonatype.nexus.security.ldap.realms.testharness.LdapUserGroupMessageUtil;
 import org.sonatype.nexus.security.ldap.realms.testharness.LdapUsersMessageUtil;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -40,7 +40,7 @@ public class Nxcm147SavedPasswordConnectionJsonIT
         super();
     }
 
-    @BeforeClass
+    @Before
     public void init()
     {
         this.xstream = this.getJsonXStream();

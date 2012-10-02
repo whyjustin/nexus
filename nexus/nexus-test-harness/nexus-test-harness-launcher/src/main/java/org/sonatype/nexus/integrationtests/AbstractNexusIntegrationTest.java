@@ -18,7 +18,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.sonatype.nexus.test.utils.ResponseMatchers.isRedirecting;
 import static org.sonatype.nexus.test.utils.ResponseMatchers.redirectLocation;
 import static org.sonatype.nexus.test.utils.ResponseMatchers.respondsWithStatusCode;
-import static org.testng.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,6 +47,9 @@ import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.restlet.data.Method;
 import org.restlet.data.Reference;
 import org.restlet.data.Response;
@@ -72,11 +74,6 @@ import org.sonatype.nexus.test.utils.TestProperties;
 import org.sonatype.nexus.test.utils.WagonDeployer;
 import org.sonatype.nexus.test.utils.XStreamFactory;
 import org.sonatype.security.guice.SecurityModule;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
 import com.google.common.base.Throwables;
 import com.google.common.io.Closeables;
@@ -919,7 +916,7 @@ public abstract class AbstractNexusIntegrationTest
         }
         catch ( Exception e )
         {
-            fail( "Profiler was active, but failed due: " + e.getMessage() );
+            Assert.fail( "Profiler was active, but failed due: " + e.getMessage() );
         }
     }
 
@@ -934,7 +931,7 @@ public abstract class AbstractNexusIntegrationTest
             }
             catch ( Exception e )
             {
-                fail( "Profiler was active, but failed due: " + e.getMessage() );
+                Assert.fail( "Profiler was active, but failed due: " + e.getMessage() );
             }
         }
     }

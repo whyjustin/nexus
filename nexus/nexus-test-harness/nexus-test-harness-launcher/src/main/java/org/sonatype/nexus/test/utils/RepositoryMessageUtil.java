@@ -20,6 +20,7 @@ import static org.sonatype.nexus.test.utils.NexusRequestMatchers.isSuccessful;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Assert;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Response;
@@ -38,7 +39,7 @@ import org.sonatype.nexus.rest.model.RepositoryResourceResponse;
 import org.sonatype.nexus.rest.model.RepositoryShadowResource;
 import org.sonatype.nexus.rest.model.RepositoryStatusResource;
 import org.sonatype.plexus.rest.representation.XStreamRepresentation;
-import org.testng.Assert;
+
 import com.thoughtworks.xstream.XStream;
 
 public class RepositoryMessageUtil
@@ -52,23 +53,17 @@ public class RepositoryMessageUtil
     private static final Logger LOG = LoggerFactory.getLogger( RepositoryMessageUtil.class );
 
     private static final RepositoriesNexusRestClient REPOSITORY_NRC = new RepositoriesNexusRestClient(
-        RequestFacade.getNexusRestClient(),
-        new TasksNexusRestClient( RequestFacade.getNexusRestClient() ),
-        new EventInspectorsUtil( RequestFacade.getNexusRestClient() )
-    );
+        RequestFacade.getNexusRestClient(), new TasksNexusRestClient( RequestFacade.getNexusRestClient() ),
+        new EventInspectorsUtil( RequestFacade.getNexusRestClient() ) );
 
     private final RepositoriesNexusRestClient repositoryNRC;
 
     public RepositoryMessageUtil( AbstractNexusIntegrationTest test, XStream xstream, MediaType mediaType )
     {
         super( test );
-        repositoryNRC = new RepositoriesNexusRestClient(
-            RequestFacade.getNexusRestClient(),
-            new TasksNexusRestClient( RequestFacade.getNexusRestClient() ),
-            test.getEventInspectorsUtil(),
-            xstream,
-            mediaType
-        );
+        repositoryNRC =
+            new RepositoriesNexusRestClient( RequestFacade.getNexusRestClient(), new TasksNexusRestClient(
+                RequestFacade.getNexusRestClient() ), test.getEventInspectorsUtil(), xstream, mediaType );
     }
 
     public RepositoryBaseResource createRepository( RepositoryBaseResource repo )
@@ -118,18 +113,18 @@ public class RepositoryMessageUtil
             // TODO: sometimes the storage dir ends with a '/' SEE: NEXUS-542
             if ( actual.getDefaultLocalStorageUrl().endsWith( "/" ) )
             {
-                Assert.assertTrue( actual.getDefaultLocalStorageUrl().endsWith( "/storage/" + repo.getId() + "/" ),
-                                   "Unexpected defaultLocalStorage: <expected to end with> " + "/storage/"
-                                       + repo.getId()
-                                       + "/  <actual>" + actual.getDefaultLocalStorageUrl() );
+                Assert.assertTrue(
+                    "Unexpected defaultLocalStorage: <expected to end with> " + "/storage/" + repo.getId()
+                        + "/  <actual>" + actual.getDefaultLocalStorageUrl(),
+                    actual.getDefaultLocalStorageUrl().endsWith( "/storage/" + repo.getId() + "/" ) );
             }
             // NOTE one of these blocks should be removed
             else
             {
-                Assert.assertTrue( actual.getDefaultLocalStorageUrl().endsWith( "/storage/" + repo.getId() ),
-                                   "Unexpected defaultLocalStorage: <expected to end with> " + "/storage/"
-                                       + repo.getId()
-                                       + "  <actual>" + actual.getDefaultLocalStorageUrl() );
+                Assert.assertTrue(
+                    "Unexpected defaultLocalStorage: <expected to end with> " + "/storage/" + repo.getId()
+                        + "  <actual>" + actual.getDefaultLocalStorageUrl(),
+                    actual.getDefaultLocalStorageUrl().endsWith( "/storage/" + repo.getId() ) );
             }
 
             Assert.assertEquals( expected.getNotFoundCacheTTL(), actual.getNotFoundCacheTTL() );
@@ -142,7 +137,7 @@ public class RepositoryMessageUtil
             else
             {
                 Assert.assertEquals( expected.getRemoteStorage().getRemoteStorageUrl(),
-                                     actual.getRemoteStorage().getRemoteStorageUrl() );
+                    actual.getRemoteStorage().getRemoteStorageUrl() );
             }
 
             Assert.assertEquals( expected.getRepoPolicy(), actual.getRepoPolicy() );
@@ -220,7 +215,7 @@ public class RepositoryMessageUtil
 
     /**
      * This should be replaced with a REST Call, but the REST client does not set the Accept correctly on GET's/
-     *
+     * 
      * @return
      * @throws IOException
      */
@@ -296,7 +291,7 @@ public class RepositoryMessageUtil
             if ( expected.getOverrideLocalStorageUrl() == null )
             {
                 Assert.assertNull( cRepo.getLocalStorage().getUrl(),
-                                   "Expected CRepo localstorage url not be set, because it is the default." );
+                    "Expected CRepo localstorage url not be set, because it is the default." );
             }
             else
             {
@@ -316,7 +311,7 @@ public class RepositoryMessageUtil
             else
             {
                 Assert.assertEquals( expected.getRemoteStorage().getRemoteStorageUrl(),
-                                     cRepo.getRemoteStorage().getUrl() );
+                    cRepo.getRemoteStorage().getUrl() );
             }
 
             // check maven repo props (for not just check everything that is a Repository
@@ -380,7 +375,7 @@ public class RepositoryMessageUtil
     /**
      * Change block proxy state.<BR>
      * this method only return after all Tasks and Asynchronous events to finish
-     *
+     * 
      * @param repoId
      * @param block
      * @throws Exception
@@ -394,7 +389,7 @@ public class RepositoryMessageUtil
     /**
      * Change block out of service state.<BR>
      * this method only return after all Tasks and Asynchronous events to finish
-     *
+     * 
      * @param repoId
      * @param outOfService
      * @throws Exception

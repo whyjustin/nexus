@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.integrationtests;
 
-import static org.testng.Assert.fail;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +23,7 @@ import org.codehaus.plexus.DefaultPlexusContainer;
 import org.codehaus.plexus.PlexusConstants;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.PlexusContainerException;
+import org.junit.Assert;
 import org.sonatype.nexus.test.utils.TestProperties;
 
 import com.google.inject.Module;
@@ -167,7 +166,7 @@ public class TestContainer
         catch ( PlexusContainerException e )
         {
             e.printStackTrace();
-            fail( "Failed to create plexus container." );
+            Assert.fail( "Failed to create plexus container." );
             return null;
         }
     }
