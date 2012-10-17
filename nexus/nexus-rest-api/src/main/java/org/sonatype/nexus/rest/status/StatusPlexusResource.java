@@ -15,13 +15,14 @@ package org.sonatype.nexus.rest.status;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -37,7 +38,8 @@ import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.security.rest.authentication.AbstractUIPermissionCalculatingPlexusResource;
 import org.sonatype.security.rest.model.AuthenticationClientPermissions;
 
-@Component( role = ManagedPlexusResource.class, hint = "StatusPlexusResource" )
+@Named
+@Singleton
 @Path( StatusPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class StatusPlexusResource
@@ -46,7 +48,7 @@ public class StatusPlexusResource
 {
     public static final String RESOURCE_URI = "/status";
 
-    @Requirement
+    @Inject
     private Nexus nexus;
 
     @Override

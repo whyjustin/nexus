@@ -12,12 +12,13 @@
  */
 package org.sonatype.nexus.rest.global;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -33,7 +34,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  * 
  * @author velo
  */
-@Component( role = PlexusResource.class, hint = "RestTimeoutSettingsPlexusResource" )
+@Named
+@Singleton
 @Path( RestApiSettingsPlexusResource.RESOURCE_URI )
 @Consumes( { "application/xml", "application/json" } )
 public class RestApiSettingsPlexusResource

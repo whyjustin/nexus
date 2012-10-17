@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.data.MediaType;
 import org.sonatype.nexus.feeds.ErrorWarningEvent;
@@ -30,12 +29,16 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Show recored nexus errors and warnings
  * 
  * @author juven
  */
-@Component( role = FeedSource.class, hint = "errorWarning" )
+@Named("errorWarning")
+@Singleton
 public class ErrorWarningFeedSource
     extends AbstractFeedSource
 {

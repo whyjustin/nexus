@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.rest;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.data.Request;
 import org.slf4j.Logger;
@@ -25,20 +23,25 @@ import org.sonatype.nexus.proxy.registry.RepositoryTypeRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.utils.RepositoryStringUtils;
 
-@Component( role = RepositoryURLBuilder.class, hint = "RestletRepositoryUrlBuilder" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("RestletRepositoryUrlBuilder")
+@Singleton
 public class RestletRepositoryURLBuilder
     implements RepositoryURLBuilder
 {
-    @Requirement
+    @Inject
     private Logger logger;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement
+    @Inject
     private GlobalRestApiSettings globalRestApiSettings;
 
     public RestletRepositoryURLBuilder()

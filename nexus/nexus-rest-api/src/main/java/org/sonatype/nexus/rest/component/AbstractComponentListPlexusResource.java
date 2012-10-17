@@ -15,7 +15,6 @@ package org.sonatype.nexus.rest.component;
 import java.util.Map;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.ComponentDescriptor;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.util.StringUtils;
@@ -29,12 +28,14 @@ import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.nexus.rest.model.PlexusComponentListResource;
 import org.sonatype.nexus.rest.model.PlexusComponentListResourceResponse;
 
+import javax.inject.Inject;
+
 public abstract class AbstractComponentListPlexusResource
     extends AbstractNexusPlexusResource
 {
     public static final String ROLE_ID = "role";
 
-    @Requirement
+    @Inject
     private PlexusContainer container;
 
     @Override

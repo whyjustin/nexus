@@ -12,12 +12,13 @@
  */
 package org.sonatype.nexus.rest.status;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -28,7 +29,8 @@ import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.plexus.rest.resource.ManagedPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 
-@Component( role = ManagedPlexusResource.class, hint = "CommandPlexusResource" )
+@Named
+@Singleton
 @Path( CommandPlexusResource.RESOURCE_URI )
 @Consumes( { "application/xml", "application/json" } )
 public class CommandPlexusResource

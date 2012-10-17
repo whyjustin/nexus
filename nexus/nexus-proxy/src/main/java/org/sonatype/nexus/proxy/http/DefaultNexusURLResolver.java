@@ -15,9 +15,6 @@ package org.sonatype.nexus.proxy.http;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Configuration;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.context.Context;
 import org.codehaus.plexus.context.ContextException;
 // FIXME: Kill these...
@@ -27,6 +24,10 @@ import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.ProxyRepository;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Default Nexus URL resolver. It does simple URL.startsWith() matching of the supplied URL with the Nexus registered
  * proxy repositories's remote URL. This should be made better, since with solution like this, we are loosing many good
@@ -34,7 +35,8 @@ import org.sonatype.nexus.proxy.repository.Repository;
  * 
  * @author cstamas
  */
-@Component(role=NexusURLResolver.class)
+@Named
+@Singleton
 public class DefaultNexusURLResolver
     extends AbstractLoggingComponent
     implements NexusURLResolver, Contextualizable
@@ -42,13 +44,15 @@ public class DefaultNexusURLResolver
 
     public static final String APPLICATION_PORT = "applicationPort";
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Configuration(value="localhost")
+    @Inject
+    @Named("${DefaultNexusURLResolver.nexusHost:-localhost}")
     private String nexusHost;
 
-    @Configuration(value="8081")
+    @Inject
+    @Named("${DefaultNexusURLResolver.nexusPort:-8081}")
     private int nexusPort;
 
     public void contextualize( Context ctx )

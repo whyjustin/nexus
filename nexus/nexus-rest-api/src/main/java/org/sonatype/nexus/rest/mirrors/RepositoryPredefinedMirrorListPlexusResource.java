@@ -15,14 +15,15 @@ package org.sonatype.nexus.rest.mirrors;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -39,14 +40,16 @@ import org.sonatype.nexus.rest.model.MirrorResourceListResponse;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "RepositoryPredefinedMirrorListPlexusResource" )
+@Named
+@Singleton
 @Path( RepositoryPredefinedMirrorListPlexusResource.RESOURCE_URI )
 @Consumes( { "application/xml", "application/json" } )
 public class RepositoryPredefinedMirrorListPlexusResource
     extends AbstractRepositoryMirrorPlexusResource
 {
     public static final String RESOURCE_URI = "/repository_predefined_mirrors/{" + REPOSITORY_ID_KEY + "}"; 
-    @Requirement
+
+    @Inject
     private NexusRepositoryMetadataHandler repoMetadata;
 
     public RepositoryPredefinedMirrorListPlexusResource()

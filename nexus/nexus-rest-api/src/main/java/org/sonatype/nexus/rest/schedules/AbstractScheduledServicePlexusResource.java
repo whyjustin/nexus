@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.Request;
 import org.restlet.resource.ResourceException;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
@@ -56,10 +55,12 @@ import org.sonatype.scheduling.schedules.RunNowSchedule;
 import org.sonatype.scheduling.schedules.Schedule;
 import org.sonatype.scheduling.schedules.WeeklySchedule;
 
+import javax.inject.Inject;
+
 public abstract class AbstractScheduledServicePlexusResource
     extends AbstractFormFieldResource
 {
-    @Requirement
+    @Inject
     private NexusScheduler nexusScheduler;
 
     public static final String SCHEDULED_SERVICE_ID_KEY = "scheduledServiceId";

@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.plugins.events.api;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Form;
 import org.restlet.data.Request;
@@ -26,13 +24,18 @@ import org.sonatype.plexus.rest.resource.AbstractPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "EventInspectorsPlexusResource" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class EventInspectorsPlexusResource
     extends AbstractPlexusResource
 {
     private static final String RESOURCE_URI = "/eventInspectors/isCalmPeriod";
 
-    @Requirement
+    @Inject
     private EventInspectorHost eventInspectorHost;
 
     @Override

@@ -12,11 +12,12 @@
  */
 package org.sonatype.nexus.rest.feeds.sources;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
+
+import javax.inject.Inject;
 
 /**
  * And abstract class for NexusArtifactEvent based feeds. This class implements all needed to create a feed,
@@ -28,13 +29,13 @@ public abstract class AbstractFeedSource
     extends AbstractLoggingComponent
     implements FeedSource
 {
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private FeedRecorder feedRecorder;
 
     protected FeedRecorder getFeedRecorder()

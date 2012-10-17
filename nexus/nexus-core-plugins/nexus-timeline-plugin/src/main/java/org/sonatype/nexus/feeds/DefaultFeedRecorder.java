@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.ExceptionUtils;
 import org.sonatype.nexus.feeds.record.NexusItemInfo;
@@ -34,12 +32,17 @@ import org.sonatype.nexus.timeline.Entry;
 import org.sonatype.nexus.timeline.NexusTimeline;
 import com.google.common.base.Predicate;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * A feed recorder that uses DefaultNexus to record feeds.
  *
  * @author cstamas
  */
-@Component( role = FeedRecorder.class )
+@Named
+@Singleton
 public class DefaultFeedRecorder
     implements FeedRecorder
 {
@@ -118,13 +121,13 @@ public class DefaultFeedRecorder
     /**
      * The timeline for persistent events and feeds.
      */
-    @Requirement
+    @Inject
     private NexusTimeline nexusTimeline;
 
     /**
      * The Feed filter (will checks for user access )
      */
-    @Requirement
+    @Inject
     private FeedArtifactEventFilter feedArtifactEventFilter;
 
     protected Logger getLogger()

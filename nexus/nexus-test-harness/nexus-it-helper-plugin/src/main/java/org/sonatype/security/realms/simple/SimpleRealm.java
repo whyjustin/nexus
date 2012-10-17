@@ -22,13 +22,18 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.codehaus.plexus.component.annotations.Component;
+import org.sonatype.inject.Description;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * All this class really needs to do is return an AuthorizationInfo. You could go go all out and implement Realm, but
  * that is more then I want to cover in this example.
  */
-@Component( role = Realm.class, hint = "Simple", description = "Simple In Memory Realm" )
+@Named("Simple")
+@Singleton
+@Description("Simple In Memory Realm" )
 // The role must be Realm.class, and the hint is up to you.
 public class SimpleRealm
     extends AuthorizingRealm

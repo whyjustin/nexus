@@ -30,7 +30,9 @@ import org.apache.shiro.authz.permission.WildcardPermission;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.codehaus.plexus.component.annotations.Component;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * This is a pretty simple sample of how you can completely override the nexus
@@ -46,7 +48,8 @@ import org.codehaus.plexus.component.annotations.Component;
  * use the role-hint of MemoryRealm.
  * 
  */
-@Component(role=Realm.class, hint="MemoryRealm")
+@Named("MemoryRealm")
+@Singleton
 public class MemoryRealm
     extends AuthorizingRealm
 {

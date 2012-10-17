@@ -14,13 +14,14 @@ package org.sonatype.nexus.rest.global;
 
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Request;
@@ -40,7 +41,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  * 
  * @author velo
  */
-@Component( role = PlexusResource.class, hint = "SmtpSettingsValidation" )
+@Named
+@Singleton
 @Path( SmtpSettingsValidationPlexusResource.RESOURCE_URI )
 @Consumes( { "application/xml", "application/json" } )
 public class SmtpSettingsValidationPlexusResource
@@ -50,7 +52,7 @@ public class SmtpSettingsValidationPlexusResource
         
     private static final Pattern EMAIL_PATTERN = Pattern.compile( ".+@.+\\.[a-zA-Z]+" );
 
-    @Requirement
+    @Inject
     private SmtpSettingsValidator emailer;
 
     public SmtpSettingsValidationPlexusResource()

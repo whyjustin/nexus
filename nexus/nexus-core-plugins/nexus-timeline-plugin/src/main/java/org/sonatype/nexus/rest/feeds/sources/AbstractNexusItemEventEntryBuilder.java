@@ -14,7 +14,6 @@ package org.sonatype.nexus.rest.feeds.sources;
 
 import java.util.Date;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.MediaType;
 import org.sonatype.nexus.Nexus;
 import org.sonatype.nexus.feeds.NexusArtifactEvent;
@@ -30,6 +29,8 @@ import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 
+import javax.inject.Inject;
+
 /**
  * @author Juven Xu
  */
@@ -37,10 +38,10 @@ abstract public class AbstractNexusItemEventEntryBuilder
     extends AbstractLoggingComponent
     implements SyndEntryBuilder<NexusArtifactEvent>
 {
-    @Requirement
+    @Inject
     private Nexus nexus;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     protected Nexus getNexus()

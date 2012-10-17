@@ -15,7 +15,6 @@ package org.sonatype.security.realms;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -25,6 +24,9 @@ import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * This is a sample of how you can inject your own authentication system
@@ -39,7 +41,8 @@ import org.apache.shiro.subject.PrincipalCollection;
  * use the role-hint of MemoryAuthenticationOnlyRealm.
  * 
  */
-@Component(role=org.apache.shiro.realm.Realm.class, hint="MemoryAuthenticationOnlyRealm")
+@Named("MemoryAuthenticationRealm")
+@Singleton
 public class MemoryAuthenticationOnlyRealm
     extends AuthorizingRealm
 {

@@ -17,16 +17,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.feeds.SystemEvent;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * The system changes feed.
  * 
  * @author cstamas
  */
-@Component( role = FeedSource.class, hint = "systemRepositoryStatusChanges" )
+@Named("systemRepositoryStatusChanges")
+@Singleton
 public class SystemRepositoryStatusChangesFeedSource
     extends AbstractSystemFeedSource
 {

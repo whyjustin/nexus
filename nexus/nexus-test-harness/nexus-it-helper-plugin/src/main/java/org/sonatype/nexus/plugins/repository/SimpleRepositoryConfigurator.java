@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.plugins.repository;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.repository.AbstractRepositoryConfigurator;
 
 import javax.inject.Named;

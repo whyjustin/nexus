@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.feeds.record;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.auth.ClientInfo;
 import org.sonatype.nexus.auth.NexusAuthenticationEvent;
@@ -25,12 +23,17 @@ import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.plexus.appevents.Event;
 
-@Component( role = EventInspector.class, hint = "NexusAuthenticationEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class NexusAuthenticationEventInspector
     extends AbstractFeedRecorderEventInspector
     implements AsynchronousEventInspector
 {
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfiguration;
 
     private volatile NexusAuthenticationEvent lastNexusAuthenticationEvent;

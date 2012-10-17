@@ -15,7 +15,6 @@ package org.sonatype.nexus.rest.repositories;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.data.Form;
 import org.restlet.data.Request;
@@ -60,25 +59,29 @@ import org.sonatype.nexus.rest.model.RepositoryResourceRemoteStorage;
 import org.sonatype.nexus.rest.model.RepositoryResourceResponse;
 import org.sonatype.nexus.rest.model.RepositoryShadowResource;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public abstract class AbstractRepositoryPlexusResource
     extends AbstractNexusPlexusResource
 {
     /** Key to store Repo with which we work against. */
     public static final String REPOSITORY_ID_KEY = "repositoryId";
 
-    @Requirement
+    @Inject
     private AuthenticationInfoConverter authenticationInfoConverter;
 
-    @Requirement
+    @Inject
     private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
 
-    @Requirement
+    @Inject
     private GlobalHttpProxySettings globalHttpProxySettings;
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
-    
-    @Requirement(hint="RestletRepositoryUrlBuilder")
+
+    @Inject
+    @Named("RestletRepositoryUrlBuilder")
     private RepositoryURLBuilder repositoryURLBuilder;
 
     protected AuthenticationInfoConverter getAuthenticationInfoConverter()

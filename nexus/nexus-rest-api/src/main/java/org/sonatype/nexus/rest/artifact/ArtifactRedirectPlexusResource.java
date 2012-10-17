@@ -12,12 +12,13 @@
  */
 package org.sonatype.nexus.rest.artifact;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -31,7 +32,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  *
  * @author cstamas
  */
-@Component( role = PlexusResource.class, hint = "ArtifactRedirectPlexusResource" )
+@Named
+@Singleton
 @Path( "/artifact/maven/redirect" )
 public class ArtifactRedirectPlexusResource
     extends AbstractArtifactPlexusResource

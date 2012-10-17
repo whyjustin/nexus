@@ -18,22 +18,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.feeds.NexusArtifactEvent;
 import org.sonatype.nexus.feeds.RepositoryIdTimelineFilter;
 import org.sonatype.nexus.timeline.Entry;
 
 import com.google.common.base.Predicate;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author Juven Xu
  */
-@Component( role = FeedSource.class, hint = "recentlyCachedArtifacts" )
+@Named("recentlyCachedArtifacts")
+@Singleton
 public class RecentCachedArtifactFeedSource
     extends AbstractNexusItemEventFeedSource
 {
-    @Requirement( hint = "artifact" )
+    @Inject
+    @Named( "artifact" )
     private SyndEntryBuilder<NexusArtifactEvent> entryBuilder;
 
     public static final String CHANNEL_KEY = "recentlyCachedArtifacts";

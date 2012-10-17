@@ -12,11 +12,14 @@
  */
 package org.sonatype.nexus.plugins.repository;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.registry.AbstractIdContentClass;
 import org.sonatype.nexus.proxy.registry.ContentClass;
 
-@Component( role = ContentClass.class, hint = SimpleContentClass.ID )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(SimpleContentClass.ID)
+@Singleton
 public class SimpleContentClass
     extends AbstractIdContentClass
 {

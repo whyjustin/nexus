@@ -22,7 +22,6 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.shiro.subject.Subject;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -59,10 +58,12 @@ import org.sonatype.nexus.rest.StorageFileItemRepresentation;
 import org.sonatype.nexus.rest.model.ArtifactCoordinate;
 import org.sonatype.security.SecuritySystem;
 
+import javax.inject.Inject;
+
 public abstract class AbstractArtifactPlexusResource
     extends AbstractNexusPlexusResource
 {
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
     /**

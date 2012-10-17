@@ -12,6 +12,8 @@
  */
 package org.sonatype.nexus.rest.cache;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,7 +21,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -39,7 +40,8 @@ import org.sonatype.nexus.tasks.ExpireCacheTask;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "CachePlexusResource" )
+@Named
+@Singleton
 @Path( CachePlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class CachePlexusResource

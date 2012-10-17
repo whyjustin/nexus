@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
@@ -34,6 +32,10 @@ import org.sonatype.timeline.TimelineConfiguration;
 import org.sonatype.timeline.TimelineException;
 import com.google.common.base.Predicate;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This is the "real thing": implementation backed by spice Timeline. Until now, it was in Core, but it kept
  * many important and key dependencies in core too, and making Nexus Core literally a hostage of it.
@@ -41,7 +43,8 @@ import com.google.common.base.Predicate;
  * @author cstamas
  * @since 2.0
  */
-@Component( role = NexusTimeline.class )
+@Named
+@Singleton
 public class DefaultNexusTimeline
     implements NexusTimeline, Initializable, Startable
 {
@@ -50,10 +53,10 @@ public class DefaultNexusTimeline
 
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private Timeline timeline;
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
     protected Logger getLogger()

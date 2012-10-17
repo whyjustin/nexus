@@ -12,11 +12,14 @@
  */
 package org.sonatype.nexus.rest.docs;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.rest.AbstractDocumentationNexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
 
-@Component( role = NexusResourceBundle.class, hint = "TimelineDocumentationNexusResourceBundle" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class TimelineDocumentationNexusResourceBundle
     extends AbstractDocumentationNexusResourceBundle
 {

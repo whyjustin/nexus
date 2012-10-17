@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.feeds.record;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.feeds.NexusArtifactEvent;
@@ -30,13 +29,17 @@ import org.sonatype.nexus.proxy.maven.uid.IsMavenChecksumAttribute;
 import org.sonatype.nexus.proxy.maven.uid.IsMavenRepositoryMetadataAttribute;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Event inspector that persists item events into Timeline.
  *
  * @author Juven Xu
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "ItemChangesFeedEventInspector" )
+@Named
+@Singleton
 public class ItemChangesFeedEventInspector
     extends AbstractFeedRecorderEventInspector
     implements AsynchronousEventInspector

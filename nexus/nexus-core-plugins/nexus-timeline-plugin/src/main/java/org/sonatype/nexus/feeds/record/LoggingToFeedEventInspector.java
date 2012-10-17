@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.feeds.record;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.feeds.ErrorWarningEvent;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.logging.LoggingEvent;
@@ -21,13 +20,17 @@ import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Listens to {@link LoggingEvent}s of ERROR/WARN level and creates corresponding {@link FeedRecorder} entries. It is an
  * asynchronous listener so Nexus is not blocked during feed entry registration.
  * 
  * @author adreghiciu@gmail.com
  */
-@Component( role = EventInspector.class, hint = "LoggingToFeedEventInspector" )
+@Named
+@Singleton
 public class LoggingToFeedEventInspector
     extends AbstractFeedRecorderEventInspector
     implements AsynchronousEventInspector

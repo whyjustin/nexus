@@ -14,13 +14,14 @@ package org.sonatype.nexus.rest.feeds;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -39,7 +40,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  * @author cstamas
  * @author dip
  */
-@Component( role = PlexusResource.class, hint = "FeedsListPlexusResource" )
+@Named
+@Singleton
 @Path( FeedsListPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class FeedsListPlexusResource
@@ -47,7 +49,7 @@ public class FeedsListPlexusResource
 {
     public static final String RESOURCE_URI = "/feeds";
     
-    @Requirement( role = FeedSource.class )
+    @Inject
     private List<FeedSource> feeds;
 
     @Override

@@ -14,11 +14,12 @@ package org.sonatype.nexus.feeds.record;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import com.google.common.base.Preconditions;
+
+import javax.inject.Inject;
 
 /**
  * @author cstamas
@@ -26,10 +27,10 @@ import com.google.common.base.Preconditions;
 public abstract class AbstractFeedRecorderEventInspector
     extends AbstractEventInspector
 {
-    @Requirement
+    @Inject
     private FeedRecorder feedRecorder;
 
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
     public AbstractFeedRecorderEventInspector()

@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.plugins.repository;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.sonatype.nexus.configuration.Configurator;
 import org.sonatype.nexus.configuration.model.CRepository;
@@ -23,15 +21,21 @@ import org.sonatype.nexus.proxy.repository.AbstractRepository;
 import org.sonatype.nexus.proxy.repository.DefaultRepositoryKind;
 import org.sonatype.nexus.proxy.repository.RepositoryKind;
 
-@Component( role = SimpleRepository.class, hint="default" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("default")
+@Singleton
 public class SimpleRepositoryImpl
     extends AbstractRepository
     implements SimpleRepository
 {
-    @Requirement( hint = SimpleContentClass.ID )
+    @Inject
+    @Named( SimpleContentClass.ID )
     private ContentClass contentClass;
 
-    @Requirement
+    @Inject
     private SimpleRepositoryConfigurator simpleRepositoryConfigurator;
 
     private final RepositoryKind repositoryKind = new DefaultRepositoryKind( SimpleRepository.class, null );

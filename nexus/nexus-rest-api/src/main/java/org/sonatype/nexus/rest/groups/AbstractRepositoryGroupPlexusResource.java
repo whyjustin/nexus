@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.Request;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
@@ -38,15 +37,19 @@ import org.sonatype.nexus.rest.repositories.RepositoryBaseResourceConverter;
 import org.sonatype.nexus.templates.repository.RepositoryTemplate;
 import org.sonatype.plexus.rest.resource.PlexusResourceException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public abstract class AbstractRepositoryGroupPlexusResource
     extends AbstractNexusPlexusResource
 {
     public static final String GROUP_ID_KEY = "groupId";
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
     
-    @Requirement(hint="RestletRepositoryUrlBuilder")
+    @Inject
+    @Named("RestletRepositoryUrlBuilder")
     private RepositoryURLBuilder repositoryURLBuilder;
     
     protected RepositoryURLBuilder getRepositoryURLBuilder()

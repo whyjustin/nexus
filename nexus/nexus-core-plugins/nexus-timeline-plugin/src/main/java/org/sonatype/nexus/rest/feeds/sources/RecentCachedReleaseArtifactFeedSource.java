@@ -18,14 +18,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.feeds.NexusArtifactEvent;
 import org.sonatype.nexus.feeds.RepositoryIdTimelineFilter;
 import org.sonatype.nexus.timeline.Entry;
 
 import com.google.common.base.Predicate;
 
-@Component( role = FeedSource.class, hint = "recentlyCachedReleaseArtifacts" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("recentlyCachedReleaseArtifacts")
+@Singleton
 public class RecentCachedReleaseArtifactFeedSource
     extends AbstractNexusReleaseArtifactEventFeedSource
 {

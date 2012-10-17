@@ -12,12 +12,13 @@
  */
 package org.sonatype.nexus.rest.authentication;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -33,7 +34,8 @@ import org.sonatype.security.rest.model.AuthenticationLoginResourceResponse;
  * 
  * @author bdemers
  */
-@Component( role = PlexusResource.class, hint = "LoginPlexusResource" )
+@Named
+@Singleton
 @Path( AbstractLoginPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class NexusLoginPlexusResource

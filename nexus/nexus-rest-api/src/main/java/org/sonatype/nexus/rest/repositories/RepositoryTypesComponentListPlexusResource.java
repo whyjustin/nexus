@@ -15,13 +15,14 @@ package org.sonatype.nexus.rest.repositories;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Form;
 import org.restlet.data.Request;
@@ -43,7 +44,8 @@ import org.sonatype.nexus.templates.repository.RepositoryTemplate;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "RepositoryTypesComponentListPlexusResource" )
+@Named
+@Singleton
 @Path( RepositoryTypesComponentListPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class RepositoryTypesComponentListPlexusResource

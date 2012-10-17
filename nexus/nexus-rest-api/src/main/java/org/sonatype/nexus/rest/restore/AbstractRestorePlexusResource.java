@@ -14,7 +14,6 @@ package org.sonatype.nexus.rest.restore;
 
 import java.util.concurrent.RejectedExecutionException;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.data.Request;
 import org.restlet.data.Status;
@@ -27,6 +26,8 @@ import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.nexus.scheduling.NexusScheduler;
 import org.sonatype.nexus.scheduling.NexusTask;
 
+import javax.inject.Inject;
+
 public abstract class AbstractRestorePlexusResource
     extends AbstractNexusPlexusResource
 {
@@ -38,7 +39,7 @@ public abstract class AbstractRestorePlexusResource
 
     public static final String TARGET_ID = "target";
 
-    @Requirement
+    @Inject
     private NexusScheduler nexusScheduler;
 
     public AbstractRestorePlexusResource()

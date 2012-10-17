@@ -15,13 +15,14 @@ package org.sonatype.nexus.rest.logs;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -41,7 +42,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  *
  * @author cstamas
  */
-@Component( role = PlexusResource.class, hint = "logsList" )
+@Named
+@Singleton
 @Path( LogsListPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class LogsListPlexusResource
@@ -50,7 +52,7 @@ public class LogsListPlexusResource
     /**
      * The LogFile Manager
      */
-    @Requirement
+    @Inject
     private LogManager logManager;
 
     public static final String RESOURCE_URI = "/logs"; 

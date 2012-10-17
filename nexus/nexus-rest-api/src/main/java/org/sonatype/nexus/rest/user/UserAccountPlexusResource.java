@@ -12,6 +12,8 @@
  */
 package org.sonatype.nexus.rest.user;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -20,7 +22,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -44,7 +45,8 @@ import org.sonatype.security.usermanagement.UserNotFoundException;
  * Resource managing user account details.
  * @since 2.1
  */
-@Component( role = PlexusResource.class, hint = "UserAccountPlexusResource" )
+@Named
+@Singleton
 @Path( "/user_account/{" + UserAccountPlexusResource.ACCOUNT_ID_KEY + "}" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )

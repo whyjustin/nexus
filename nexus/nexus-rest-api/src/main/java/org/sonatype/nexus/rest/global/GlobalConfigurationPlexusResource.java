@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -25,8 +27,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Reference;
@@ -67,7 +67,8 @@ import org.sonatype.security.configuration.source.SecurityConfigurationSource;
  * @author cstamas
  * @author tstevens
  */
-@Component( role = PlexusResource.class, hint = "GlobalConfigurationPlexusResource" )
+@Named
+@Singleton
 @Path( GlobalConfigurationPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )

@@ -15,7 +15,6 @@ package org.sonatype.nexus.rest.routes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.Reference;
 import org.restlet.data.Request;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
@@ -25,6 +24,8 @@ import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.nexus.rest.NoSuchRepositoryAccessException;
 import org.sonatype.nexus.rest.model.RepositoryRouteMemberRepository;
 import org.sonatype.nexus.rest.model.RepositoryRouteResource;
+
+import javax.inject.Inject;
 
 /**
  * Abstract base class for route resource handlers.
@@ -36,7 +37,7 @@ public abstract class AbstractRepositoryRoutePlexusResource
 {
     public static final String ROUTE_ID_KEY = "routeId";
 
-    @Requirement
+    @Inject
     private RequestRepositoryMapper repositoryMapper;
 
     protected RequestRepositoryMapper getRepositoryMapper()

@@ -22,11 +22,12 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Base64Encoder;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Configuration;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,8 @@ import org.slf4j.LoggerFactory;
 /**
  * @author <a href="oleg@codehaus.org">Oleg Gusakov</a>
  */
-@Component( role = PlexusCipher.class )
+@Named
+@Singleton
 public class DefaultPlexusCipher
     implements PlexusCipher
 {
@@ -47,15 +49,15 @@ public class DefaultPlexusCipher
     /**
      * Encryption algorithm to use by this instance. Needs protected scope for tests
      */
-    @Configuration( value = "PBEWithSHAAnd128BitRC4" )
+    @Inject
+    @Named("${DefaultPlexusCipher.algorithm:-PBEWithSHAAnd128BitRC4}" )
     protected String algorithm = "PBEWithSHAAnd128BitRC4";
 
     /**
      * Number of iterations when generationg the key
-     * 
-     * @plexus.configuration default-value="23"
      */
-    @Configuration( value = "23" )
+    @Inject
+    @Named("${DefaultPlexusCipher.iterationCount:-23}" )
     protected int iterationCount = 23;
 
     private final BouncyCastleProvider bouncyCastleProvider;

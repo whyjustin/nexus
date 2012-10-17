@@ -18,9 +18,6 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Configuration;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
@@ -35,12 +32,17 @@ import org.sonatype.nexus.configuration.model.CHttpProxySettings;
 import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.threads.NexusThreadFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * A default HTTP Proxy service. A very simple network service based on Java 5 ExecutorService.
  * 
  * @author cstamas
  */
-@Component( role = HttpProxyService.class )
+@Named
+@Singleton
 public class DefaultHttpProxyService
     extends AbstractConfigurable
     implements HttpProxyService, Startable
@@ -49,13 +51,14 @@ public class DefaultHttpProxyService
 
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private NexusURLResolver nexusURLResolver;
 
-    @Configuration( value = "10" )
+    @Inject
+    @Named("${DefaultHttpProxyService.poolSize:-10}")
     private int poolSize;
 
     private ServerSocket serverSocket;

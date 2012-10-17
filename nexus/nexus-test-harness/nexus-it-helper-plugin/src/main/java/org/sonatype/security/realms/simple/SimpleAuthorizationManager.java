@@ -15,13 +15,16 @@ package org.sonatype.security.realms.simple;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
+import org.sonatype.inject.Description;
 import org.sonatype.security.authorization.AbstractReadOnlyAuthorizationManager;
 import org.sonatype.security.authorization.AuthorizationManager;
 import org.sonatype.security.authorization.NoSuchPrivilegeException;
 import org.sonatype.security.authorization.NoSuchRoleException;
 import org.sonatype.security.authorization.Privilege;
 import org.sonatype.security.authorization.Role;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A AuthorizationManager is used if an external Realm wants to use its Group/Roles in Nexus. For example, your realm might
@@ -30,7 +33,9 @@ import org.sonatype.security.authorization.Role;
  */
 // This class must have a role of 'AuthorizationManager', and the hint, must match the result of getSource() and the hint
 // of the corresponding Realm.
-@Component( role = AuthorizationManager.class, hint = "Simple", description = "Simple Authorization Manager" )
+@Named("Simple")
+@Singleton
+@Description( "Simple Authorization Manager" )
 public class SimpleAuthorizationManager
     extends AbstractReadOnlyAuthorizationManager
 {

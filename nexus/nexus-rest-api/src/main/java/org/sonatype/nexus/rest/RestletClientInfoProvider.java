@@ -14,11 +14,13 @@ package org.sonatype.nexus.rest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.data.Request;
 import org.sonatype.nexus.auth.ClientInfo;
 import org.sonatype.nexus.auth.ClientInfoProvider;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * {@link ClientInfoProvider} implementation that uses Security and Restlet frameworks to obtain informations. Note: in
@@ -29,7 +31,8 @@ import org.sonatype.nexus.logging.AbstractLoggingComponent;
  * @author cstamas
  * @since 2.1
  */
-@Component( role = ClientInfoProvider.class )
+@Named
+@Singleton
 public class RestletClientInfoProvider
     extends AbstractLoggingComponent
     implements ClientInfoProvider

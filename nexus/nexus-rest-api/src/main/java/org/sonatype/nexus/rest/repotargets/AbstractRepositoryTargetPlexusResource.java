@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.Request;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.proxy.registry.ContentClass;
@@ -26,13 +25,15 @@ import org.sonatype.nexus.proxy.target.TargetRegistry;
 import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.nexus.rest.model.RepositoryTargetResource;
 
+import javax.inject.Inject;
+
 public abstract class AbstractRepositoryTargetPlexusResource
     extends AbstractNexusPlexusResource
 {
-    @Requirement
+    @Inject
     private TargetRegistry targetRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
     protected TargetRegistry getTargetRegistry()

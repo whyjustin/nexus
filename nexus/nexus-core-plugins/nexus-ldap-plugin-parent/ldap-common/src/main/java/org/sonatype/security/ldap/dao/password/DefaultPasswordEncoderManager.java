@@ -18,16 +18,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Configuration;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author cstamas
  */
-@Component( role = PasswordEncoderManager.class )
+@Named
+@Singleton
 public class DefaultPasswordEncoderManager
     implements PasswordEncoderManager
 {
@@ -36,17 +38,14 @@ public class DefaultPasswordEncoderManager
 
     private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    /**
-     */
-    @Requirement( role = PasswordEncoder.class )
+    @Inject
     private List<PasswordEncoder> encoders;
 
-    /**
-     */
-    @Configuration( value = "clear" )
+    @Inject
+    @Named("${DefaultPasswordEncoderManager.preferredEncoding:-clear}")
     private String preferredEncoding;
 
-    @Requirement( role = PasswordEncoder.class )
+    @Inject
     private Map<String, PasswordEncoder> encodersMap;
 
     protected Logger getLogger()

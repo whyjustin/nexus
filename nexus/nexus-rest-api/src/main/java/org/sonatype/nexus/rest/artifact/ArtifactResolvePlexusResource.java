@@ -12,13 +12,14 @@
  */
 package org.sonatype.nexus.rest.artifact;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Form;
@@ -44,7 +45,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  * 
  * @author cstamas
  */
-@Component( role = PlexusResource.class, hint = "ArtifactResolvePlexusResource" )
+@Named
+@Singleton
 @Path( ArtifactResolvePlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 public class ArtifactResolvePlexusResource

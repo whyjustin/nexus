@@ -14,6 +14,10 @@ package org.sonatype.nexus.rest.repositories;
 
 import java.io.IOException;
 
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,8 +25,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.restlet.Context;
@@ -63,7 +65,8 @@ import org.sonatype.plexus.rest.resource.PlexusResourceException;
  * 
  * @author cstamas
  */
-@Component( role = PlexusResource.class, hint = "RepositoryListPlexusResource" )
+@Named
+@Singleton
 @Path( RepositoryListPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
@@ -72,11 +75,13 @@ public class RepositoryListPlexusResource
 {
     public static final String RESOURCE_URI = "/repositories";
 
-    @Requirement
+    @Inject
     private RemoteProviderHintFactory remoteProviderHintFactory;
 
     // UGLY HACK, SEE BELOW
-    @Requirement( role = TemplateProvider.class, hint = DefaultRepositoryTemplateProvider.PROVIDER_ID )
+    @Inject
+    @Named(DefaultRepositoryTemplateProvider.PROVIDER_ID)
+    @Typed(TemplateProvider.class)
     private DefaultRepositoryTemplateProvider repositoryTemplateProvider;
 
     public RepositoryListPlexusResource()

@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.feeds.record;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.feeds.record.AbstractFeedRecorderEventInspector;
 import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
@@ -21,10 +20,14 @@ import org.sonatype.nexus.proxy.events.RepositoryEventProxyModeChanged;
 import org.sonatype.nexus.proxy.repository.ProxyMode;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author Juven Xu
  */
-@Component( role = EventInspector.class, hint = "RepositoryEventProxyModeChanged" )
+@Named
+@Singleton
 public class RepositoryEventProxyModeChangedInspector
     extends AbstractFeedRecorderEventInspector
     implements AsynchronousEventInspector

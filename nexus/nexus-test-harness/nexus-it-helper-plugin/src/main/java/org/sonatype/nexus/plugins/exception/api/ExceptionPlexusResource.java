@@ -14,8 +14,6 @@ package org.sonatype.nexus.plugins.exception.api;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Form;
 import org.restlet.data.Request;
@@ -29,11 +27,16 @@ import org.sonatype.plexus.rest.resource.AbstractPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "ExceptionPlexusResource" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class ExceptionPlexusResource
     extends AbstractPlexusResource
 {
-    @Requirement
+    @Inject
     private ErrorReportingManager manager;
     
     public ExceptionPlexusResource()

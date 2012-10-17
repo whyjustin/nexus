@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.rest.groups;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.data.Request;
 import org.restlet.resource.ResourceException;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
@@ -22,10 +21,14 @@ import org.sonatype.nexus.rest.AbstractResourceStoreContentPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author tstevens
  */
-@Component( role = PlexusResource.class, hint = "RepositoryGroupContentPlexusResource" )
+@Named
+@Singleton
 public class RepositoryGroupContentPlexusResource
     extends AbstractResourceStoreContentPlexusResource
 {

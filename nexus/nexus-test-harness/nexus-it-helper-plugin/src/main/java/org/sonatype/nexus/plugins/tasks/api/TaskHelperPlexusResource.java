@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Form;
 import org.restlet.data.Request;
@@ -35,11 +33,16 @@ import org.sonatype.scheduling.TaskState;
 import org.sonatype.scheduling.schedules.ManualRunSchedule;
 import org.sonatype.scheduling.schedules.RunNowSchedule;
 
-@Component( role = PlexusResource.class, hint = "TaskHelperResource" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class TaskHelperPlexusResource
     extends AbstractPlexusResource
 {
-    @Requirement
+    @Inject
     private NexusScheduler nexusScheduler;
 
     @Override

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.PatternSyntaxException;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,7 +28,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -52,7 +53,8 @@ import org.sonatype.plexus.rest.resource.error.ErrorResponse;
  * @author cstamas
  * @author tstevens
  */
-@Component( role = PlexusResource.class, hint = "RepositoryRoutePlexusResource" )
+@Named
+@Singleton
 @Path( RepositoryRoutePlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )

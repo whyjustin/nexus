@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.restlet.Context;
 import org.restlet.data.Form;
@@ -30,6 +29,8 @@ import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.nexus.rest.feeds.sources.FeedSource;
 
 import com.sun.syndication.feed.synd.SyndFeed;
+
+import javax.inject.Inject;
 
 /**
  * A base Resource class for RSS feeds to be published over restlet.org. It overrides the get() method, the user only
@@ -45,7 +46,7 @@ public abstract class AbstractFeedPlexusResource
 
     private static final String ATOM_1_0 = "atom_1.0";
 
-    @Requirement( role = FeedSource.class )
+    @Inject
     private Map<String, FeedSource> feeds;
 
     public List<Variant> getVariants()

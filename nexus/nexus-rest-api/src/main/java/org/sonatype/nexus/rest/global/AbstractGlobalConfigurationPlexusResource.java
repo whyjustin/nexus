@@ -14,7 +14,6 @@ package org.sonatype.nexus.rest.global;
 
 import java.util.ArrayList;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.configuration.application.AuthenticationInfoConverter;
 import org.sonatype.nexus.configuration.application.GlobalHttpProxySettings;
@@ -43,6 +42,8 @@ import org.sonatype.nexus.rest.model.RestApiSettings;
 import org.sonatype.nexus.rest.model.SmtpSettings;
 import org.sonatype.nexus.rest.model.SystemNotificationSettings;
 
+import javax.inject.Inject;
+
 /**
  * The base class for global configuration resources.
  * 
@@ -57,22 +58,22 @@ public abstract class AbstractGlobalConfigurationPlexusResource
 
     public static final String SECURITY_CUSTOM = "custom";
 
-    @Requirement
+    @Inject
     private NexusEmailer nexusEmailer;
 
-    @Requirement
+    @Inject
     private GlobalHttpProxySettings globalHttpProxySettings;
 
-    @Requirement
+    @Inject
     private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
 
-    @Requirement
+    @Inject
     private GlobalRestApiSettings globalRestApiSettings;
 
-    @Requirement
+    @Inject
     private AuthenticationInfoConverter authenticationInfoConverter;
 
-    @Requirement
+    @Inject
     private ErrorReportingManager errorReportingManager;
 
     protected NexusEmailer getNexusEmailer()

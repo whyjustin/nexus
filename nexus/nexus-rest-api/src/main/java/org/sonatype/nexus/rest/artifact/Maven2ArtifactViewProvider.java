@@ -14,7 +14,6 @@ package org.sonatype.nexus.rest.artifact;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.data.Request;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
@@ -28,13 +27,17 @@ import org.sonatype.nexus.rest.ArtifactViewProvider;
 import org.sonatype.nexus.rest.model.Maven2ArtifactInfoResource;
 import org.sonatype.nexus.rest.model.Maven2ArtifactInfoResourceRespose;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Returns Maven2 artifact information.
  * 
  * @author Brian Demers
  * @author cstamas
  */
-@Component( role = ArtifactViewProvider.class, hint = "maven2" )
+@Named("maven2")
+@Singleton
 public class Maven2ArtifactViewProvider
     extends AbstractArtifactViewProvider
 {

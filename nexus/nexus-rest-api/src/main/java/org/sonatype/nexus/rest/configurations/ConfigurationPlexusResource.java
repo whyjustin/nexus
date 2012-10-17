@@ -15,13 +15,14 @@ package org.sonatype.nexus.rest.configurations;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.MediaType;
 import org.restlet.data.Request;
@@ -41,7 +42,8 @@ import org.sonatype.plexus.rest.resource.PlexusResource;
  * 
  * @author cstamas
  */
-@Component( role = PlexusResource.class, hint = "configuration" )
+@Named
+@Singleton
 @Path( "/configs/{configName}" )
 @Produces( "text/xml" )
 public class ConfigurationPlexusResource

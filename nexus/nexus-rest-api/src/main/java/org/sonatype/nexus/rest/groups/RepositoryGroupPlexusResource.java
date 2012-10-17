@@ -14,6 +14,8 @@ package org.sonatype.nexus.rest.groups;
 
 import java.io.IOException;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,7 +25,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Request;
@@ -47,7 +48,8 @@ import org.sonatype.plexus.rest.resource.PlexusResourceException;
  * 
  * @author tstevens
  */
-@Component( role = PlexusResource.class, hint = "RepositoryGroupPlexusResource" )
+@Named
+@Singleton
 @Path( RepositoryGroupPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )

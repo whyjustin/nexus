@@ -15,6 +15,8 @@ package org.sonatype.nexus.rest.error.reporting;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -22,7 +24,6 @@ import javax.ws.rs.Produces;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.swizzle.IssueSubmissionException;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
@@ -40,7 +41,8 @@ import org.sonatype.nexus.rest.model.ErrorReportingSettings;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "ErrorReportingPlexusResource" )
+@Named
+@Singleton
 @Path( ErrorReportingPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )

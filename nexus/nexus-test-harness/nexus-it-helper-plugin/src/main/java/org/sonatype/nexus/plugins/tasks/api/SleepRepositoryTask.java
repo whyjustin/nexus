@@ -12,12 +12,14 @@
  */
 package org.sonatype.nexus.plugins.tasks.api;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.scheduling.SchedulerTask;
 
-@Component( role = SchedulerTask.class, hint = "SleepRepositoryTask", instantiationStrategy = "per-lookup" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("SleepRepositoryTask")
 public class SleepRepositoryTask
     extends AbstractNexusRepositoriesTask<Object>
 {

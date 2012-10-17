@@ -13,7 +13,6 @@
 package org.sonatype.nexus.rest.user;
 
 import com.thoughtworks.xstream.XStream;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.Request;
 import org.sonatype.nexus.rest.model.UserAccount;
 import org.sonatype.nexus.rest.model.UserAccountRequestResponseWrapper;
@@ -23,10 +22,12 @@ import org.sonatype.security.usermanagement.DefaultUser;
 import org.sonatype.security.usermanagement.User;
 import org.sonatype.security.usermanagement.UserStatus;
 
+import javax.inject.Inject;
+
 public abstract class AbstractUserAccountPlexusResource
     extends AbstractSecurityPlexusResource
 {
-    @Requirement
+    @Inject
     protected UserAccountManager userAccountManager;
 
     @Override

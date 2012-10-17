@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.feeds.record;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.feeds.FeedRecorder;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
@@ -30,17 +28,22 @@ import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.ShadowRepository;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Creates timeline entries (for feeds) about repository configuration related changes.
  * 
  * @author Juven Xu
  */
-@Component( role = EventInspector.class, hint = "RepositoryRegistryRepositoryEvent" )
+@Named
+@Singleton
 public class RepositoryRegistryRepositoryEventInspector
     extends AbstractFeedRecorderEventInspector
     implements AsynchronousEventInspector
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repoRegistry;
 
     public boolean accepts( Event<?> evt )
