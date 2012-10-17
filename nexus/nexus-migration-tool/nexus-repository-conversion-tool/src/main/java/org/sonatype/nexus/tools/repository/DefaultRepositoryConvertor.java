@@ -33,9 +33,12 @@ public class DefaultRepositoryConvertor
 
     public static final String VERSION_REGEX = "^[0-9].*$";
 
+    private final RepositorySeperationConvertorCommand repositorySeperationConvertorCommand;
+
     @Inject
-    @Named( RepositorySeperationConvertorCommand.ID )
-    private RepositorySeperationConvertorCommand repositorySeperationConvertorCommand;
+    public DefaultRepositoryConvertor(@Named(RepositorySeperationConvertorCommand.ID) ConvertorCommand command) {
+        this.repositorySeperationConvertorCommand = (RepositorySeperationConvertorCommand) command;
+    }
 
     private File currentRepository;
 
