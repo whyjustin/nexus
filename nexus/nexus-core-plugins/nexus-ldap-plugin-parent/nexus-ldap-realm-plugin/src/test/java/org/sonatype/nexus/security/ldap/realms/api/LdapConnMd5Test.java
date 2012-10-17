@@ -31,7 +31,7 @@ public class LdapConnMd5Test
     private PlexusResource getResource()
         throws Exception
     {
-        return this.lookup( PlexusResource.class, "LdapConnectionInfoPlexusResource" );
+        return this.lookup( PlexusResource.class, LdapConnectionInfoPlexusResource.NAME );
     }
 
     @Test

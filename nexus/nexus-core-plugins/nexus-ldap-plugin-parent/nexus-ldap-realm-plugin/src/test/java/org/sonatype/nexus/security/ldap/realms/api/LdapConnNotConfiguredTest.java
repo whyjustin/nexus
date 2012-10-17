@@ -31,7 +31,7 @@ public class LdapConnNotConfiguredTest
     private PlexusResource getResource()
         throws Exception
     {
-        return this.lookup( PlexusResource.class, "LdapConnectionInfoPlexusResource" );
+        return this.lookup( PlexusResource.class, LdapConnectionInfoPlexusResource.NAME );
     }
 
     @Test

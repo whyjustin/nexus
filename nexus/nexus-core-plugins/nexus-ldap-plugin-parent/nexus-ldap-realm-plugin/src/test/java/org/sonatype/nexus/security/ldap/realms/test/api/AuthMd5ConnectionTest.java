@@ -36,7 +36,7 @@ public class AuthMd5ConnectionTest
     throws Exception
 {
     return this
-        .lookup( PlexusResource.class, "LdapTestAuthenticationPlexusResource" );
+        .lookup( PlexusResource.class, LdapTestAuthenticationPlexusResource.NAME );
 }
 
     @Test

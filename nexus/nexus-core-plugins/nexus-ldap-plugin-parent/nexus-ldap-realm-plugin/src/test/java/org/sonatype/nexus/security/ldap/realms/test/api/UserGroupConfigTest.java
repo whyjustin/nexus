@@ -37,7 +37,7 @@ public class UserGroupConfigTest
     private PlexusResource getResource()
         throws Exception
     {
-        return this.lookup( PlexusResource.class, "LdapUserAndGroupConfigTestPlexusResource" );
+        return this.lookup( PlexusResource.class, LdapUserAndGroupConfigTestPlexusResource.NAME );
     }
 
     @Test

@@ -65,12 +65,14 @@ import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 @Path( "/ldap/test_user_conf" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
-@Named
+@Named(LdapUserAndGroupConfigTestPlexusResource.NAME)
 @Singleton
 public class LdapUserAndGroupConfigTestPlexusResource
     extends AbstractLdapRealmPlexusResource
     implements Contextualizable
 {
+
+    public static final String NAME = "LdapUserAndGroupConfigTestPlexusResource";
 
     @Inject
     private Logger logger;

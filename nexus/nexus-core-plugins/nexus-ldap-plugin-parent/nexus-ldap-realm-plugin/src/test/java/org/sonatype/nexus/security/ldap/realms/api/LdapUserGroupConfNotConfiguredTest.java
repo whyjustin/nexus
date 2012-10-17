@@ -33,7 +33,7 @@ public class LdapUserGroupConfNotConfiguredTest
     private PlexusResource getResource()
         throws Exception
     {
-        return this.lookup( PlexusResource.class, "LdapUserAndGroupsConfigurationPlexusResource" );
+        return this.lookup( PlexusResource.class, LdapUserAndGroupsConfigurationPlexusResource.NAME );
     }
 
     @Test

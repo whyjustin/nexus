@@ -31,7 +31,7 @@ public class AuthConnectionTest
     private PlexusResource getResource()
         throws Exception
     {
-        return this.lookup( PlexusResource.class, "LdapTestAuthenticationPlexusResource" );
+        return this.lookup( PlexusResource.class, LdapTestAuthenticationPlexusResource.NAME );
     }
 
     @Test

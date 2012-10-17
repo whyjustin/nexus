@@ -36,11 +36,13 @@ import org.sonatype.security.ldap.realms.persist.model.CUserAndGroupAuthConfigur
 @Path( "/ldap/user_group_conf" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
-@Named
+@Named(LdapUserAndGroupsConfigurationPlexusResource.NAME)
 @Singleton
 public class LdapUserAndGroupsConfigurationPlexusResource
     extends AbstractLdapRealmPlexusResource
 {
+
+    public static final String NAME = "LdapUserAndGroupsConfigurationPlexusResource";
 
     public LdapUserAndGroupsConfigurationPlexusResource()
     {

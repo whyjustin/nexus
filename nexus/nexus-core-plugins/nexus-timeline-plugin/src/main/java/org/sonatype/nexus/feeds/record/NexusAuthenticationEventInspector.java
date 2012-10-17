@@ -27,12 +27,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named
+@Named(NexusAuthenticationEventInspector.NAME)
 @Singleton
 public class NexusAuthenticationEventInspector
     extends AbstractFeedRecorderEventInspector
     implements AsynchronousEventInspector
 {
+
+    public static final String NAME = "NexusAuthenticationEventInspector";
+
     @Inject
     private NexusConfiguration nexusConfiguration;
 

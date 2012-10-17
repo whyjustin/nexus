@@ -39,7 +39,7 @@ public class FeedTest
 
         System.out.println( "map: " + map );
 
-        FeedPlexusResource feedResource = (FeedPlexusResource) this.lookup( PlexusResource.class, "feed" );
+        FeedPlexusResource feedResource = (FeedPlexusResource) this.lookup( PlexusResource.class, FeedPlexusResource.NAME );
 
         // need to test the protected method, its a little hacky, but the problem i am trying to test has to do with
         // Plexus loading this class

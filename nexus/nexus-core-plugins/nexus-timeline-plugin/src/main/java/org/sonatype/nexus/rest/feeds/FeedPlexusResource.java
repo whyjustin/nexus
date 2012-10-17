@@ -40,7 +40,7 @@ import com.sun.syndication.feed.synd.SyndFeed;
  * @author cstamas
  * @author dip
  */
-@Named
+@Named(FeedPlexusResource.NAME)
 @Singleton
 @Path( "/feeds/{" + FeedPlexusResource.FEED_KEY + "}" )
 @Produces( { "application/rss+xml", "application/atom+xml", "text/xml" } )
@@ -48,6 +48,8 @@ public class FeedPlexusResource
     extends AbstractFeedPlexusResource
 {
     public static final String FEED_KEY = "feedKey";
+
+    public static final String NAME = "feed";
 
     @Override
     public Object getPayloadInstance()

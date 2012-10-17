@@ -39,11 +39,13 @@ import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 @Path( "/ldap/conn_info" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
-@Named
+@Named(LdapConnectionInfoPlexusResource.NAME)
 @Singleton
 public class LdapConnectionInfoPlexusResource
     extends AbstractLdapRealmPlexusResource
 {
+
+    public static final String NAME = "LdapConnectionInfoPlexusResource";
 
     public LdapConnectionInfoPlexusResource()
     {

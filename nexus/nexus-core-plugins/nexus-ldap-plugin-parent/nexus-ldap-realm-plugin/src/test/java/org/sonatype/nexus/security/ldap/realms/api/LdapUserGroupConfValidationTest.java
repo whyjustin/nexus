@@ -32,7 +32,7 @@ public class LdapUserGroupConfValidationTest
     {
         return this.lookup(
             PlexusResource.class,
-            "LdapUserAndGroupsConfigurationPlexusResource" );
+            LdapUserAndGroupsConfigurationPlexusResource.NAME );
     }
 
     private LdapUserAndGroupConfigurationDTO getPopulatedDTO()

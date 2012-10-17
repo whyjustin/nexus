@@ -44,11 +44,13 @@ import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 @Path( "/ldap/test_auth" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
-@Named
+@Named(LdapTestAuthenticationPlexusResource.NAME)
 @Singleton
 public class LdapTestAuthenticationPlexusResource
     extends AbstractLdapRealmPlexusResource
 {
+
+    public static final String NAME = "LdapTestAuthenticationPlexusResource";
 
     @Inject
     private LdapConnectionTester ldapConnectionTester;
