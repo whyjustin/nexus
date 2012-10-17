@@ -28,13 +28,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.PlexusConstants;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.codehaus.plexus.context.ContextException;
 import org.codehaus.plexus.logging.Logger;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -69,7 +65,6 @@ import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 @Singleton
 public class LdapUserAndGroupConfigTestPlexusResource
     extends AbstractLdapRealmPlexusResource
-    implements Contextualizable
 {
 
     public static final String NAME = "LdapUserAndGroupConfigTestPlexusResource";
@@ -83,6 +78,7 @@ public class LdapUserAndGroupConfigTestPlexusResource
     @Inject
     private ConfigurationValidator configurationValidator;
 
+    @Inject
     private PlexusContainer container;
 
     public LdapUserAndGroupConfigTestPlexusResource()
@@ -217,11 +213,11 @@ public class LdapUserAndGroupConfigTestPlexusResource
             // get the ldapConfig
             UsersGroupAuthTestLdapConfiguration ldapConfiguration =
                 (UsersGroupAuthTestLdapConfiguration) this.container.lookup( LdapConfiguration.class,
-                                                                             "UsersGroupAuthTestLdapConfiguration" );
+                                                                             UsersGroupAuthTestLdapConfiguration.NAME );
             ldapConfiguration.setLdapAuthConfiguration( ldapAuthConfiguration );
             ldapConfiguration.setConnectionInfo( connectionInfo );
 
-            ldapManager = (TestLdapManager) this.container.lookup( LdapManager.class, "TestLdapManager" );
+            ldapManager = (TestLdapManager) this.container.lookup( LdapManager.class, TestLdapManager.NAME );
             ldapManager.setLdapConfiguration( ldapConfiguration );
         }
         catch ( ComponentLookupException e )
@@ -268,11 +264,4 @@ public class LdapUserAndGroupConfigTestPlexusResource
         }
         return dto;
     }
-
-    public void contextualize( org.codehaus.plexus.context.Context context )
-        throws ContextException
-    {
-        this.container = (PlexusContainer) context.get( PlexusConstants.PLEXUS_KEY );
-    }
-
 }
