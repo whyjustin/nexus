@@ -17,23 +17,17 @@ import groovy.lang.GroovyShell;
 import groovy.util.AntBuilder;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.scheduling.SchedulerTask;
 
 import com.sonatype.nexus.plugin.groovyconsole.tasks.descriptors.GroovyRunnerTaskDescriptor;
 
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Singleton;
 
 @Named(GroovyRunnerTaskDescriptor.ID)
 public class GroovyRunnerTask
     extends AbstractNexusRepositoriesTask<Object>
 {
-    @Inject
-    private PlexusContainer plexus;
-
     @Override
     protected String getRepositoryFieldId()
     {
@@ -57,7 +51,6 @@ public class GroovyRunnerTask
         Binding binding = new Binding();
         binding.setVariable( "ant", new AntBuilder() );
         binding.setVariable( "task", this );
-        binding.setVariable( "plexus", plexus );
         binding.setVariable( "logger", getLogger() );
 
         CompilerConfiguration config = new CompilerConfiguration( CompilerConfiguration.DEFAULT );

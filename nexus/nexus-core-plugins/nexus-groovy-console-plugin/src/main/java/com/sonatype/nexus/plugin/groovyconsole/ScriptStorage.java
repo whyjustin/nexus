@@ -19,6 +19,7 @@ import org.sonatype.plexus.appevents.Event;
 
 public interface ScriptStorage
 {
+    void close();
 
     String getScript( Class<? extends Event<?>> eventClass );
 

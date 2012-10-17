@@ -12,32 +12,38 @@
  */
 package com.sonatype.nexus.plugin.groovyconsole;
 
-import org.sonatype.nexus.proxy.events.AbstractEventInspector;
-import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
+import org.sonatype.nexus.proxy.events.EventInspector;
+import org.sonatype.nexus.proxy.events.NexusStoppedEvent;
 import org.sonatype.plexus.appevents.Event;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named(DefaultGroovyEventInspector.NAME)
+/**
+ * @since 2.3
+ */
+@Named
 @Singleton
-public class DefaultGroovyEventInspector
-    extends AbstractEventInspector
-    implements AsynchronousEventInspector
+public class ScriptStorageLifecycle
+    implements EventInspector
 {
-    public static final String NAME = "groovy";
+    private final ScriptStorage storage;
 
     @Inject
-    private GroovyScriptManager groovyScriptManager;
+    public ScriptStorageLifecycle(ScriptStorage storage) {
+        this.storage = storage;
+    }
 
-    public boolean accepts( Event<?> evt )
-    {
+    @Override
+    public boolean accepts(final Event<?> event) {
         return true;
     }
 
-    public void inspect( Event<?> evt )
-    {
-        groovyScriptManager.actUponEvent( evt );
+    @Override
+    public void inspect(final Event<?> event) {
+        if (event instanceof NexusStoppedEvent) {
+            storage.close();
+        }
     }
 }

@@ -19,7 +19,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.plexus.appevents.Event;
 import com.sonatype.nexus.plugin.groovyconsole.rest.dto.GroovyScriptDTO;
@@ -40,9 +39,6 @@ public class DefaultGroovyScriptManager
     @Inject
     private ScriptStorage storage;
 
-    @Inject
-    private PlexusContainer plexus;
-
     public void actUponEvent( Event<?> evt )
     {
         Class<? extends Event<?>> c = (Class<? extends Event<?>>) evt.getClass();
@@ -56,7 +52,6 @@ public class DefaultGroovyScriptManager
         Binding binding = new Binding();
         binding.setVariable( "ant", new AntBuilder() );
         binding.setVariable( "event", evt );
-        binding.setVariable( "plexus", plexus );
         binding.setVariable( "logger", getLogger() );
 
         CompilerConfiguration config = new CompilerConfiguration( CompilerConfiguration.DEFAULT );

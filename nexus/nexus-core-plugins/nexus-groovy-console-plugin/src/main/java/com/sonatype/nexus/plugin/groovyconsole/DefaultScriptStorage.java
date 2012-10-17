@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.google.common.base.Throwables;
 import org.apache.commons.vfs2.FileChangeEvent;
 import org.apache.commons.vfs2.FileContent;
 import org.apache.commons.vfs2.FileListener;
@@ -29,10 +30,6 @@ import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemManager;
 import org.apache.commons.vfs2.VFS;
 import org.apache.commons.vfs2.impl.DefaultFileMonitor;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
@@ -47,12 +44,8 @@ import javax.inject.Singleton;
 @Singleton
 public class DefaultScriptStorage
     extends AbstractLoggingComponent
-    implements ScriptStorage, Initializable, Disposable, FileListener
+    implements ScriptStorage, FileListener
 {
-
-    @Inject
-    private ApplicationConfiguration applicationConfiguration;
-
     private static final String GROOVY = "groovy";
 
     private static final String DOT_GROOVY = "." + GROOVY;
@@ -63,7 +56,74 @@ public class DefaultScriptStorage
 
     private File scriptDir;
 
-    public void dispose()
+    @Inject
+    public DefaultScriptStorage(final ApplicationConfiguration applicationConfiguration) {
+        scripts = new LinkedHashMap<String, String>();
+
+        FileObject listendir;
+        try
+        {
+            FileSystemManager fsManager = VFS.getManager();
+            scriptDir = applicationConfiguration.getWorkingDirectory( "scripts" );
+            if ( !scriptDir.exists() )
+            {
+                scriptDir.mkdirs();
+
+                try
+                {
+                    new File( scriptDir, "place your .groovy files here.txt" ).createNewFile();
+                }
+                catch ( IOException e )
+                {
+                    throw Throwables.propagate(e);
+                }
+            }
+
+            listendir = fsManager.resolveFile( scriptDir.getAbsolutePath() );
+        }
+        catch ( FileSystemException e )
+        {
+            throw Throwables.propagate(e);
+        }
+
+        FileSelector selector = new FileSelector()
+        {
+            public boolean traverseDescendents( FileSelectInfo arg0 )
+                throws Exception
+            {
+                return true;
+            }
+
+            public boolean includeFile( FileSelectInfo arg0 )
+                throws Exception
+            {
+                return isScriptFile( arg0.getFile() );
+            }
+        };
+
+        try
+        {
+            FileObject[] availableScripts = listendir.findFiles( selector );
+            for ( FileObject fileObject : availableScripts )
+            {
+                updateScript( fileObject );
+            }
+        }
+        catch ( FileSystemException e )
+        {
+            getLogger().warn( "Unable to perform initial directory scan.", e );
+        }
+
+        DefaultFileMonitor fm = new DefaultFileMonitor( this );
+        fm.setRecursive( true );
+        fm.addFile( listendir );
+        fm.start();
+
+        this.fileMonitor = fm;
+    }
+
+    @Override
+    public void close()
     {
         fileMonitor.stop();
         fileMonitor = null;
@@ -116,73 +176,6 @@ public class DefaultScriptStorage
         {
             return scripts.get( eventClass.getName() );
         }
-    }
-
-    public void initialize()
-        throws InitializationException
-    {
-        scripts = new LinkedHashMap<String, String>();
-
-        FileObject listendir;
-        try
-        {
-            FileSystemManager fsManager = VFS.getManager();
-            scriptDir = applicationConfiguration.getWorkingDirectory( "scripts" );
-            if ( !scriptDir.exists() )
-            {
-                scriptDir.mkdirs();
-
-                try
-                {
-                    new File( scriptDir, "place your .groovy files here.txt" ).createNewFile();
-                }
-                catch ( IOException e )
-                {
-                    throw new InitializationException( e.getMessage(), e );
-                }
-            }
-
-            listendir = fsManager.resolveFile( scriptDir.getAbsolutePath() );
-        }
-        catch ( FileSystemException e )
-        {
-            throw new InitializationException( e.getMessage(), e );
-        }
-
-        FileSelector selector = new FileSelector()
-        {
-            public boolean traverseDescendents( FileSelectInfo arg0 )
-                throws Exception
-            {
-                return true;
-            }
-
-            public boolean includeFile( FileSelectInfo arg0 )
-                throws Exception
-            {
-                return isScriptFile( arg0.getFile() );
-            }
-        };
-
-        try
-        {
-            FileObject[] availableScripts = listendir.findFiles( selector );
-            for ( FileObject fileObject : availableScripts )
-            {
-                updateScript( fileObject );
-            }
-        }
-        catch ( FileSystemException e )
-        {
-            getLogger().warn( "Unable to perform initial directory scan.", e );
-        }
-
-        DefaultFileMonitor fm = new DefaultFileMonitor( this );
-        fm.setRecursive( true );
-        fm.addFile( listendir );
-        fm.start();
-
-        this.fileMonitor = fm;
     }
 
     private boolean isScriptFile( FileObject file )
