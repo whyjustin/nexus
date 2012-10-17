@@ -167,7 +167,6 @@
     <commons-beanutils.version>1.7.0</commons-beanutils.version>
     <enunciate.version>1.20</enunciate.version>
     <jetty.version>8.1.7.v20120910</jetty.version>
-    <jsw.binaries.version>3.2.3.5</jsw.binaries.version>
     <maven.version>3.0.4</maven.version>
     <micromailer.version>1.5</micromailer.version>
     <nexus.repository.metadata.version>1.2</nexus.repository.metadata.version>
@@ -259,47 +258,9 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>org.sonatype.appbooter.plexus-booters</groupId>
-        <artifactId>plexus-jsw-app-booter</artifactId>
-        <version>${plexus.appbooter.version}</version>
-        <scope>provided</scope>
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-container-default</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.sonatype.appbooter.plexus-booters</groupId>
-        <artifactId>plexus-forked-app-booter</artifactId>
-        <version>${plexus.appbooter.version}</version>
-        <scope>compile</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.sonatype.appbooter.plexus-platforms</groupId>
-        <artifactId>plexus-platform-jsw</artifactId>
-        <version>${plexus.appbooter.version}</version>
-        <scope>provided</scope>
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-container-default</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
         <groupId>tanukisoft</groupId>
         <artifactId>wrapper</artifactId>
         <version>3.2.3</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.sonatype.jsw-binaries</groupId>
-        <artifactId>jsw-binaries</artifactId>
-        <version>${jsw.binaries.version}</version>
-        <type>tar.gz</type>
-        <!--make sure this doesn't get into any classpaths -->
         <scope>provided</scope>
       </dependency>
 
@@ -650,13 +611,6 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jul-to-slf4j</artifactId>
-        <version>${slf4j.version}</version>
-        <type>jar</type>
-        <scope>runtime</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>log4j-over-slf4j</artifactId>
         <version>${slf4j.version}</version>
         <type>jar</type>
         <scope>runtime</scope>
