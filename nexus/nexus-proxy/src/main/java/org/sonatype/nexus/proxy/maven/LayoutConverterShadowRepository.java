@@ -17,7 +17,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.AccessDeniedException;
 import org.sonatype.nexus.proxy.IllegalOperationException;
@@ -46,6 +45,9 @@ import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RepositoryKind;
 import org.sonatype.nexus.proxy.storage.UnsupportedStorageOperationException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * Base class for shadows that make "gateways" from M1 to M2 lauouts and vice versa.
  * 
@@ -58,25 +60,27 @@ public abstract class LayoutConverterShadowRepository
     /**
      * The GAV Calculator.
      */
-    @Requirement( hint = "maven1" )
+    @Named("maven1" )
+    @Inject
     private GavCalculator m1GavCalculator;
 
     /**
      * The GAV Calculator.
      */
-    @Requirement( hint = "maven2" )
+    @Named("maven2" )
+    @Inject
     private GavCalculator m2GavCalculator;
 
     /**
      * Metadata manager.
      */
-    @Requirement
+    @Inject
     private MetadataManager metadataManager;
 
     /**
      * The artifact packaging mapper.
      */
-    @Requirement
+    @Inject
     private ArtifactPackagingMapper artifactPackagingMapper;
 
     /**

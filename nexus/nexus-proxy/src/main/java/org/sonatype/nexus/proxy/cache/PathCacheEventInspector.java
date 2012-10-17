@@ -12,14 +12,16 @@
  */
 package org.sonatype.nexus.proxy.cache;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.RepositoryRegistryEventRemove;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.utils.RepositoryStringUtils;
 import org.sonatype.plexus.appevents.Event;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Event inspector that listens for repository registry removals, and purges the {@link PathCache} belonging to given
@@ -30,11 +32,12 @@ import org.sonatype.plexus.appevents.Event;
  * @author cstamas
  * @since 2.1
  */
-@Component( role = EventInspector.class, hint = "PathCacheEventInspector" )
+@Named
+@Singleton
 public class PathCacheEventInspector
     extends AbstractEventInspector
 {
-    @Requirement
+    @Inject
     private CacheManager cacheManager;
 
     @Override

@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.ahc;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.configuration.application.events.GlobalHttpProxySettingsChangedEvent;
 import org.sonatype.nexus.configuration.application.events.GlobalRemoteConnectionSettingsChangedEvent;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
@@ -21,6 +19,10 @@ import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.NexusStoppedEvent;
 import org.sonatype.plexus.appevents.Event;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A trivial inspector listening for configuration changes and just resetting Ahc Provider (forcing it to recreate
@@ -33,12 +35,13 @@ import org.sonatype.plexus.appevents.Event;
  * @deprecated Use httpclient4 components instead
  */
 @Deprecated
-@Component( role = EventInspector.class, hint = "AhcProviderEventInspector" )
+@Named
+@Singleton
 public class AhcProviderEventInspector
     extends AbstractEventInspector
     implements AsynchronousEventInspector
 {
-    @Requirement
+    @Inject
     private AhcProvider ahcProvider;
 
     @Override

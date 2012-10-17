@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.proxy.AccessDeniedException;
@@ -46,6 +45,8 @@ import org.sonatype.nexus.proxy.storage.UnsupportedStorageOperationException;
 import org.sonatype.nexus.proxy.walker.DefaultWalkerContext;
 import org.sonatype.nexus.proxy.walker.WalkerException;
 
+import javax.inject.Inject;
+
 /**
  * The abstract (layout unaware) Maven Repository.
  * 
@@ -58,13 +59,13 @@ public abstract class AbstractMavenRepository
     /**
      * Metadata manager.
      */
-    @Requirement
+    @Inject
     private MetadataManager metadataManager;
 
     /**
      * The artifact packaging mapper.
      */
-    @Requirement
+    @Inject
     private ArtifactPackagingMapper artifactPackagingMapper;
 
     private MutableProxyRepositoryKind repositoryKind;

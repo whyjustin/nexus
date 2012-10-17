@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.AccessDeniedException;
 import org.sonatype.nexus.proxy.IllegalOperationException;
 import org.sonatype.nexus.proxy.ItemNotFoundException;
@@ -32,6 +31,8 @@ import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RepositoryKind;
 import org.sonatype.nexus.proxy.storage.UnsupportedStorageOperationException;
 
+import javax.inject.Inject;
+
 public abstract class AbstractMavenGroupRepository
     extends AbstractGroupRepository
     implements MavenGroupRepository
@@ -39,13 +40,13 @@ public abstract class AbstractMavenGroupRepository
     /**
      * Metadata manager.
      */
-    @Requirement
+    @Inject
     private MetadataManager metadataManager;
 
     /**
      * The artifact packaging mapper.
      */
-    @Requirement
+    @Inject
     private ArtifactPackagingMapper artifactPackagingMapper;
 
     private ArtifactStoreHelper artifactStoreHelper;

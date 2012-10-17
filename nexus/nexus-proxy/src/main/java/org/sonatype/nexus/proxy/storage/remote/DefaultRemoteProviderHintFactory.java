@@ -12,17 +12,20 @@
  */
 package org.sonatype.nexus.proxy.storage.remote;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.sonatype.nexus.proxy.storage.remote.httpclient.HttpClientRemoteStorage;
 import org.sonatype.nexus.util.SystemPropertiesHelper;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * TODO: for now, we have limited the RRS selection, but in future, this should be made dynamic!
  */
-@Component( role = RemoteProviderHintFactory.class )
+@Named
+@Singleton
 public class DefaultRemoteProviderHintFactory
     implements RemoteProviderHintFactory
 {
@@ -30,7 +33,7 @@ public class DefaultRemoteProviderHintFactory
 
     public final static String DEFAULT_HTTP_PROVIDER_FORCED_KEY = "nexus.default.http.providerForced";
 
-    @Requirement
+    @Inject
     private Logger logger;
 
     private Boolean httpProviderForced = null;

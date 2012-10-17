@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.ahc;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.proxy.repository.ClientSSLRemoteAuthenticationSettings;
 import org.sonatype.nexus.proxy.repository.NtlmRemoteAuthenticationSettings;
@@ -30,18 +28,23 @@ import com.ning.http.client.AsyncHttpClientConfig.Builder;
 import com.ning.http.client.ProxyServer;
 import com.ning.http.client.Realm;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @deprecated Use httpclient4 components instead
  */
 @Deprecated
-@Component( role = AhcProvider.class )
+@Named
+@Singleton
 public class DefaultAhcProvider
     implements AhcProvider
 {
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private UserAgentBuilder userAgentBuilder;
 
     private volatile AsyncHttpClient sharedClient;

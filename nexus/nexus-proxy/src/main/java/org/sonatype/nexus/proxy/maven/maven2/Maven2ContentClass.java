@@ -12,16 +12,19 @@
  */
 package org.sonatype.nexus.proxy.maven.maven2;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.registry.AbstractIdContentClass;
 import org.sonatype.nexus.proxy.registry.ContentClass;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * The Maven2 content class.
  * 
  * @author cstamas
  */
-@Component( role = ContentClass.class, hint = Maven2ContentClass.ID )
+@Named(Maven2ContentClass.ID)
+@Singleton
 public class Maven2ContentClass
     extends AbstractIdContentClass
 {

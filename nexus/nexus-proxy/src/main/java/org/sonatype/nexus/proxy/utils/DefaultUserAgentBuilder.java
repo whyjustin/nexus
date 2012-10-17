@@ -15,8 +15,6 @@ package org.sonatype.nexus.proxy.utils;
 import java.util.List;
 
 import com.google.common.annotations.VisibleForTesting;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.SystemStatus;
@@ -25,14 +23,19 @@ import org.sonatype.nexus.proxy.repository.RemoteConnectionSettings;
 import org.sonatype.nexus.proxy.storage.remote.RemoteRepositoryStorage;
 import org.sonatype.nexus.proxy.storage.remote.RemoteStorageContext;
 
-@Component( role = UserAgentBuilder.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultUserAgentBuilder
     implements UserAgentBuilder
 {
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
-    @Requirement
+    @Inject
     private List<UserAgentContributor> contributors;
 
     /**

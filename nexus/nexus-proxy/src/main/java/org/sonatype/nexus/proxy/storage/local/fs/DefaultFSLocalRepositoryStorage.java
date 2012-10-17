@@ -22,8 +22,9 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.mime.MimeSupport;
 import org.sonatype.nexus.proxy.ItemNotFoundException;
@@ -54,7 +55,8 @@ import org.sonatype.nexus.util.ItemPathUtils;
  * 
  * @author cstamas
  */
-@Component( role = LocalRepositoryStorage.class, hint = DefaultFSLocalRepositoryStorage.PROVIDER_STRING )
+@Named(DefaultFSLocalRepositoryStorage.PROVIDER_STRING)
+@Singleton
 public class DefaultFSLocalRepositoryStorage
     extends AbstractLocalRepositoryStorage
 {

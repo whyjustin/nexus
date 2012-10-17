@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.configuration;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
@@ -29,17 +27,22 @@ import org.sonatype.nexus.configuration.model.Configuration;
 import org.sonatype.nexus.proxy.storage.remote.DefaultRemoteStorageContext;
 import org.sonatype.nexus.proxy.storage.remote.RemoteStorageContext;
 
-@Component( role = ApplicationConfiguration.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class SimpleProxyApplicationConfiguration
     extends SimpleApplicationConfiguration
         implements Initializable
 {
     private RemoteStorageContext remoteStorageContext = null;
     
-    @Requirement
+    @Inject
     private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
     
-    @Requirement
+    @Inject
     private GlobalHttpProxySettings globalHttpProxySettings;
     
     public void initialize()

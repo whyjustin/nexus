@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.proxy.maven.maven2;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.sonatype.nexus.configuration.Configurator;
 import org.sonatype.nexus.configuration.model.CRepository;
@@ -23,27 +21,36 @@ import org.sonatype.nexus.proxy.maven.gav.GavCalculator;
 import org.sonatype.nexus.proxy.maven.gav.M2ArtifactRecognizer;
 import org.sonatype.nexus.proxy.maven.maven1.Maven1ContentClass;
 import org.sonatype.nexus.proxy.registry.ContentClass;
+import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.ShadowRepository;
+
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * A shadow repository that transforms M1 content hierarchy of master to M2 layouted shadow.
  * 
  * @author cstamas
  */
-@Component( role = ShadowRepository.class, hint = M2LayoutedM1ShadowRepository.ID, instantiationStrategy = "per-lookup", description = "Maven1 to Maven2" )
+@Named(M2LayoutedM1ShadowRepository.ID)
+//@Component( role = ShadowRepository.class, hint = M2LayoutedM1ShadowRepository.ID, instantiationStrategy = "per-lookup", description = "Maven1 to Maven2" )
+@Typed(ShadowRepository.class)
 public class M2LayoutedM1ShadowRepository
     extends LayoutConverterShadowRepository
 {
     /** This "mimics" the @Named("m1-m2-shadow") */
     public static final String ID = "m1-m2-shadow";
 
-    @Requirement( hint = Maven2ContentClass.ID )
+    @Inject
+    @Named(Maven2ContentClass.ID )
     private ContentClass contentClass;
 
-    @Requirement( hint = Maven1ContentClass.ID )
+    @Inject
+    @Named(Maven1ContentClass.ID )
     private ContentClass masterContentClass;
 
-    @Requirement
+    @Inject
     private M2LayoutedM1ShadowRepositoryConfigurator m2LayoutedM1ShadowRepositoryConfigurator;
 
     @Override

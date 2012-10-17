@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.regex.Pattern;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
@@ -46,6 +44,10 @@ import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.utils.ResourceStoreUtils;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The Class PathBasedRequestRepositoryMapper filters repositories to search using supplied list of filter expressions.
  * It is parametrized by java,util.Map, the contents: </p> <tt>
@@ -63,20 +65,21 @@ import org.sonatype.plexus.appevents.Event;
  * 
  * @author cstamas
  */
-@Component( role = RequestRepositoryMapper.class )
+@Named
+@Singleton
 public class DefaultRequestRepositoryMapper
     extends AbstractConfigurable
     implements RequestRepositoryMapper
 {
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private ApplicationConfigurationValidator validator;
 
     /** The compiled flag. */

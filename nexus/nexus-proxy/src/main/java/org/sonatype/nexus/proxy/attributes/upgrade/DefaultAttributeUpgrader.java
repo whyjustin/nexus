@@ -16,11 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.util.FileUtils;
@@ -39,7 +40,8 @@ import org.sonatype.nexus.util.SystemPropertiesHelper;
  *
  * @since 2.0
  */
-@Component( role = AttributeUpgrader.class )
+@Named
+@Singleton
 public class DefaultAttributeUpgrader
     extends AbstractLoggingComponent
     implements AttributeUpgrader, Disposable
@@ -65,10 +67,10 @@ public class DefaultAttributeUpgrader
     private final int UPGRADE_THROTTLE_UPS = SystemPropertiesHelper.getInteger( getClass().getName() + ".throttleUps",
         100 );
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     private ObjectName jmxName;

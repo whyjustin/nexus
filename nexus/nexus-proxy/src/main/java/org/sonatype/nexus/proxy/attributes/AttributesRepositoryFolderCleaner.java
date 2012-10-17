@@ -15,17 +15,20 @@ package org.sonatype.nexus.proxy.attributes;
 import java.io.File;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.wastebasket.AbstractRepositoryFolderCleaner;
 import org.sonatype.nexus.proxy.wastebasket.RepositoryFolderCleaner;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * TO BE REMOVED once we switch from FS based attribute storage to LS based attribute storage!
  * 
  * @author cstamas
  */
-@Component( role = RepositoryFolderCleaner.class, hint = "core-proxy-attributes" )
+@Named("core-proxy-attributes")
+@Singleton
 public class AttributesRepositoryFolderCleaner
     extends AbstractRepositoryFolderCleaner
 {

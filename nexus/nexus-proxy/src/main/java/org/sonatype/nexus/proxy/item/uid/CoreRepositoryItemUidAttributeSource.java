@@ -12,18 +12,19 @@
  */
 package org.sonatype.nexus.proxy.item.uid;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.codehaus.plexus.component.annotations.Component;
 
 /**
  * The source for attributes implemented in Nexus Core.
  * 
  * @author cstamas
  */
-@Component( role = RepositoryItemUidAttributeSource.class, hint = "core" )
+@Named("core")
+@Singleton
 public class CoreRepositoryItemUidAttributeSource
     implements RepositoryItemUidAttributeSource
 {

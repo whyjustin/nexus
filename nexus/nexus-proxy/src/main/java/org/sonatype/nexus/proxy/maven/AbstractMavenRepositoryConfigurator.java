@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.proxy.maven;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.configuration.model.CRepositoryCoreConfiguration;
@@ -21,13 +20,18 @@ import org.sonatype.nexus.proxy.repository.ItemContentValidator;
 import org.sonatype.nexus.proxy.repository.ProxyRepository;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public abstract class AbstractMavenRepositoryConfigurator
     extends AbstractProxyRepositoryConfigurator
 {
-    @Requirement( hint = "ChecksumContentValidator" )
+    @Named( "ChecksumContentValidator" )
+    @Inject
     private ItemContentValidator checksumValidator;
 
-    @Requirement( hint = "FileTypeItemContentValidator" )
+    @Named( "FileTypeItemContentValidator" )
+    @Inject
     private ItemContentValidator fileTypeItemContentValidator;
     
     @Override

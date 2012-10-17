@@ -12,9 +12,8 @@
  */
 package org.sonatype.nexus.proxy.maven.maven1;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
+import org.sonatype.inject.Description;
 import org.sonatype.nexus.configuration.Configurator;
 import org.sonatype.nexus.configuration.model.CRepository;
 import org.sonatype.nexus.configuration.model.CRepositoryExternalConfigurationHolderFactory;
@@ -30,13 +29,20 @@ import org.sonatype.nexus.proxy.maven.gav.M1ArtifactRecognizer;
 import org.sonatype.nexus.proxy.registry.ContentClass;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The default M1Repository. This class adds snapshot/release sensing and differentiated expiration handling and repo
  * policies for them.
  * 
  * @author cstamas
  */
-@Component( role = Repository.class, hint = M1Repository.ID, instantiationStrategy = "per-lookup", description = "Maven1 Repository" )
+@Named(M1Repository.ID)
+@Typed(Repository.class)
+@Description("Maven1 Repository")
 public class M1Repository
     extends AbstractMavenRepository
 {
@@ -46,13 +52,15 @@ public class M1Repository
     /**
      * The GAV Calculator.
      */
-    @Requirement( hint = "maven1" )
+    @Inject
+    @Named( "maven1" )
     private GavCalculator gavCalculator;
 
-    @Requirement( hint = Maven1ContentClass.ID )
+    @Inject
+    @Named( Maven1ContentClass.ID )
     private ContentClass contentClass;
 
-    @Requirement
+    @Inject
     private M1RepositoryConfigurator m1RepositoryConfigurator;
 
     @Override
@@ -97,8 +105,7 @@ public class M1Repository
 
     /**
      * Should serve by policies.
-     * 
-     * @param uid the uid
+     *
      * @return true, if successful
      */
     @Override

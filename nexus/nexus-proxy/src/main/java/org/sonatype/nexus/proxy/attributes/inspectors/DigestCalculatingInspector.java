@@ -20,11 +20,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.codec.binary.Hex;
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.attributes.AbstractStorageFileItemInspector;
 import org.sonatype.nexus.proxy.attributes.StorageFileItemInspector;
 import org.sonatype.nexus.proxy.item.StorageFileItem;
 import org.sonatype.nexus.proxy.item.StorageItem;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * The Class DigestCalculatingInspector calculates MD5 and SHA1 digests of a file and stores them into extended
@@ -32,7 +34,8 @@ import org.sonatype.nexus.proxy.item.StorageItem;
  * 
  * @author cstamas
  */
-@Component( role = StorageFileItemInspector.class, hint = "digest" )
+@Named("digest")
+@Singleton
 public class DigestCalculatingInspector
     extends AbstractStorageFileItemInspector
 {

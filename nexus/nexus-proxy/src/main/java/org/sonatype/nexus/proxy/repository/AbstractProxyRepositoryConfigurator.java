@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.proxy.repository;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
@@ -31,19 +30,21 @@ import org.sonatype.nexus.proxy.storage.remote.RemoteProviderHintFactory;
 import org.sonatype.nexus.proxy.storage.remote.RemoteRepositoryStorage;
 import org.sonatype.nexus.proxy.storage.remote.RemoteStorageContext;
 
+import javax.inject.Inject;
+
 public abstract class AbstractProxyRepositoryConfigurator
     extends AbstractRepositoryConfigurator
 {
-    @Requirement
+    @Inject
     private AuthenticationInfoConverter authenticationInfoConverter;
 
-    @Requirement
+    @Inject
     private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
 
-    @Requirement
+    @Inject
     private GlobalHttpProxySettings globalHttpProxySettings;
 
-    @Requirement
+    @Inject
     private RemoteProviderHintFactory remoteProviderHintFactory;
 
     @Override

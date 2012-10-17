@@ -23,12 +23,14 @@ import org.apache.maven.artifact.repository.metadata.Metadata;
 import org.apache.maven.artifact.repository.metadata.Snapshot;
 import org.apache.maven.artifact.repository.metadata.SnapshotVersion;
 import org.apache.maven.artifact.repository.metadata.Versioning;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.maven.gav.Gav;
 import org.sonatype.nexus.proxy.maven.metadata.operations.ModelVersionUtility;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Component responsible for metadata maintenance.
@@ -36,7 +38,8 @@ import org.sonatype.nexus.proxy.maven.metadata.operations.ModelVersionUtility;
  * @author cstamas
  * @todo add some unit tests
  */
-@Component( role = MetadataManager.class )
+@Named
+@Singleton
 public class DefaultMetadataManager
     extends AbstractLoggingComponent
     implements MetadataManager
@@ -47,10 +50,10 @@ public class DefaultMetadataManager
 
     static final String RELEASE_VERSION = "RELEASE";
 
-    @Requirement
+    @Inject
     private MetadataUpdater metadataUpdater;
 
-    @Requirement
+    @Inject
     private MetadataLocator metadataLocator;
 
     @Override

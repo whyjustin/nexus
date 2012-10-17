@@ -12,10 +12,10 @@
  */
 package org.sonatype.nexus.proxy.maven.gav;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.codehaus.plexus.component.annotations.Component;
 
 /**
  * An M1 <code>GavCalculator</code>. Heavily under-maintained.
@@ -23,7 +23,8 @@ import org.codehaus.plexus.component.annotations.Component;
  * @author Jason van Zyl
  * @author Tamas Cservenak
  */
-@Component( role = GavCalculator.class, hint = "maven1" )
+@Named("maven1")
+@Singleton
 public class M1GavCalculator
     implements GavCalculator
 {

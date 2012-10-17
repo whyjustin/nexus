@@ -16,19 +16,22 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.access.AccessManager;
 import org.sonatype.nexus.proxy.attributes.AbstractStorageFileItemInspector;
 import org.sonatype.nexus.proxy.attributes.StorageFileItemInspector;
 import org.sonatype.nexus.proxy.item.StorageFileItem;
 import org.sonatype.nexus.proxy.item.StorageItem;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The Class AuditingInspector simply records the auth stuff from Item Context to attributes..
  * 
  * @author cstamas
  */
-@Component( role = StorageFileItemInspector.class, hint = "AuditingInspector" )
+@Named
+@Singleton
 public class AuditingInspector
     extends AbstractStorageFileItemInspector
 {

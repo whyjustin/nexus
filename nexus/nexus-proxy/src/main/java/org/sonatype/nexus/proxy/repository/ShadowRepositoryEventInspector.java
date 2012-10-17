@@ -14,13 +14,15 @@ package org.sonatype.nexus.proxy.repository;
 
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.RepositoryItemEvent;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.plexus.appevents.Event;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A "relaying" event inspector that is made asynchronous and is used to relay the repository content change related
@@ -31,12 +33,13 @@ import org.sonatype.plexus.appevents.Event;
  * 
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "ShadowRepositoryEventInspector" )
+@Named
+@Singleton
 public class ShadowRepositoryEventInspector
     extends AbstractEventInspector
     implements EventInspector
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     @Override

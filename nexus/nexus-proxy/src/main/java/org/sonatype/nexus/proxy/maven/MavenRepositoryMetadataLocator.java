@@ -22,7 +22,6 @@ import org.apache.maven.artifact.repository.metadata.Metadata;
 import org.apache.maven.artifact.repository.metadata.Plugin;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.ReaderFactory;
 import org.codehaus.plexus.util.StringUtils;
@@ -43,12 +42,16 @@ import org.sonatype.nexus.proxy.maven.metadata.operations.MetadataBuilder;
 import org.sonatype.nexus.proxy.maven.metadata.operations.MetadataException;
 import org.sonatype.nexus.proxy.storage.UnsupportedStorageOperationException;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * A MetadataLocator powered by Nexus' MavenRepository.
  * 
  * @author cstamas
  */
-@Component( role = MetadataLocator.class )
+@Named
+@Singleton
 public class MavenRepositoryMetadataLocator
     implements MetadataLocator
 {

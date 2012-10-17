@@ -21,12 +21,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.item.StorageFileItem;
 import org.sonatype.nexus.proxy.repository.validator.AbstractMimeMagicFileTypeValidator;
 import org.sonatype.nexus.proxy.repository.validator.FileTypeValidator;
 import org.sonatype.nexus.proxy.repository.validator.XMLUtils;
 import org.sonatype.nexus.util.SystemPropertiesHelper;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Maven specific FileTypeValidator that checks for "most common" Maven artifacts and metadatas, namely: JARs, ZIPs,
@@ -34,7 +36,8 @@ import org.sonatype.nexus.util.SystemPropertiesHelper;
  * 
  * @author cstamas
  */
-@Component( role = FileTypeValidator.class, hint = "maven" )
+@Named("maven")
+@Singleton
 public class MavenFileTypeValidator
     extends AbstractMimeMagicFileTypeValidator
 {

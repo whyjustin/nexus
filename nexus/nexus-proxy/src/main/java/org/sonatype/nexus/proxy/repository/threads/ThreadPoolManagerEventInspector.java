@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.proxy.repository.threads;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.RepositoryRegistryEventAdd;
@@ -21,16 +19,21 @@ import org.sonatype.nexus.proxy.events.RepositoryRegistryEventRemove;
 import org.sonatype.nexus.proxy.events.RepositoryRegistryRepositoryEvent;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Maintains the ThreadPoolManager based on Nexus events.
  * 
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "ThreadPoolManagerEventInspector" )
+@Named
+@Singleton
 public class ThreadPoolManagerEventInspector
     extends AbstractEventInspector
 {
-    @Requirement
+    @Inject
     private ThreadPoolManager poolManager;
 
     @Override

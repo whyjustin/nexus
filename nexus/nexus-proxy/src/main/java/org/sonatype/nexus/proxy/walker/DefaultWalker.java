@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.AccessDeniedException;
 import org.sonatype.nexus.proxy.IllegalOperationException;
@@ -29,12 +28,16 @@ import org.sonatype.nexus.proxy.repository.LocalStatus;
 import org.sonatype.nexus.proxy.utils.RepositoryStringUtils;
 import org.sonatype.scheduling.TaskInterruptedException;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The Class Walker.
  * 
  * @author cstamas
  */
-@Component( role = Walker.class )
+@Named
+@Singleton
 public class DefaultWalker
     extends AbstractLoggingComponent
     implements Walker

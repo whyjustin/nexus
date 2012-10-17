@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.proxy.repository;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.AccessDeniedException;
 import org.sonatype.nexus.proxy.IllegalOperationException;
 import org.sonatype.nexus.proxy.ItemNotFoundException;
@@ -34,6 +33,8 @@ import org.sonatype.nexus.proxy.walker.DefaultWalkerContext;
 import org.sonatype.nexus.proxy.walker.WalkerContext;
 import org.sonatype.nexus.proxy.walker.WalkerException;
 
+import javax.inject.Inject;
+
 /**
  * The Class ShadowRepository.
  * 
@@ -43,7 +44,7 @@ public abstract class AbstractShadowRepository
     extends AbstractRepository
     implements ShadowRepository
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     protected RepositoryRegistry getRepositoryRegistry()

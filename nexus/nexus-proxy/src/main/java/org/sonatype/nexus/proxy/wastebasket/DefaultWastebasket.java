@@ -15,8 +15,6 @@ package org.sonatype.nexus.proxy.wastebasket;
 import java.io.File;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.ItemNotFoundException;
@@ -33,7 +31,12 @@ import org.sonatype.nexus.proxy.walker.Walker;
 import org.sonatype.sisu.resource.scanner.Listener;
 import org.sonatype.sisu.resource.scanner.Scanner;
 
-@Component( role = Wastebasket.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultWastebasket
     extends AbstractLoggingComponent
     implements SmartWastebasket
@@ -44,7 +47,7 @@ public class DefaultWastebasket
 
     // ==
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
     protected ApplicationConfiguration getApplicationConfiguration()
@@ -54,7 +57,7 @@ public class DefaultWastebasket
 
     // ==
 
-    @Requirement
+    @Inject
     private Walker walker;
 
     protected Walker getWalker()
@@ -70,7 +73,8 @@ public class DefaultWastebasket
 
     // ==
 
-    @Requirement( hint = "serial" )
+    @Inject
+    @Named( "serial" )
     private Scanner scanner;
 
     protected Scanner getScanner()
@@ -80,7 +84,7 @@ public class DefaultWastebasket
 
     // ==
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     protected RepositoryRegistry getRepositoryRegistry()

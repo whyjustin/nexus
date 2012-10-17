@@ -16,16 +16,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.item.uid.Attribute;
 import org.sonatype.nexus.proxy.item.uid.RepositoryItemUidAttributeSource;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * The attributes implemented in Nexus Maven plugin contributing Maven specific UID attributes.
  * 
  * @author cstamas
  */
-@Component( role = RepositoryItemUidAttributeSource.class, hint = "maven" )
+@Named("maven")
+@Singleton
 public class MavenRepositoryItemUidAttributeSource
     implements RepositoryItemUidAttributeSource
 {

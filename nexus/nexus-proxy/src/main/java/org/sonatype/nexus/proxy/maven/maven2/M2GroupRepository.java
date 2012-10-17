@@ -21,10 +21,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.maven.artifact.repository.metadata.Metadata;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
+import org.sonatype.inject.Description;
 import org.sonatype.nexus.configuration.Configurator;
 import org.sonatype.nexus.configuration.model.CRepository;
 import org.sonatype.nexus.configuration.model.CRepositoryExternalConfigurationHolderFactory;
@@ -58,7 +57,14 @@ import org.sonatype.nexus.proxy.repository.GroupRepository;
 import org.sonatype.nexus.proxy.storage.UnsupportedStorageOperationException;
 import org.sonatype.nexus.util.DigesterUtils;
 
-@Component( role = GroupRepository.class, hint = M2GroupRepository.ID, instantiationStrategy = "per-lookup", description = "Maven2 Repository Group" )
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(M2GroupRepository.ID)
+@Typed(GroupRepository.class)
+@Description("Maven2 Repository Group")
 public class M2GroupRepository
     extends AbstractMavenGroupRepository
 {
@@ -68,16 +74,18 @@ public class M2GroupRepository
     /**
      * The GAV Calculator.
      */
-    @Requirement( hint = "maven2" )
+    @Inject
+    @Named("maven2" )
     private GavCalculator gavCalculator;
 
     /**
      * Content class.
      */
-    @Requirement( hint = Maven2ContentClass.ID )
+    @Inject
+    @Named( Maven2ContentClass.ID )
     private ContentClass contentClass;
 
-    @Requirement
+    @Inject
     private M2GroupRepositoryConfigurator m2GroupRepositoryConfigurator;
 
     @Override

@@ -12,20 +12,23 @@
  */
 package org.sonatype.nexus.proxy.item.uid;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.NexusInitializedEvent;
 import org.sonatype.plexus.appevents.Event;
 
-@Component( role = EventInspector.class, hint = "RepositoryItemUidAttributeEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class RepositoryItemUidAttributeEventInspector
     extends AbstractEventInspector
     implements EventInspector
 {
-    @Requirement
+    @Inject
     private RepositoryItemUidAttributeManager manager;
 
     @Override

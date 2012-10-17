@@ -17,8 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.shiro.subject.Subject;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
@@ -28,18 +26,23 @@ import org.sonatype.nexus.proxy.target.TargetMatch;
 import org.sonatype.nexus.proxy.target.TargetSet;
 import org.sonatype.security.SecuritySystem;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Default implementation of Nexus Authorizer, that relies onto JSecurity.
  */
-@Component( role = NexusItemAuthorizer.class )
+@Named
+@Singleton
 public class DefaultNexusItemAuthorizer
     extends AbstractLoggingComponent
     implements NexusItemAuthorizer
 {
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repoRegistry;
 
     public boolean authorizePath( final Repository repository, final ResourceStoreRequest request, final Action action )

@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
@@ -27,17 +25,22 @@ import org.sonatype.nexus.proxy.registry.ContentClass;
 import org.sonatype.nexus.proxy.registry.RepositoryTypeRegistry;
 import org.sonatype.plexus.appevents.Event;
 
-@Component( role = EventInspector.class, hint = "DefaultTargetRegistryEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultTargetRegistryEventInspector
     extends AbstractEventInspector
 {
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement
+    @Inject
     private TargetRegistry targetRegistry;
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
     public boolean accepts( Event<?> evt )

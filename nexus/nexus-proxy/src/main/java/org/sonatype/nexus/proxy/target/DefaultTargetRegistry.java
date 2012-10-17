@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,25 +41,30 @@ import org.sonatype.nexus.proxy.registry.ContentClass;
 import org.sonatype.nexus.proxy.registry.RepositoryTypeRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The default implementation of target registry.
  * 
  * @author cstamas
  */
-@Component( role = TargetRegistry.class )
+@Named
+@Singleton
 public class DefaultTargetRegistry
     extends AbstractConfigurable
     implements TargetRegistry
 {
     private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement
+    @Inject
     private ApplicationConfigurationValidator validator;
 
     // a cache view of "live" targets, keyed by target ID

@@ -15,9 +15,10 @@ package org.sonatype.nexus.proxy.repository.validator;
 import java.io.IOException;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.mime.MimeSupport;
 import org.sonatype.nexus.proxy.item.StorageFileItem;
+
+import javax.inject.Inject;
 
 /**
  * Helper base class for implementing {@link FileTypeValidator} components that want to verify the content's MIME magic
@@ -32,7 +33,7 @@ import org.sonatype.nexus.proxy.item.StorageFileItem;
 public abstract class AbstractMimeMagicFileTypeValidator
     extends AbstractFileTypeValidator
 {
-    @Requirement
+    @Inject
     private MimeSupport mimeSupport;
 
     /**

@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
@@ -38,19 +37,21 @@ import org.sonatype.nexus.proxy.registry.RepositoryTypeRegistry;
 import org.sonatype.nexus.proxy.storage.local.LocalRepositoryStorage;
 import org.sonatype.nexus.proxy.storage.remote.RemoteRepositoryStorage;
 
+import javax.inject.Inject;
+
 public abstract class AbstractRepositoryConfigurator
     implements Configurator
 {
-    @Requirement
+    @Inject
     private PlexusContainer plexusContainer;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement( role = RepositoryCustomizer.class )
+    @Inject
     private Map<String, RepositoryCustomizer> pluginRepositoryConfigurators;
 
     public final void applyConfiguration( Object target, ApplicationConfiguration configuration,

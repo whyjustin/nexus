@@ -232,7 +232,14 @@ public class DefaultNexusEmailer
 
     public boolean isSMTPDebug()
     {
-        return getCurrentConfiguration( false ).isDebugMode();
+        // HACK: try/catch
+        try {
+            return getCurrentConfiguration( false ).isDebugMode();
+        }
+        catch (Exception e) {
+            return false;
+        }
+
     }
 
     public void setSMTPDebug( boolean val )

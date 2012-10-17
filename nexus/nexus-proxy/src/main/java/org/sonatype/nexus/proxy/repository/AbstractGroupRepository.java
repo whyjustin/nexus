@@ -22,7 +22,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.configuration.ConfigurationPrepareForSaveEvent;
 import org.sonatype.nexus.proxy.AccessDeniedException;
 import org.sonatype.nexus.proxy.IllegalOperationException;
@@ -55,6 +54,8 @@ import org.sonatype.sisu.charger.CallableExecutor;
 import org.sonatype.sisu.charger.internal.AllArrivedChargeStrategy;
 import org.sonatype.sisu.charger.internal.FirstArrivedInOrderChargeStrategy;
 
+import javax.inject.Inject;
+
 /**
  * An abstract group repository. The specific behaviour (ie. metadata merge) should be implemented in subclases.
  *
@@ -68,16 +69,16 @@ public abstract class AbstractGroupRepository
     private final boolean USE_CHARGER_FOR_GROUP_REQUESTS = SystemPropertiesHelper.getBoolean( getClass().getName()
         + ".useParallelGroupRequests", false );
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repoRegistry;
 
-    @Requirement
+    @Inject
     private RequestRepositoryMapper requestRepositoryMapper;
 
-    @Requirement
+    @Inject
     private ChargerHolder chargerHolder;
 
-    @Requirement
+    @Inject
     private ThreadPoolManager poolManager;
 
     @Override

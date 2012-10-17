@@ -19,12 +19,15 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 
-@Component( role = LinkPersister.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultLinkPersister
     implements LinkPersister
 {
@@ -34,7 +37,7 @@ public class DefaultLinkPersister
 
     private static final byte[] LINK_PREFIX_BYTES = LINK_PREFIX.getBytes( Charset.forName( UTF8_CHARSET ) );
 
-    @Requirement
+    @Inject
     private RepositoryItemUidFactory repositoryItemUidFactory;
 
     public boolean isLinkContent( final ContentLocator locator )

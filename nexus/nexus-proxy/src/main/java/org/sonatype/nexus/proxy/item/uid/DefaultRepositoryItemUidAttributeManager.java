@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.item.RepositoryItemUid;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * This is just a quick implementation for currently only one existing attribute: is hidden. Later this should be
@@ -27,12 +29,13 @@ import org.sonatype.nexus.proxy.item.RepositoryItemUid;
  * 
  * @author cstamas
  */
-@Component( role = RepositoryItemUidAttributeManager.class )
+@Named
+@Singleton
 public class DefaultRepositoryItemUidAttributeManager
     extends AbstractLoggingComponent
     implements RepositoryItemUidAttributeManager
 {
-    @Requirement( role = RepositoryItemUidAttributeSource.class )
+    @Inject
     private Map<String, RepositoryItemUidAttributeSource> attributeSources;
 
     private final Map<Class<?>, Attribute<?>> attributes;

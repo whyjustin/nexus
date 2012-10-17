@@ -12,9 +12,12 @@
  */
 package org.sonatype.nexus;
 
-import org.codehaus.plexus.component.annotations.Component;
 
-@Component( role = ApplicationStatusSource.class )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class SimpleApplicationStatusSource
     implements ApplicationStatusSource
 {

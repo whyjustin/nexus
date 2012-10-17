@@ -19,8 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLifecycleException;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.logging.Logger;
@@ -39,16 +37,21 @@ import org.sonatype.nexus.proxy.repository.ShadowRepository;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-@Component( role = RepositoryTypeRegistry.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultRepositoryTypeRegistry
     implements RepositoryTypeRegistry
 {
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private PlexusContainer container;
 
-    @Requirement( role = ContentClass.class )
+    @Inject
     private Map<String, ContentClass> contentClasses;
 
     private Map<String, ContentClass> repoCachedContentClasses = new HashMap<String, ContentClass>();

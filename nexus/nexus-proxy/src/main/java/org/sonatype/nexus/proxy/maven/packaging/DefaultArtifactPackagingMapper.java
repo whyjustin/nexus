@@ -19,9 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A very simple artifact packaging mapper, that has everything for quick-start wired in this class. Also, it takes into
@@ -30,7 +32,8 @@ import org.sonatype.nexus.logging.AbstractLoggingComponent;
  *
  * @author cstamas
  */
-@Component( role = ArtifactPackagingMapper.class )
+@Named
+@Singleton
 public class DefaultArtifactPackagingMapper
     extends AbstractLoggingComponent
     implements ArtifactPackagingMapper

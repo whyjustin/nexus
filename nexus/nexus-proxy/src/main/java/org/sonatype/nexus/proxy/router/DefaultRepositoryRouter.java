@@ -19,8 +19,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
@@ -56,28 +54,33 @@ import org.sonatype.nexus.proxy.storage.UnsupportedStorageOperationException;
 import org.sonatype.nexus.proxy.target.TargetSet;
 import org.sonatype.nexus.util.ItemPathUtils;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The simplest re-implementation for RepositoryRouter that does only routing.
  * 
  * @author cstamas
  */
-@Component( role = RepositoryRouter.class )
+@Named
+@Singleton
 public class DefaultRepositoryRouter
     extends AbstractConfigurable
     implements RepositoryRouter
 {
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement
+    @Inject
     private NexusItemAuthorizer itemAuthorizer;
 
     public boolean isFollowLinks()

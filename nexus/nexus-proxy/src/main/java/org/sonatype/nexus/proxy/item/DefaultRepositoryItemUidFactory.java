@@ -12,25 +12,28 @@
  */
 package org.sonatype.nexus.proxy.item;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A default factory for UIDs.
  * 
  * @author cstamas
  */
-@Component( role = RepositoryItemUidFactory.class )
+@Named
+@Singleton
 public class DefaultRepositoryItemUidFactory
     extends AbstractRepositoryItemUidFactory
 {
     /**
      * The registry.
      */
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     @Override

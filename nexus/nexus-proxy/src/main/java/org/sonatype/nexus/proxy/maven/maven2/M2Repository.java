@@ -25,10 +25,9 @@ import java.util.List;
 import org.apache.maven.artifact.repository.metadata.Metadata;
 import org.apache.maven.artifact.repository.metadata.io.xpp3.MetadataXpp3Reader;
 import org.apache.maven.artifact.repository.metadata.io.xpp3.MetadataXpp3Writer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
+import org.sonatype.inject.Description;
 import org.sonatype.nexus.configuration.Configurator;
 import org.sonatype.nexus.configuration.model.CRepository;
 import org.sonatype.nexus.configuration.model.CRepositoryExternalConfigurationHolderFactory;
@@ -56,17 +55,25 @@ import org.sonatype.nexus.proxy.maven.metadata.operations.MetadataBuilder;
 import org.sonatype.nexus.proxy.maven.metadata.operations.ModelVersionUtility;
 import org.sonatype.nexus.proxy.maven.metadata.operations.ModelVersionUtility.Version;
 import org.sonatype.nexus.proxy.registry.ContentClass;
+import org.sonatype.nexus.proxy.repository.GroupRepository;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RepositoryMetadataManager;
 import org.sonatype.nexus.util.AlphanumComparator;
 import org.sonatype.nexus.util.DigesterUtils;
+
+import javax.enterprise.inject.Typed;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * The default M2Repository.
  * 
  * @author cstamas
  */
-@Component( role = Repository.class, hint = M2Repository.ID, instantiationStrategy = "per-lookup", description = "Maven2 Repository" )
+@Named(M2Repository.ID)
+@Typed(Repository.class)
+@Description("Maven2 Repository")
 public class M2Repository
     extends AbstractMavenRepository
 {
@@ -76,13 +83,15 @@ public class M2Repository
     /**
      * The GAV Calculator.
      */
-    @Requirement( hint = "maven2" )
+    @Inject
+    @Named( "maven2" )
     private GavCalculator gavCalculator;
 
-    @Requirement( hint = Maven2ContentClass.ID )
+    @Inject
+    @Named( Maven2ContentClass.ID )
     private ContentClass contentClass;
 
-    @Requirement
+    @Inject
     private M2RepositoryConfigurator m2RepositoryConfigurator;
     
     private final MavenRepositoryMetadataManager mavenRepositoryMetadataManager = new MavenRepositoryMetadataManager( this );

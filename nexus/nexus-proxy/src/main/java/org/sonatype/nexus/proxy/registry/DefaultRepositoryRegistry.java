@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.slf4j.Logger;
@@ -36,6 +34,10 @@ import org.sonatype.nexus.proxy.utils.RepositoryStringUtils;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 import org.sonatype.plexus.appevents.EventListener;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Repository registry. It holds handles to registered repositories and sorts them properly. This class is used to get a
  * grip on repositories.
@@ -50,17 +52,18 @@ import org.sonatype.plexus.appevents.EventListener;
  * 
  * @author cstamas
  */
-@Component( role = RepositoryRegistry.class )
+@Named
+@Singleton
 public class DefaultRepositoryRegistry
     implements RepositoryRegistry, Disposable
 {
-    @Requirement
+    @Inject
     private Logger logger;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
     protected Logger getLogger()
