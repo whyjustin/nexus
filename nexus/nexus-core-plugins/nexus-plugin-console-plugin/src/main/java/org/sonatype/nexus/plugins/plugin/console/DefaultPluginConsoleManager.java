@@ -126,6 +126,9 @@ public class DefaultPluginConsoleManager
             result.setFailureReason( pluginResponse.formatAsString( false ) );
         }
 
+        // FIXME: The following is Plexus specific, and does not actually appear to be used (RestInfo details are not displayed on the console AFAICT)
+        // FIXME: Validate if this is actually used, nuke if not... otherwise need to sort out how to make this Plexus-free.
+
         // WARN
         // dirty hack here, the logic here should be moved into PluginManger
         if ( pluginResponse.isSuccessful() )
