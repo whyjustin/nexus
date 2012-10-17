@@ -15,10 +15,6 @@ package org.sonatype.nexus.configuration.application;
 import java.io.File;
 import java.io.IOException;
 
-import org.codehaus.plexus.context.Context;
-import org.codehaus.plexus.context.ContextException;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.sonatype.nexus.configuration.ConfigurationCommitEvent;
 import org.sonatype.nexus.configuration.ConfigurationPrepareForSaveEvent;
 import org.sonatype.nexus.configuration.ConfigurationSaveEvent;
@@ -39,7 +35,7 @@ import javax.inject.Singleton;
 @Named
 @Singleton
 public class SimpleApplicationConfiguration
-    implements ApplicationConfiguration, Contextualizable
+    implements ApplicationConfiguration
 {
     @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
@@ -50,6 +46,8 @@ public class SimpleApplicationConfiguration
 
     private RemoteStorageContext remoteStorageContext = new DefaultRemoteStorageContext( null );
 
+    @Inject
+    @Named("${" + NexusTestSupport.WORK_CONFIGURATION_KEY + "}")
     private File workingDirectory;
 
     public SimpleApplicationConfiguration()
@@ -135,21 +133,6 @@ public class SimpleApplicationConfiguration
     public boolean isSecurityEnabled()
     {
         return false;
-    }
-
-    @Override
-    public void contextualize( final Context context )
-        throws ContextException
-    {
-        try
-        {
-            workingDirectory = new File( (String) context.get( NexusTestSupport.WORK_CONFIGURATION_KEY ) );
-        }
-        catch ( ContextException e )
-        {
-            throw new RuntimeException( "Missing key from plexus context: " + NexusTestSupport.WORK_CONFIGURATION_KEY,
-                e );
-        }
     }
 
 }
