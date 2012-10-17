@@ -24,7 +24,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.concurrent.locks.Lock;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
@@ -37,8 +36,12 @@ import org.sonatype.configuration.validation.ValidationResponse;
 import org.sonatype.nexus.configuration.validator.ConfigurationValidator;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 @SuppressWarnings( "deprecation" )
-@Component( role = ConfigurationHelper.class )
+@Named
+@Singleton
 public class DefaultConfigurationHelper
     extends AbstractLoggingComponent
     implements ConfigurationHelper

@@ -12,7 +12,7 @@
  */
 package org.sonatype.nexus.configuration;
 
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
@@ -21,6 +21,8 @@ import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 import org.sonatype.plexus.appevents.Event;
 import org.sonatype.plexus.appevents.EventListener;
+
+import javax.inject.Inject;
 
 /**
  * Abstract class to implement configurable components to "click" them in into generic configuration environment.
@@ -35,7 +37,7 @@ public abstract class AbstractConfigurable
     /** The configuration */
     private CoreConfiguration coreConfiguration;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
     /**

@@ -12,8 +12,7 @@
  */
 package org.sonatype.nexus.repositories.nexus4807;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.sonatype.nexus.configuration.Configurator;
@@ -26,6 +25,9 @@ import org.sonatype.nexus.proxy.repository.DefaultRepositoryKind;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RepositoryKind;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 // see org/sonatype/nexus/repositories/nexus4807/Nexus4807Test.xml
 //@Component( role = Repository.class, hint = Nexus4807RepositoryImpl.ID, instantiationStrategy = "per-lookup", description = "NEXUS4807 Repository" )
 public class Nexus4807RepositoryImpl
@@ -34,10 +36,11 @@ public class Nexus4807RepositoryImpl
 {
     public static final String ID = "nexus4807";
 
-    @Requirement( hint = Nexus4807ContentClass.ID )
+    @Inject
+    @Named( Nexus4807ContentClass.ID)
     private ContentClass contentClass;
 
-    @Requirement
+    @Inject
     private Nexus4807RepositoryConfigurator configurator;
 
     private final RepositoryKind repositoryKind;

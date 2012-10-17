@@ -15,8 +15,10 @@ package org.sonatype.nexus.log.internal;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.log.LogConfigurationParticipant;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Contributes "logback-nexus" to logback configuration.
@@ -24,7 +26,8 @@ import org.sonatype.nexus.log.LogConfigurationParticipant;
  * @author adreghiciu@gmail.com
  */
 
-@Component( role = LogConfigurationParticipant.class, hint = "logback-nexus" )
+@Named("logback-nexus" )
+@Singleton
 public class LogbackNexusLogConfigurationParticipant
     implements LogConfigurationParticipant
 {

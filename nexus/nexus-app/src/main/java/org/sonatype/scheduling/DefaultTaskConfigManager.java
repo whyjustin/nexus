@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,11 +49,16 @@ import org.sonatype.scheduling.schedules.RunNowSchedule;
 import org.sonatype.scheduling.schedules.Schedule;
 import org.sonatype.scheduling.schedules.WeeklySchedule;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The default implementation of the Task Configuration manager. Will handle writing to and loading from the tasks
  * within nexus.xml file.
  */
-@Component ( role = TaskConfigManager.class )
+@Named
+@Singleton
 public class DefaultTaskConfigManager
     extends AbstractConfigurable
     implements TaskConfigManager
@@ -65,13 +68,13 @@ public class DefaultTaskConfigManager
     /**
      * The app config holding tasks.
      */
-    @Requirement
+    @Inject
     private NexusConfiguration applicationConfiguration;
 
     /**
      * Plexus.
      */
-    @Requirement
+    @Inject
     private PlexusContainer plexusContainer;
 
     protected PlexusContainer getPlexusContainer()

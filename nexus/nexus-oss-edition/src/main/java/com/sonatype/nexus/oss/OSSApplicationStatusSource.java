@@ -12,13 +12,16 @@
  */
 package com.sonatype.nexus.oss;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.AbstractApplicationStatusSource;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.SystemStatus;
 
-@Component( role = ApplicationStatusSource.class )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class OSSApplicationStatusSource
     extends AbstractApplicationStatusSource
     implements ApplicationStatusSource

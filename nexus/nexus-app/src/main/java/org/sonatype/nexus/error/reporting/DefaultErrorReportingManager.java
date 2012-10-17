@@ -27,8 +27,6 @@ import java.util.Set;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.swizzle.IssueSubmissionException;
 import org.codehaus.plexus.swizzle.IssueSubmissionRequest;
 import org.codehaus.plexus.swizzle.IssueSubmissionResult;
@@ -58,7 +56,12 @@ import org.sonatype.sisu.pr.bundle.Archiver;
 import org.sonatype.sisu.pr.bundle.Bundle;
 import org.sonatype.sisu.pr.bundle.StorageManager;
 
-@Component( role = ErrorReportingManager.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultErrorReportingManager
     extends AbstractConfigurable
     implements ErrorReportingManager
@@ -66,25 +69,25 @@ public class DefaultErrorReportingManager
 
     private final Logger logger = LoggerFactory.getLogger( getClass() );
 
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfig;
 
-    @Requirement
+    @Inject
     private IssueSubmitter issueSubmitter;
 
-    @Requirement
+    @Inject
     private IssueRetriever issueRetriever;
 
-    @Requirement
+    @Inject
     private Archiver archiver;
 
-    @Requirement
+    @Inject
     private ProjectManager projectManager;
 
-    @Requirement
+    @Inject
     private UserAgentBuilder uaBuilder;
 
-    @Requirement
+    @Inject
     private StorageManager storageManager;
 
     private static final String DEFAULT_USERNAME = "sonatype_problem_reporting";

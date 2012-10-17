@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.email;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.micromailer.Address;
 import org.sonatype.micromailer.EMailer;
 import org.sonatype.micromailer.EmailerConfiguration;
@@ -23,15 +21,20 @@ import org.sonatype.micromailer.imp.DefaultMailType;
 import org.sonatype.nexus.configuration.model.CSmtpConfiguration;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author velo
  */
-@Component( role = SmtpSettingsValidator.class )
+@Named
+@Singleton
 public class DefaultSmtpSettingsValidator
     extends AbstractLoggingComponent
     implements SmtpSettingsValidator
 {
-    @Requirement
+    @Inject
     private EMailer emailer;
 
     private static final String NEXUS_MAIL_ID = "Nexus";

@@ -15,8 +15,6 @@ package org.sonatype.nexus.plugins.lvo;
 import java.io.IOException;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.plugins.lvo.config.LvoPluginConfiguration;
@@ -29,17 +27,22 @@ import org.sonatype.nexus.proxy.maven.version.VersionParser;
 
 import com.google.common.annotations.VisibleForTesting;
 
-@Component( role = LvoPlugin.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultLvoPlugin
     extends AbstractLoggingComponent
     implements LvoPlugin
 {
     private final VersionParser versionScheme = new GenericVersionParser();
 
-    @Requirement
+    @Inject
     private LvoPluginConfiguration lvoPluginConfiguration;
 
-    @Requirement( role = DiscoveryStrategy.class )
+    @Inject
     private Map<String, DiscoveryStrategy> strategies;
 
     /**

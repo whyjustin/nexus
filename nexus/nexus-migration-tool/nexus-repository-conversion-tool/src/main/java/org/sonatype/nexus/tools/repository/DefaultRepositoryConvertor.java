@@ -12,6 +12,9 @@
  */
 package org.sonatype.nexus.tools.repository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -19,20 +22,19 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
-
 /**
  * @author Juven Xu
  */
-@Component( role = RepositoryConvertor.class )
+@Named
+@Singleton
 public class DefaultRepositoryConvertor
     implements RepositoryConvertor
 {
 
     public static final String VERSION_REGEX = "^[0-9].*$";
 
-    @Requirement( role = ConvertorCommand.class, hint = RepositorySeperationConvertorCommand.ID )
+    @Inject
+    @Named( RepositorySeperationConvertorCommand.ID )
     private RepositorySeperationConvertorCommand repositorySeperationConvertorCommand;
 
     private File currentRepository;

@@ -16,19 +16,23 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.FileUtils;
 import org.sonatype.nexus.proxy.maven.gav.GavCalculator;
 import org.sonatype.nexus.proxy.maven.metadata.AbstractMetadataHelper;
 import org.sonatype.nexus.util.DigesterUtils;
 
-@Component( role = FSMetadataHelper.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class FSMetadataHelper
     extends AbstractMetadataHelper
 {
-    @Requirement( role = GavCalculator.class, hint = "maven2" )
+    @Inject
+    @Named( "maven2" )
     private GavCalculator gavCalculator;
 
     public FSMetadataHelper( Logger logger )

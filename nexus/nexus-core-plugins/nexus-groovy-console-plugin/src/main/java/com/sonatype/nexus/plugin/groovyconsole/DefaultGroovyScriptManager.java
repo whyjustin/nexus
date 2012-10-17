@@ -20,8 +20,6 @@ import java.util.Set;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.plexus.appevents.Event;
 import com.sonatype.nexus.plugin.groovyconsole.rest.dto.GroovyScriptDTO;
@@ -29,15 +27,20 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.util.AntBuilder;
 
-@Component( role = GroovyScriptManager.class, instantiationStrategy = "singleton" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultGroovyScriptManager
     extends AbstractLoggingComponent
     implements GroovyScriptManager
 {
-    @Requirement
+    @Inject
     private ScriptStorage storage;
 
-    @Requirement
+    @Inject
     private PlexusContainer plexus;
 
     public void actUponEvent( Event<?> evt )

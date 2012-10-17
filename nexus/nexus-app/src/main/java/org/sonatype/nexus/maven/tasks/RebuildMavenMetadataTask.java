@@ -14,7 +14,6 @@ package org.sonatype.nexus.maven.tasks;
 
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.maven.tasks.descriptors.RebuildMavenMetadataTaskDescriptor;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
@@ -25,10 +24,13 @@ import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesPathAwareTask;
 import org.sonatype.scheduling.SchedulerTask;
 import org.sonatype.scheduling.TaskUtil;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author Juven Xu
  */
-@Component( role = SchedulerTask.class, hint = RebuildMavenMetadataTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(RebuildMavenMetadataTaskDescriptor.ID)
 public class RebuildMavenMetadataTask
     extends AbstractNexusRepositoriesPathAwareTask<Object>
 {

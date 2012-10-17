@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
@@ -45,23 +43,30 @@ import org.sonatype.nexus.repository.metadata.model.RepositoryMetadata;
 import org.sonatype.nexus.repository.metadata.model.RepositoryMirrorMetadata;
 import org.sonatype.plexus.appevents.Event;
 
-@Component( role = EventInspector.class, hint = "NexusRepositoryMetadataEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("NexusRepositoryMetadataEventInspector" )
+@Singleton
 public class NexusRepositoryMetadataEventInspector
     extends AbstractEventInspector
 {
-    @Requirement( hint = "maven1" )
+    @Inject
+    @Named("maven1" )
     private ContentClass maven1ContentClass;
 
-    @Requirement( hint = "maven2" )
+    @Inject
+    @Named("maven2" )
     private ContentClass maven2ContentClass;
 
-    @Requirement
+    @Inject
     private RepositoryMetadataHandler repositoryMetadataHandler;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
     public boolean accepts( Event<?> evt )

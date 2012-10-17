@@ -12,13 +12,14 @@
  */
 package org.sonatype.nexus.tasks;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.scheduling.AbstractNexusTask;
 import org.sonatype.nexus.tasks.descriptors.PurgeApiKeysTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
 import org.sonatype.security.events.UserPrincipalsExpiredEvent;
 
-@Component( role = SchedulerTask.class, hint = PurgeApiKeysTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+import javax.inject.Named;
+
+@Named(PurgeApiKeysTaskDescriptor.ID)
 public class PurgeApiKeysTask
     extends AbstractNexusTask<Void>
 {

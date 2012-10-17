@@ -22,8 +22,7 @@ import java.util.Map;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.httpclient.CustomMultiThreadedHttpConnectionManager;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
@@ -72,79 +71,84 @@ import org.sonatype.nexus.templates.repository.RepositoryTemplate;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 import org.sonatype.security.SecuritySystem;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The default Nexus implementation.
  *
  * @author Jason van Zyl
  * @author cstamas
  */
-@Component( role = Nexus.class )
+@Named
+@Singleton
 public class DefaultNexus
     extends AbstractLoggingComponent
     implements Nexus, Initializable, Startable
 {
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
-    @Requirement
+    @Inject
     private NexusPluginManager nexusPluginManager;
 
     /**
      * The nexus configuration.
      */
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfiguration;
 
     /**
      * The repository registry.
      */
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     /**
      * The Scheduler.
      */
-    @Requirement
+    @Inject
     private NexusScheduler nexusScheduler;
 
     /**
      * The snapshot remover component.
      */
-    @Requirement
+    @Inject
     private SnapshotRemover snapshotRemover;
 
     /**
      * The SecurityConfiguration component.
      */
-    @Requirement
+    @Inject
     private RepositoryRouter rootRepositoryRouter;
 
     /**
      * Template manager.
      */
-    @Requirement
+    @Inject
     private TemplateManager templateManager;
 
     /**
      * The event inspector host.
      */
-    @Requirement
+    @Inject
     private EventInspectorHost eventInspectorHost;
 
     /**
      * The status holding component.
      */
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
     /**
      * Security component
      */
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
-    @Requirement
+    @Inject
     private ArtifactPackagingMapper artifactPackagingMapper;
 
     private static final String MAPPING_PROPERTIES_FILE = "packaging2extension-mapping.properties";

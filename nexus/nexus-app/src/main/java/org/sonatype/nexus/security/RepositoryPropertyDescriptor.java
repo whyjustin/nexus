@@ -12,10 +12,13 @@
  */
 package org.sonatype.nexus.security;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.security.realms.privileges.PrivilegePropertyDescriptor;
 
-@Component( role = PrivilegePropertyDescriptor.class, hint = "RepositoryPropertyDescriptor" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("RepositoryPropertyDescriptor" )
+@Singleton
 public class RepositoryPropertyDescriptor
     implements PrivilegePropertyDescriptor
 {

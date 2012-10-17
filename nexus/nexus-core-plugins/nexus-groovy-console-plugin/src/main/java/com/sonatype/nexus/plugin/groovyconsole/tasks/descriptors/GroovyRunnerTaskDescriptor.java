@@ -15,14 +15,18 @@ package com.sonatype.nexus.plugin.groovyconsole.tasks.descriptors;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.formfields.FormField;
 import org.sonatype.nexus.formfields.RepoOrGroupComboFormField;
 import org.sonatype.nexus.formfields.TextAreaFormField;
 import org.sonatype.nexus.tasks.descriptors.AbstractScheduledTaskDescriptor;
 import org.sonatype.nexus.tasks.descriptors.ScheduledTaskDescriptor;
 
-@Component( role = ScheduledTaskDescriptor.class, hint = "GroovyRunner", description = "Groovy Runner Task" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("GroovyRunner")
+@Singleton
+//@Component( role = ScheduledTaskDescriptor.class, hint = "GroovyRunner", description = "Groovy Runner Task" )
 public class GroovyRunnerTaskDescriptor
     extends AbstractScheduledTaskDescriptor
 {

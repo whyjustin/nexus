@@ -16,8 +16,6 @@ import java.net.MalformedURLException;
 import java.util.Set;
 import java.util.SortedSet;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
 import org.slf4j.Logger;
@@ -38,23 +36,28 @@ import org.sonatype.security.ldap.realms.persist.LdapConfiguration;
 import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 import org.sonatype.security.ldap.realms.tools.LdapURL;
 
-@Component( role = LdapManager.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class SimpleLdapManager
     implements LdapManager
 {
 
     private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    @Requirement
+    @Inject
     private LdapAuthenticator ldapAuthenticator;
 
-    @Requirement
+    @Inject
     private LdapUserDAO ldapUserManager;
 
-    @Requirement
+    @Inject
     private LdapGroupDAO ldapGroupManager;
 
-    @Requirement
+    @Inject
     private LdapConfiguration ldapConfiguration;
 
     private LdapConnector ldapManagerStrategy;

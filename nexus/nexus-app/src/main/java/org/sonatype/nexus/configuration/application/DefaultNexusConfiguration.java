@@ -26,8 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.util.FileUtils;
@@ -84,6 +83,10 @@ import com.google.common.base.Function;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Collections2;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The class DefaultNexusConfiguration is responsible for config management. It actually keeps in sync Nexus internal
  * state with p ersisted user configuration. All changes incoming thru its iface is reflect/maintained in Nexus current
@@ -91,12 +94,13 @@ import com.google.common.collect.Collections2;
  * 
  * @author cstamas
  */
-@Component( role = NexusConfiguration.class )
+@Named
+@Singleton
 public class DefaultNexusConfiguration
     extends AbstractLoggingComponent
     implements NexusConfiguration, Initializable
 {
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
     /**
@@ -105,11 +109,12 @@ public class DefaultNexusConfiguration
      * nexus-app module onwards) does "awake" this component, and hence, by having this reference here, we actually pull
      * and have Plexus manage the "lifecycle" of CacheManager component (and indirectly, EhCacheManager lifecycle).
      */
-    @Requirement
+    @Inject
     @SuppressWarnings( "unused" )
     private CacheManager pathCache;
 
-    @Requirement( hint = "file" )
+    @Inject
+    @Named("file")
     private ApplicationConfigurationSource configurationSource;
 
     /** The global local storage context. */
@@ -118,40 +123,41 @@ public class DefaultNexusConfiguration
     /** The global remote storage context. */
     private RemoteStorageContext globalRemoteStorageContext;
 
-    @Requirement
+    @Inject
     private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
 
-    @Requirement
+    @Inject
     private GlobalHttpProxySettings globalHttpProxySettings;
 
     /**
      * The config validator.
      */
-    @Requirement
+    @Inject
     private ApplicationConfigurationValidator configurationValidator;
 
     /**
      * The runtime configuration builder.
      */
-    @Requirement
+    @Inject
     private ApplicationRuntimeConfigurationBuilder runtimeConfigurationBuilder;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement( role = ScheduledTaskDescriptor.class )
+    @Inject
     private List<ScheduledTaskDescriptor> scheduledTaskDescriptors;
 
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
-    @org.codehaus.plexus.component.annotations.Configuration( value = "${nexus-work}" )
+    @Inject
+    @Named("${nexus-work}")
     private File workingDirectory;
 
-    @Requirement
+    @Inject
     private VetoFormatter vetoFormatter;
 
     /** The config dir */
@@ -169,7 +175,7 @@ public class DefaultNexusConfiguration
     /** The map with per-repotype limitations */
     private Map<RepositoryTypeDescriptor, Integer> repositoryMaxInstanceCountLimits;
 
-    @Requirement
+    @Inject
     private List<ConfigurationModifier> configurationModifiers;
 
     // ==

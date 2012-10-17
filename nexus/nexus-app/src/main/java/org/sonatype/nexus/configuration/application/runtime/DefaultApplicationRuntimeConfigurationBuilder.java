@@ -13,8 +13,6 @@
 package org.sonatype.nexus.configuration.application.runtime;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLifecycleException;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.sonatype.configuration.ConfigurationException;
@@ -25,18 +23,23 @@ import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.utils.RepositoryStringUtils;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The Class DefaultRuntimeConfigurationBuilder. Todo: all the bad thing is now concentrated in this class. We are
  * playing container instead of container.
  * 
  * @author cstamas
  */
-@Component( role = ApplicationRuntimeConfigurationBuilder.class )
+@Named
+@Singleton
 public class DefaultApplicationRuntimeConfigurationBuilder
     extends AbstractLoggingComponent
     implements ApplicationRuntimeConfigurationBuilder
 {
-    @Requirement
+    @Inject
     private PlexusContainer plexusContainer;
 
     @Override

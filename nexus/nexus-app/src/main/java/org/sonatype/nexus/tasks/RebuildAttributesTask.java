@@ -16,19 +16,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesPathAwareTask;
 import org.sonatype.nexus.tasks.descriptors.RebuildAttributesTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
 
+import javax.inject.Named;
+
 /**
  * Rebuild attributes task.
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = RebuildAttributesTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(RebuildAttributesTaskDescriptor.ID)
 public class RebuildAttributesTask
     extends AbstractNexusRepositoriesPathAwareTask<Object>
 {

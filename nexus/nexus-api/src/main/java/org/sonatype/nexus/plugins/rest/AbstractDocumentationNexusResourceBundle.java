@@ -22,17 +22,18 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.mime.MimeSupport;
+
+import javax.inject.Inject;
 
 public abstract class AbstractDocumentationNexusResourceBundle
     implements NexusDocumentationBundle
 {
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private MimeSupport mimeSupport;
 
     protected Logger getLogger()

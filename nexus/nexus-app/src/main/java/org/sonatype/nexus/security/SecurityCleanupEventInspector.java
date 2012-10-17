@@ -15,8 +15,6 @@ package org.sonatype.nexus.security;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.jsecurity.realms.TargetPrivilegeDescriptor;
 import org.sonatype.nexus.jsecurity.realms.TargetPrivilegeGroupPropertyDescriptor;
 import org.sonatype.nexus.jsecurity.realms.TargetPrivilegeRepositoryPropertyDescriptor;
@@ -33,14 +31,20 @@ import org.sonatype.security.authorization.Privilege;
 import org.sonatype.security.authorization.xml.SecurityXmlAuthorizationManager;
 import org.sonatype.security.realms.tools.ConfigurationManager;
 
-@Component( role = EventInspector.class, hint = "SecurityCleanupEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("SecurityCleanupEventInspector" )
+@Singleton
 public class SecurityCleanupEventInspector
     extends AbstractEventInspector
 {
-    @Requirement( hint = "default" )
+    @Inject
+    @Named("default" )
     private ConfigurationManager configManager;
 
-    @Requirement
+    @Inject
     private SecuritySystem security;
 
     public boolean accepts( Event<?> evt )

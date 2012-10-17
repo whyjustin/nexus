@@ -14,20 +14,23 @@ package org.sonatype.nexus.configuration.model;
 
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.configuration.PasswordHelper;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.plexus.components.cipher.PlexusCipherException;
 import com.thoughtworks.xstream.XStream;
 
-@Component( role = ConfigurationHelper.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultConfigurationHelper
     extends AbstractLoggingComponent
     implements ConfigurationHelper
 {
-    @Requirement
+    @Inject
     private PasswordHelper passwordHelper;
 
     private static final String PASSWORD_MASK = "*****";

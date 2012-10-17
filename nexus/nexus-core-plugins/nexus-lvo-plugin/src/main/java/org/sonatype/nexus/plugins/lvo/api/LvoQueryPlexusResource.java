@@ -14,8 +14,6 @@ package org.sonatype.nexus.plugins.lvo.api;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -31,11 +29,16 @@ import org.sonatype.plexus.rest.resource.AbstractPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "LvoQueryPlexusResource" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class LvoQueryPlexusResource
     extends AbstractPlexusResource
 {
-    @Requirement
+    @Inject
     private LvoPlugin lvoPlugin;
 
     @Override

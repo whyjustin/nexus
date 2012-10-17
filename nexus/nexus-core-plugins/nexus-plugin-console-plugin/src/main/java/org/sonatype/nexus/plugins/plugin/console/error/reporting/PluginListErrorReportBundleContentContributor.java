@@ -16,8 +16,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.error.report.ErrorReportBundleContentContributor;
 import org.sonatype.nexus.error.report.ErrorReportBundleEntry;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
@@ -25,13 +23,18 @@ import org.sonatype.nexus.plugins.plugin.console.PluginConsoleManager;
 import org.sonatype.nexus.plugins.plugin.console.model.PluginInfo;
 import com.thoughtworks.xstream.XStream;
 
-@Component( role = ErrorReportBundleContentContributor.class, hint = "pluginList" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class PluginListErrorReportBundleContentContributor
     extends AbstractLoggingComponent
     implements ErrorReportBundleContentContributor
 {
 
-    @Requirement
+    @Inject
     private PluginConsoleManager pluginConsoleManager;
 
     public ErrorReportBundleEntry[] getEntries()

@@ -12,12 +12,14 @@
  */
 package org.sonatype.nexus.log.internal;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logback.EventTarget;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * {@link EventTarget} that will multicast the incoming logging event to {@link ApplicationEventMulticaster}.
@@ -25,11 +27,12 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
  * @author cstamas
  * @since 2.2
  */
-@Component( role = EventTarget.class )
+@Named
+@Singleton
 public class NexusEventSystemEventTarget
     implements EventTarget
 {
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster eventMulticaster;
 
     @Override

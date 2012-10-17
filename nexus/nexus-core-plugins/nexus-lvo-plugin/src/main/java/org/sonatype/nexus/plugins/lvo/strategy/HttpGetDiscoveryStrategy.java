@@ -16,8 +16,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.ClientInfo;
 import org.restlet.data.Method;
 import org.restlet.data.Request;
@@ -27,17 +25,22 @@ import org.sonatype.nexus.plugins.lvo.DiscoveryResponse;
 import org.sonatype.nexus.plugins.lvo.DiscoveryStrategy;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This is a "remote" strategy, uses HTTP GET for information fetch from the remoteUrl. Note: this class uses Restlet
  * Client implementation to do it. Note: this implementation will follow redirects, up to 3 times.
  * 
  * @author cstamas
  */
-@Component( role = DiscoveryStrategy.class, hint = "http-get" )
+@Named("http-get")
+@Singleton
 public class HttpGetDiscoveryStrategy
     extends AbstractRemoteDiscoveryStrategy
 {
-    @Requirement
+    @Inject
     private GlobalRestApiSettings restApiSettings;
 
     public DiscoveryResponse discoverLatestVersion( DiscoveryRequest request )

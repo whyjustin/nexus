@@ -18,18 +18,20 @@ import groovy.util.AntBuilder;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.scheduling.SchedulerTask;
 
 import com.sonatype.nexus.plugin.groovyconsole.tasks.descriptors.GroovyRunnerTaskDescriptor;
 
-@Component( role = SchedulerTask.class, hint = GroovyRunnerTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(GroovyRunnerTaskDescriptor.ID)
 public class GroovyRunnerTask
     extends AbstractNexusRepositoriesTask<Object>
 {
-    @Requirement
+    @Inject
     private PlexusContainer plexus;
 
     @Override

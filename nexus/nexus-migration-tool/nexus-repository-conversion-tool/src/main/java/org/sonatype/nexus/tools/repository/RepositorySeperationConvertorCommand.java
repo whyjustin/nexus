@@ -12,27 +12,28 @@
  */
 package org.sonatype.nexus.tools.repository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.List;
-
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 
 /**
  *
  * @author Juven Xu
  *
  */
-@Component( role = ConvertorCommand.class, hint = RepositorySeperationConvertorCommand.ID )
+@Named(RepositorySeperationConvertorCommand.ID)
+@Singleton
 public class RepositorySeperationConvertorCommand
     implements ConvertorCommand
 {
 
     public static final String ID = "RepositorySeperationConvertorCommand";
 
-    @Requirement
+    @Inject
     private RepositoryConvertorFileHelper repositoryConvertorFileHelper;
 
     private boolean isMove = false;

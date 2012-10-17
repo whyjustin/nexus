@@ -12,12 +12,14 @@
  */
 package org.sonatype.security.ldap.dao.password;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author tstevens
  */
-@Component( role=PasswordEncoder.class, hint="clear" )
+@Named("clear")
+@Singleton
 public class ClearTextPasswordEncoder
     implements PasswordEncoder
 {

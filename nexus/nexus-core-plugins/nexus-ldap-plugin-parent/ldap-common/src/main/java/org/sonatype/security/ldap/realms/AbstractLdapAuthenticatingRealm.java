@@ -15,6 +15,7 @@ package org.sonatype.security.ldap.realms;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
 import javax.naming.NamingException;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,8 +29,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.ldap.AbstractLdapRealm;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
-import org.apache.shiro.subject.PrincipalCollection;
-import org.codehaus.plexus.component.annotations.Requirement;
+import org.apache.shiro.subject.PrincipalCollection;c
 import org.codehaus.plexus.logging.Logger;
 import org.sonatype.security.ldap.dao.LdapDAOException;
 import org.sonatype.security.ldap.dao.NoLdapUserRolesFoundException;
@@ -39,10 +39,10 @@ public abstract class AbstractLdapAuthenticatingRealm
     extends AbstractLdapRealm
 {
 
-    @Requirement
+    @Inject
     private LdapManager ldapManager;
 
-    @Requirement
+    @Inject
     protected Logger logger;
 
     @Override

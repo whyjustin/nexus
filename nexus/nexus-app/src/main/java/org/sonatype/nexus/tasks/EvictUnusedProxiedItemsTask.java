@@ -15,19 +15,20 @@ package org.sonatype.nexus.tasks;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.nexus.tasks.descriptors.EvictUnusedItemsTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
 
+import javax.inject.Named;
+
 /**
  * Evicts unused proxied items.
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = EvictUnusedItemsTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(EvictUnusedItemsTaskDescriptor.ID)
 public class EvictUnusedProxiedItemsTask
     extends AbstractNexusRepositoriesTask<Collection<String>>
 {

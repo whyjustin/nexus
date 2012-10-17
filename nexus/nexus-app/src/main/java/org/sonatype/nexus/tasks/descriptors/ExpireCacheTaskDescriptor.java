@@ -15,12 +15,16 @@ package org.sonatype.nexus.tasks.descriptors;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.formfields.FormField;
 import org.sonatype.nexus.formfields.RepoOrGroupComboFormField;
 import org.sonatype.nexus.formfields.StringTextFormField;
 
-@Component( role = ScheduledTaskDescriptor.class, hint = "ExpireCache", description = "Expire Repository Caches" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
+//@Component( role = ScheduledTaskDescriptor.class, hint = "ExpireCache", description = "Expire Repository Caches" )
 public class ExpireCacheTaskDescriptor
     extends AbstractScheduledTaskDescriptor
 {

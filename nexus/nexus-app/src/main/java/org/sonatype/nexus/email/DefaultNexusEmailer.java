@@ -12,8 +12,7 @@
  */
 package org.sonatype.nexus.email;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.micromailer.Address;
@@ -31,7 +30,12 @@ import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.configuration.model.CSmtpConfiguration;
 import org.sonatype.nexus.configuration.model.CSmtpConfigurationCoreConfiguration;
 
-@Component( role = NexusEmailer.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultNexusEmailer
     extends AbstractConfigurable
     implements NexusEmailer, Startable
@@ -46,13 +50,13 @@ public class DefaultNexusEmailer
      */
     private static final String X_MESSAGE_SENDER_HEADER = "X-EMailer-Mail-Sender";
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
-    @Requirement
+    @Inject
     private EMailer eMailer;
 
     // ==

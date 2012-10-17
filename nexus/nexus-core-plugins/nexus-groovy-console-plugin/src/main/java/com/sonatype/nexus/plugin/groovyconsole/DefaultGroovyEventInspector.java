@@ -12,19 +12,22 @@
  */
 package com.sonatype.nexus.plugin.groovyconsole;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.plexus.appevents.Event;
 
-@Component( role = EventInspector.class, hint = "groovy" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("groovy")
+@Singleton
 public class DefaultGroovyEventInspector
     extends AbstractEventInspector
     implements AsynchronousEventInspector
 {
-    @Requirement
+    @Inject
     private GroovyScriptManager groovyScriptManager;
 
     public boolean accepts( Event<?> evt )

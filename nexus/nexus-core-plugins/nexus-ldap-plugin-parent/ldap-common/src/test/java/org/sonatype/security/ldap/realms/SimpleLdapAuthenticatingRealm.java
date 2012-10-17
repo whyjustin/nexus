@@ -12,10 +12,14 @@
  */
 package org.sonatype.security.ldap.realms;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.apache.shiro.realm.Realm;
 
-@Component( role = Realm.class, hint = SimpleLdapAuthenticatingRealm.ROLE, description = "Test Authentication LDAP Realm" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(SimpleLdapAuthenticatingRealm.ROLE)
+@Singleton
+//@Component( role = Realm.class, hint = SimpleLdapAuthenticatingRealm.ROLE, description = "Test Authentication LDAP Realm" )
 public class SimpleLdapAuthenticatingRealm
     extends AbstractLdapAuthenticatingRealm
 {

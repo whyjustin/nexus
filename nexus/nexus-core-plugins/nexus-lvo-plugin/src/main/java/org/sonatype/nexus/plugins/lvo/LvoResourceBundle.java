@@ -15,17 +15,20 @@ package org.sonatype.nexus.plugins.lvo;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.rest.AbstractNexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.DefaultStaticResource;
 import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.StaticResource;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Usually Nexus exports /static/... URLs by default, but only for nexus-plugin packaging.
  * LVO is called plugin, but it's not (packaging=jar).
  */
-@Component( role = NexusResourceBundle.class, hint = "LvoResourceBundle" )
+@Named
+@Singleton
 public class LvoResourceBundle
     extends AbstractNexusResourceBundle
 {

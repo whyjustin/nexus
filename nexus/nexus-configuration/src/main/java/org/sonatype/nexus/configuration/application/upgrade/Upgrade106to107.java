@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
 import org.sonatype.configuration.upgrade.SingleVersionUpgrader;
@@ -49,12 +48,16 @@ import org.sonatype.nexus.configuration.model.v1_0_7.CSecurity;
 import org.sonatype.nexus.configuration.model.v1_0_7.CSmtpConfiguration;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Upgrades configuration model from version 1.0.6 to 1.0.7.
  * 
  * @author cstamas
  */
-@Component( role = SingleVersionUpgrader.class, hint = "1.0.6" )
+@Named("1.0.6")
+@Singleton
 public class Upgrade106to107
     extends AbstractLoggingComponent
     implements SingleVersionUpgrader

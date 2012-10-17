@@ -20,8 +20,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 import java.util.concurrent.TimeUnit;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.slf4j.Logger;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
@@ -33,6 +32,10 @@ import org.sonatype.plexus.appevents.Event;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * A default implementation of EventInspectorHost, a component simply collecting all EventInspectors and re-emitting
  * events towards them in they wants to receive it. For ones implementing {@link AsynchronousEventInspector} a cached
@@ -43,7 +46,8 @@ import com.google.common.annotations.VisibleForTesting;
  * 
  * @author cstamas
  */
-@Component( role = EventInspectorHost.class )
+@Named
+@Singleton
 public class DefaultEventInspectorHost
     extends AbstractLoggingComponent
     implements EventInspectorHost, Disposable
@@ -53,7 +57,7 @@ public class DefaultEventInspectorHost
 
     private final ThreadPoolExecutor hostThreadPool;
 
-    @Requirement( role = EventInspector.class )
+    @Inject
     private Map<String, EventInspector> eventInspectors;
 
     public DefaultEventInspectorHost()

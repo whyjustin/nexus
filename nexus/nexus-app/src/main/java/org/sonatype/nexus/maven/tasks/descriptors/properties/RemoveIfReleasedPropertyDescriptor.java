@@ -12,11 +12,13 @@
  */
 package org.sonatype.nexus.maven.tasks.descriptors.properties;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.tasks.descriptors.properties.AbstractBooleanPropertyDescriptor;
 import org.sonatype.nexus.tasks.descriptors.properties.ScheduledTaskPropertyDescriptor;
 
-@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "RemoveIfReleased", instantiationStrategy = "per-lookup" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("RemoveIfReleased" )
 public class RemoveIfReleasedPropertyDescriptor
     extends AbstractBooleanPropertyDescriptor
 {

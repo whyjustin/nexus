@@ -15,11 +15,13 @@ package org.sonatype.nexus.plugins.lvo.strategy;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.lvo.DiscoveryRequest;
 import org.sonatype.nexus.plugins.lvo.DiscoveryResponse;
 import org.sonatype.nexus.plugins.lvo.DiscoveryStrategy;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * This is a "remote" strategy, uses HTTP GET to get a Java properties file and get filtered keys from there. It extends
@@ -27,7 +29,8 @@ import org.sonatype.nexus.proxy.NoSuchRepositoryException;
  * 
  * @author cstamas
  */
-@Component( role = DiscoveryStrategy.class, hint = "http-get-properties" )
+@Named("http-get-properties")
+@Singleton
 public class HttpGetPropertiesDiscoveryStrategy
     extends AbstractRemoteDiscoveryStrategy
 {

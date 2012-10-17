@@ -15,9 +15,11 @@ package org.sonatype.nexus.configuration.source;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.model.Configuration;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A special "static" configuration source, that always return a factory provided defaults for Nexus configuration. It
@@ -25,7 +27,8 @@ import org.sonatype.nexus.configuration.model.Configuration;
  * 
  * @author cstamas
  */
-@Component( role = ApplicationConfigurationSource.class, hint = "static" )
+@Named("static")
+@Singleton
 public class StaticConfigurationSource
     extends AbstractApplicationConfigurationSource
 {

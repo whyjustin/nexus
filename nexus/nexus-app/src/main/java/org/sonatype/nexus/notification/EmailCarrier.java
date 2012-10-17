@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.micromailer.Address;
@@ -29,7 +27,12 @@ import org.sonatype.security.usermanagement.User;
 import org.sonatype.security.usermanagement.UserNotFoundException;
 import org.sonatype.security.usermanagement.UserSearchCriteria;
 
-@Component( role = Carrier.class, hint = EmailCarrier.KEY )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(EmailCarrier.KEY)
+@Singleton
 public class EmailCarrier
     implements Carrier
 {
@@ -37,10 +40,10 @@ public class EmailCarrier
 
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private NexusEmailer nexusEmailer;
 
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
     // --

@@ -12,11 +12,14 @@
  */
 package org.sonatype.nexus.error.reporting;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.scheduling.AbstractNexusTask;
 import org.sonatype.scheduling.SchedulerTask;
 
-@Component( role = SchedulerTask.class, hint = "ExceptionTask" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("ExceptionTask")
+@Singleton
 public class ExceptionTask
     extends AbstractNexusTask<Object>
 {

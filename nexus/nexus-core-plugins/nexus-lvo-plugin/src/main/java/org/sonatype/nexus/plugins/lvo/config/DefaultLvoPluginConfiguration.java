@@ -24,7 +24,6 @@ import java.io.Writer;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -36,12 +35,18 @@ import org.sonatype.nexus.plugins.lvo.config.model.Configuration;
 import org.sonatype.nexus.plugins.lvo.config.model.io.xpp3.NexusLvoPluginConfigurationXpp3Reader;
 import org.sonatype.nexus.plugins.lvo.config.model.io.xpp3.NexusLvoPluginConfigurationXpp3Writer;
 
-@Component( role = LvoPluginConfiguration.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultLvoPluginConfiguration
     extends AbstractLoggingComponent
     implements LvoPluginConfiguration
 {
-    @org.codehaus.plexus.component.annotations.Configuration( value = "${nexus-work}/conf/lvo-plugin.xml" )
+    @Inject
+    @Named("${nexus-work}/conf/lvo-plugin.xml" )
     private File configurationFile;
 
     private Configuration configuration;

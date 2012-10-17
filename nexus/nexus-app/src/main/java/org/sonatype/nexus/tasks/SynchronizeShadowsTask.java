@@ -12,19 +12,20 @@
  */
 package org.sonatype.nexus.tasks;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.repository.ShadowRepository;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.nexus.tasks.descriptors.SynchronizeShadowTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
 
+import javax.inject.Named;
+
 /**
  * Publish indexes task.
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = SynchronizeShadowTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(SynchronizeShadowTaskDescriptor.ID)
 public class SynchronizeShadowsTask
     extends AbstractNexusRepositoriesTask<Object>
 {

@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.proxy.IllegalOperationException;
@@ -60,6 +58,10 @@ import org.sonatype.nexus.proxy.wastebasket.DeleteOperation;
 import org.sonatype.nexus.util.ItemPathUtils;
 import org.sonatype.scheduling.TaskUtil;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The Class SnapshotRemoverJob. After a successful run, the job guarantees that there will remain at least
  * minCountOfSnapshotsToKeep (but maybe more) snapshots per one snapshot collection by removing all older from
@@ -68,19 +70,21 @@ import org.sonatype.scheduling.TaskUtil;
  * 
  * @author cstamas
  */
-@Component( role = SnapshotRemover.class )
+@Named
+@Singleton
 public class DefaultSnapshotRemover
     extends AbstractLoggingComponent
     implements SnapshotRemover
 {
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private Walker walker;
 
-    @Requirement( hint = "maven2" )
+    @Inject
+    @Named("maven2" )
     private ContentClass contentClass;
 
     private VersionParser versionScheme = new GenericVersionParser();

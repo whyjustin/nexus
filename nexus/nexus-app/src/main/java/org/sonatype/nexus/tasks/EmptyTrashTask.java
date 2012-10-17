@@ -12,18 +12,19 @@
  */
 package org.sonatype.nexus.tasks;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.wastebasket.Wastebasket;
 import org.sonatype.nexus.scheduling.AbstractNexusTask;
 import org.sonatype.nexus.tasks.descriptors.EmptyTrashTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * Empty trash.
  */
-@Component( role = SchedulerTask.class, hint = EmptyTrashTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(EmptyTrashTaskDescriptor.ID)
 public class EmptyTrashTask
     extends AbstractNexusTask<Object>
 {
@@ -37,7 +38,7 @@ public class EmptyTrashTask
     /**
      * The Wastebasket component.
      */
-    @Requirement( role = Wastebasket.class )
+    @Inject
     private Wastebasket wastebasket;
 
     @Override

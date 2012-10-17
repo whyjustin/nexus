@@ -18,13 +18,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.plexus.components.cipher.Base64;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author bdemers
  */
-@Component( role = PasswordEncoder.class, hint = "ssha" )
+@Named("ssha")
+@Singleton
 public class SSHAPasswordEncoder
     implements PasswordEncoder
 {

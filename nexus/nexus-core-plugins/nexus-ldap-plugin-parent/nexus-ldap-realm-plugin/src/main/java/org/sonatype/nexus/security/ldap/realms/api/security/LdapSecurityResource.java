@@ -12,11 +12,14 @@
  */
 package org.sonatype.nexus.security.ldap.realms.api.security;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.security.realms.tools.AbstractStaticSecurityResource;
 import org.sonatype.security.realms.tools.StaticSecurityResource;
 
-@Component( role = StaticSecurityResource.class, hint = "LdapSecurityResource" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class LdapSecurityResource
     extends AbstractStaticSecurityResource
     implements StaticSecurityResource

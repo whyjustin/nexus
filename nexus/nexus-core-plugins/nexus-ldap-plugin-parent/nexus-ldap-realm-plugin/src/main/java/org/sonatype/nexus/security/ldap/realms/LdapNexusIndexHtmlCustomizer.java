@@ -14,11 +14,14 @@ package org.sonatype.nexus.security.ldap.realms;
 
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.rest.AbstractNexusIndexHtmlCustomizer;
 import org.sonatype.nexus.plugins.rest.NexusIndexHtmlCustomizer;
 
-@Component( role = NexusIndexHtmlCustomizer.class, hint = "LdapNexusIndexHtmlCustomizer" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class LdapNexusIndexHtmlCustomizer
     extends AbstractNexusIndexHtmlCustomizer
 {

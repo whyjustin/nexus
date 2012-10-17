@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.Collection;
 
 import org.junit.Test;
+import org.sonatype.inject.BeanScanning;
 import org.sonatype.nexus.test.PlexusTestCaseSupport;
 
 import eu.medsea.mimeutil.MimeType;

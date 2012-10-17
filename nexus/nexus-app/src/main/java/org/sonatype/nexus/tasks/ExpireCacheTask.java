@@ -12,19 +12,20 @@
  */
 package org.sonatype.nexus.tasks;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesPathAwareTask;
 import org.sonatype.nexus.tasks.descriptors.ExpireCacheTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
 
+import javax.inject.Named;
+
 /**
  * Clear caches task.
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = ExpireCacheTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(ExpireCacheTaskDescriptor.ID)
 public class ExpireCacheTask
     extends AbstractNexusRepositoriesPathAwareTask<Object>
 {

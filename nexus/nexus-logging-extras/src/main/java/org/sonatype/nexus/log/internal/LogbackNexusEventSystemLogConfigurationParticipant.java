@@ -16,15 +16,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.log.LogConfigurationParticipant;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Contributes "logback-events" to logback configuration.
  * 
  * @author adreghiciu@gmail.com
  */
-@Component( role = LogConfigurationParticipant.class, hint="logback-events" )
+@Named("logback-events" )
+@Singleton
 public class LogbackNexusEventSystemLogConfigurationParticipant
     implements LogConfigurationParticipant, LogConfigurationParticipant.NonEditable
 {

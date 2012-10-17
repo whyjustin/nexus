@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
 import org.sonatype.configuration.upgrade.SingleVersionUpgrader;
@@ -43,12 +42,16 @@ import org.sonatype.nexus.configuration.model.v1_0_1.CRepositoryShadow;
 import org.sonatype.nexus.configuration.model.v1_0_1.CRouting;
 import org.sonatype.nexus.configuration.model.v1_0_1.CSecurity;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Upgrades configuration model from version 1.0.0 (SWX: 1.0) to 1.0.1.
  * 
  * @author cstamas
  */
-@Component( role = SingleVersionUpgrader.class, hint = "1.0.0" )
+@Named("1.0.0")
+@Singleton
 public class Upgrade100to101
     implements SingleVersionUpgrader
 {

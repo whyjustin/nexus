@@ -14,12 +14,14 @@ package org.sonatype.nexus.configuration;
 
 import java.util.Random;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @deprecated this is just plain stupid
  */
-@Component( role = ConfigurationIdGenerator.class )
+@Named
+@Singleton
 public class DefaultConfigurationIdGenerator
     implements ConfigurationIdGenerator
 {

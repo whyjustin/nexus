@@ -37,6 +37,7 @@ import org.junit.Assert;
 import org.junit.Before;
 
 import com.google.inject.Module;
+import org.sonatype.inject.BeanScanning;
 
 /**
  * A Support PlexusTestCase clone that does not extend JUnit TestCase, thereby allowing us to extend this class like we
@@ -153,6 +154,8 @@ public abstract class PlexusTestCaseSupport
      */
     protected void customizeContainerConfiguration( final ContainerConfiguration containerConfiguration )
     {
+        containerConfiguration.setAutoWiring( true );
+        containerConfiguration.setClassPathScanning( BeanScanning.ON.name() );
     }
 
     protected void customizeContext( final Context context )

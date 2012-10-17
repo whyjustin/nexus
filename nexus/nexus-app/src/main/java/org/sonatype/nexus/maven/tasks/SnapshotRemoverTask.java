@@ -12,19 +12,21 @@
  */
 package org.sonatype.nexus.maven.tasks;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.maven.tasks.descriptors.SnapshotRemovalTaskDescriptor;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.scheduling.SchedulerTask;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * SnapshotRemoverTask
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = SnapshotRemovalTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(SnapshotRemovalTaskDescriptor.ID)
 public class SnapshotRemoverTask
     extends AbstractNexusRepositoriesTask<SnapshotRemovalResult>
 {
@@ -34,7 +36,7 @@ public class SnapshotRemoverTask
 
     public static final int DEFAULT_OLDER_THAN_DAYS = -1;
 
-    @Requirement
+    @Inject
     private SnapshotRemover snapshotRemover;
 
     @Override

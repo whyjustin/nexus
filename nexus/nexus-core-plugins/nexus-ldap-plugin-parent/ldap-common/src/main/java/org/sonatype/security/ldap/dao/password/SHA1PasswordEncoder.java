@@ -16,14 +16,17 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.digest.Hex;
 import org.sonatype.plexus.components.cipher.Base64;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author cstamas
  */
-@Component(role=PasswordEncoder.class, hint="sha")
+@Named("sha")
+@Singleton
 public class SHA1PasswordEncoder
     implements PasswordEncoder
 {

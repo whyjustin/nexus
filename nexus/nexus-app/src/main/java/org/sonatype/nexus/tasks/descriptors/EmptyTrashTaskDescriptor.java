@@ -15,11 +15,15 @@ package org.sonatype.nexus.tasks.descriptors;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.formfields.FormField;
 import org.sonatype.nexus.formfields.NumberTextFormField;
 
-@Component( role = ScheduledTaskDescriptor.class, hint = "EmptyTrash", description = "Empty Trash" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
+//@Component( role = ScheduledTaskDescriptor.class, hint = "EmptyTrash", description = "Empty Trash" )
 public class EmptyTrashTaskDescriptor
     extends AbstractScheduledTaskDescriptor
 {

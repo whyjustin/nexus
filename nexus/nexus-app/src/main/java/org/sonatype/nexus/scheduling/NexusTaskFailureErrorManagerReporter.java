@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.scheduling;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.error.reporting.ErrorReportRequest;
 import org.sonatype.nexus.error.reporting.ErrorReportingManager;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
@@ -22,18 +20,23 @@ import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.scheduling.events.NexusTaskEventStoppedFailed;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * {@link EventInspector} that will send error report in case of a failing {@link NexusTask}.
  * 
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "NexusTaskFailureErrorManagerReporter" )
+@Named("NexusTaskFailureErrorManagerReporter" )
+@Singleton
 public class NexusTaskFailureErrorManagerReporter
     extends AbstractEventInspector
     implements AsynchronousEventInspector
 {
 
-    @Requirement
+    @Inject
     private ErrorReportingManager errorManager;
 
     /**

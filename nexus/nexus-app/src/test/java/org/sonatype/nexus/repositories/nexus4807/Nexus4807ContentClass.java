@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.repositories.nexus4807;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.registry.AbstractIdContentClass;
 import org.sonatype.nexus.proxy.registry.ContentClass;
 

@@ -16,7 +16,6 @@ import static org.sonatype.sisu.pr.Modifier.Priority.MODIFIER;
 
 import javax.inject.Named;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.swizzle.IssueSubmissionRequest;
 import org.sonatype.nexus.error.reporting.ErrorReportRequest;
 import org.sonatype.sisu.pr.Modifier;

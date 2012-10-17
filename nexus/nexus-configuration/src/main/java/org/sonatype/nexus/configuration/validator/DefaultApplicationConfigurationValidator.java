@@ -17,7 +17,6 @@ import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.validation.ValidationMessage;
 import org.sonatype.configuration.validation.ValidationRequest;
@@ -41,13 +40,17 @@ import org.sonatype.nexus.configuration.model.CSmtpConfiguration;
 import org.sonatype.nexus.configuration.model.Configuration;
 import org.sonatype.nexus.proxy.repository.LocalStatus;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The default configuration validator provider. It checks the model for semantical validity.
  * 
  * @author cstamas
  * @deprecated see Configurable
  */
-@Component( role = ApplicationConfigurationValidator.class )
+@Named
+@Singleton
 public class DefaultApplicationConfigurationValidator
     implements ApplicationConfigurationValidator
 {

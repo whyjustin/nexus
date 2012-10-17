@@ -13,8 +13,6 @@
 
 package org.sonatype.nexus.user;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
 import org.sonatype.security.SecuritySystem;
@@ -23,17 +21,22 @@ import org.sonatype.security.usermanagement.NoSuchUserManagerException;
 import org.sonatype.security.usermanagement.User;
 import org.sonatype.security.usermanagement.UserNotFoundException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Provides functionality to read and update basic user data.
  *
  * @since 2.1
  */
-@Component( role = UserAccountManager.class )
+@Named
+@Singleton
 public class DefaultUserAccountManager
     extends AbstractLogEnabled
     implements UserAccountManager
 {
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
     public User readAccount( String userId )

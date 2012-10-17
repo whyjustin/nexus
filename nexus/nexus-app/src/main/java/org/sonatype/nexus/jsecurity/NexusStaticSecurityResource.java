@@ -12,11 +12,14 @@
  */
 package org.sonatype.nexus.jsecurity;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.security.realms.tools.AbstractStaticSecurityResource;
 import org.sonatype.security.realms.tools.StaticSecurityResource;
 
-@Component( role = StaticSecurityResource.class, hint = "NexusStaticSecurityResource" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("NexusStaticSecurityResource")
+@Singleton
 public class NexusStaticSecurityResource
     extends AbstractStaticSecurityResource
     implements StaticSecurityResource

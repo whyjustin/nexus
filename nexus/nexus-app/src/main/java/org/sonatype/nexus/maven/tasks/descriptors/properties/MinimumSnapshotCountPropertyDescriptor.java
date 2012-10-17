@@ -12,11 +12,13 @@
  */
 package org.sonatype.nexus.maven.tasks.descriptors.properties;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.tasks.descriptors.properties.AbstractNumberPropertyDescriptor;
 import org.sonatype.nexus.tasks.descriptors.properties.ScheduledTaskPropertyDescriptor;
 
-@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "MinimumSnapshotCount", instantiationStrategy = "per-lookup" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("MinimumSnapshotCount" )
 public class MinimumSnapshotCountPropertyDescriptor
     extends AbstractNumberPropertyDescriptor
 {

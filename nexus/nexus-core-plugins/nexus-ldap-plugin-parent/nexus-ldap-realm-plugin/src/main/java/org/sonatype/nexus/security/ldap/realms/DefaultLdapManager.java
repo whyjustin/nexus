@@ -18,8 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
@@ -49,26 +48,31 @@ import org.sonatype.security.ldap.realms.persist.LdapConfiguration;
 import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 import org.sonatype.security.ldap.realms.tools.LdapURL;
 
-@Component( role = LdapManager.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultLdapManager
     implements LdapManager, EventListener, Initializable, Disposable
 {
 
     private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    @Requirement
+    @Inject
     private LdapAuthenticator ldapAuthenticator;
 
-    @Requirement
+    @Inject
     private LdapUserDAO ldapUserManager;
 
-    @Requirement
+    @Inject
     private LdapGroupDAO ldapGroupManager;
 
-    @Requirement
+    @Inject
     private LdapConfiguration ldapConfiguration;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
     private LdapConnector ldapConnector;

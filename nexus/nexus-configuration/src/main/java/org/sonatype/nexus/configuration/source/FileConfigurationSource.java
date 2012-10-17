@@ -20,8 +20,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.configuration.ConfigurationException;
@@ -38,13 +36,18 @@ import org.sonatype.nexus.configuration.validator.ConfigurationValidator;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 import org.sonatype.security.events.SecurityConfigurationChangedEvent;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The default configuration source powered by Modello. It will try to load configuration, upgrade if needed and
  * validate it. It also holds the one and only existing Configuration object.
  * 
  * @author cstamas
  */
-@Component( role = ApplicationConfigurationSource.class, hint = "file" )
+@Named("file")
+@Singleton
 public class FileConfigurationSource
     extends AbstractApplicationConfigurationSource
 {
@@ -52,37 +55,39 @@ public class FileConfigurationSource
     /**
      * The configuration file.
      */
-    @org.codehaus.plexus.component.annotations.Configuration( value = "${nexus-work}/conf/nexus.xml" )
+    @Named("${nexus-work}/conf/nexus.xml" )
+    @Inject
     private File configurationFile;
 
     /**
      * The configuration validator.
      */
-    @Requirement
+    @Inject
     private ApplicationConfigurationValidator configurationValidator;
 
     /**
      * The configuration upgrader.
      */
-    @Requirement
+    @Inject
     private ApplicationConfigurationUpgrader configurationUpgrader;
 
     /**
      * The nexus defaults configuration source.
      */
-    @Requirement( hint = "static" )
+    @Named("static")
+    @Inject
     private ApplicationConfigurationSource nexusDefaults;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster eventMulticaster;
 
-    @Requirement
+    @Inject
     private ConfigurationHelper configHelper;
 
     /** Flag to mark defaulted config */
     private boolean configurationDefaulted;
 
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
     /**

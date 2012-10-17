@@ -16,6 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
+import org.sonatype.inject.BeanScanning;
 import org.sonatype.nexus.test.PlexusTestCaseSupport;
 
 public class DefaultMimeSupportTest

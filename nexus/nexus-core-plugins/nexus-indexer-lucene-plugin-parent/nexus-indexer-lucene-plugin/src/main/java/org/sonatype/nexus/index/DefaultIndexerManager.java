@@ -117,6 +117,9 @@ import org.sonatype.scheduling.TaskUtil;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * <p>
  * Indexer Manager. This is a thin layer above Nexus Indexer and simply manages indexingContext additions, updates and
@@ -133,7 +136,8 @@ import com.google.common.annotations.VisibleForTesting;
  * 
  * @author Tamas Cservenak
  */
-@Component( role = IndexerManager.class )
+@Named
+@Singleton
 public class DefaultIndexerManager
     implements IndexerManager
 {

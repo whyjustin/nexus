@@ -18,8 +18,6 @@ import java.util.TreeSet;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.security.ldap.dao.LdapDAOException;
@@ -36,7 +34,12 @@ import org.sonatype.security.usermanagement.UserNotFoundTransientException;
 import org.sonatype.security.usermanagement.UserSearchCriteria;
 import org.sonatype.security.usermanagement.UserStatus;
 
-@Component( role = UserManager.class, hint = "LDAP" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("LDAP")
+@Singleton
 public class LdapUserManager
     extends AbstractReadOnlyUserManager
 {
@@ -46,7 +49,7 @@ public class LdapUserManager
     public static final String LDAP_REALM_KEY = "LdapAuthenticatingRealm";
     private static final String USER_SOURCE = "LDAP";
 
-    @Requirement
+    @Inject
     private LdapManager ldapManager;
 
     /**

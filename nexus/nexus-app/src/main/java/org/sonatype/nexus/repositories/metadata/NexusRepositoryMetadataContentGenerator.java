@@ -16,7 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.proxy.IllegalOperationException;
 import org.sonatype.nexus.proxy.ItemNotFoundException;
@@ -28,7 +27,11 @@ import org.sonatype.nexus.proxy.item.StorageFileItem;
 import org.sonatype.nexus.proxy.item.StringContentLocator;
 import org.sonatype.nexus.proxy.repository.Repository;
 
-@Component( role = ContentGenerator.class, hint = NexusRepositoryMetadataContentGenerator.ID )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(NexusRepositoryMetadataContentGenerator.ID)
+@Singleton
 public class NexusRepositoryMetadataContentGenerator
     implements ContentGenerator
 {

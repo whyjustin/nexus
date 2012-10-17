@@ -17,8 +17,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.AbstractConfigurable;
 import org.sonatype.nexus.configuration.Configurator;
@@ -30,12 +28,17 @@ import org.sonatype.nexus.proxy.repository.DefaultRemoteProxySettings;
 import org.sonatype.nexus.proxy.repository.RemoteAuthenticationSettings;
 import org.sonatype.nexus.proxy.repository.RemoteProxySettings;
 
-@Component( role = GlobalHttpProxySettings.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultGlobalHttpProxySettings
     extends AbstractConfigurable
     implements GlobalHttpProxySettings
 {
-    @Requirement
+    @Inject
     private AuthenticationInfoConverter authenticationInfoConverter;
 
     @Override

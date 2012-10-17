@@ -14,11 +14,14 @@ package org.sonatype.nexus.plugins.plugin.console.ui;
 
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.rest.AbstractNexusIndexHtmlCustomizer;
 import org.sonatype.nexus.plugins.rest.NexusIndexHtmlCustomizer;
 
-@Component( role = NexusIndexHtmlCustomizer.class, hint = "PluginConsoleNexusIndexHtmlCustomizer" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class PluginConsoleNexusIndexHtmlCustomizer
     extends AbstractNexusIndexHtmlCustomizer
 {

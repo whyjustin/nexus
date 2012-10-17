@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -29,12 +28,16 @@ import org.sonatype.nexus.configuration.model.v1_10_0.CRepository;
 import org.sonatype.nexus.configuration.model.v1_10_0.upgrade.BasicVersionUpgrade;
 import org.sonatype.nexus.proxy.repository.AbstractProxyRepositoryConfiguration;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Upgrades configuration model from version 1.4.6 to 1.10.0.<BR>
  * 
  * @author velo
  */
-@Component( role = SingleVersionUpgrader.class, hint = "1.4.6" )
+@Named("1.4.6")
+@Singleton
 public class Upgrade146to1100
     extends AbstractLogEnabled
     implements SingleVersionUpgrader

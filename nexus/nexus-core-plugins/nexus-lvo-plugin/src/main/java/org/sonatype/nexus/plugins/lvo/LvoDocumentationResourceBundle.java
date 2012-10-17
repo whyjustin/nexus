@@ -12,11 +12,14 @@
  */
 package org.sonatype.nexus.plugins.lvo;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.rest.AbstractDocumentationNexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
 
-@Component( role = NexusResourceBundle.class, hint = "LvoDocumentationResourceBundle" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class LvoDocumentationResourceBundle
     extends AbstractDocumentationNexusResourceBundle
 {

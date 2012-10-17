@@ -16,13 +16,16 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.digest.Hex;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author cstamas
  */
-@Component( role = PasswordEncoder.class, hint = "md5" )
+@Named("md5")
+@Singleton
 public class MD5PasswordEncoder
     implements PasswordEncoder
 {

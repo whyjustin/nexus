@@ -12,9 +12,12 @@
  */
 package org.sonatype.nexus.tasks.descriptors.properties;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "Shadow", instantiationStrategy = "per-lookup" )
+@Named
+@Singleton
+//@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "Shadow", instantiationStrategy = "per-lookup" )
 public class ShadowPropertyDescriptor
     extends AbstractRepositoryPropertyDescriptor
 {

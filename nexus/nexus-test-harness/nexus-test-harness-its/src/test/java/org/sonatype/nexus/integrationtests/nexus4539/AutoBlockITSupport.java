@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.maven.index.artifact.Gav;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.StoppingException;
 import org.hamcrest.Matchers;
 import org.eclipse.jetty.servlet.ServletHolder;

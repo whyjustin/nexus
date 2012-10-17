@@ -15,19 +15,22 @@ package org.sonatype.nexus.tools.metadata;
 import java.io.File;
 import java.net.URI;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.FileUtils;
 
-@Component( role = MetadataRebuilder.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultMetadataRebuilder extends AbstractLogEnabled
     implements MetadataRebuilder
 {
 
     private String repo;
 
-    @Requirement
+    @Inject
     private FSMetadataHelper fSMetadataHelper = new FSMetadataHelper( getLogger() );
 
     public void rebuildMetadata( String repo )

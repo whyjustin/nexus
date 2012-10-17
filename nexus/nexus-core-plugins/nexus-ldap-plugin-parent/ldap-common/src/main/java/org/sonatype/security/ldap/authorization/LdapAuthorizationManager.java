@@ -15,8 +15,6 @@ package org.sonatype.security.ldap.authorization;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.security.authorization.AbstractReadOnlyAuthorizationManager;
@@ -30,12 +28,17 @@ import org.sonatype.security.ldap.dao.LdapDAOException;
 import org.sonatype.security.ldap.dao.NoSuchLdapGroupException;
 import org.sonatype.security.ldap.realms.LdapManager;
 
-@Component( role = AuthorizationManager.class, hint = "LDAP" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("LDAP")
+@Singleton
 public class LdapAuthorizationManager
     extends AbstractReadOnlyAuthorizationManager
 {
 
-    @Requirement
+    @Inject
     private LdapManager ldapManager;
 
     private Logger logger = LoggerFactory.getLogger( getClass() ); 

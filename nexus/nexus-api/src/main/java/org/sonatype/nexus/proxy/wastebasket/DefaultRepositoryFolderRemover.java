@@ -15,19 +15,22 @@ package org.sonatype.nexus.proxy.wastebasket;
 import java.io.IOException;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.proxy.repository.Repository;
 
-@Component( role = RepositoryFolderRemover.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultRepositoryFolderRemover
     implements RepositoryFolderRemover
 {
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement( role = RepositoryFolderCleaner.class )
+    @Inject
     private Map<String, RepositoryFolderCleaner> cleaners;
 
     protected Logger getLogger()

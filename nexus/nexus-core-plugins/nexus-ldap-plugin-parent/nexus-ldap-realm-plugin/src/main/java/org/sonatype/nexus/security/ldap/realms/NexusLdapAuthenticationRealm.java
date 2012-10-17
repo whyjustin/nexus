@@ -12,11 +12,15 @@
  */
 package org.sonatype.nexus.security.ldap.realms;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.apache.shiro.realm.Realm;
 import org.sonatype.security.ldap.realms.AbstractLdapAuthenticatingRealm;
 
-@Component( role = Realm.class, hint = NexusLdapAuthenticationRealm.ROLE, description = "OSS LDAP Authentication Realm")
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named(NexusLdapAuthenticationRealm.ROLE)
+@Singleton
+//@Component( role = Realm.class, hint = NexusLdapAuthenticationRealm.ROLE, description = "OSS LDAP Authentication Realm")
 public class NexusLdapAuthenticationRealm
     extends AbstractLdapAuthenticatingRealm
 {

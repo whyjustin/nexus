@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
@@ -37,7 +35,11 @@ import org.sonatype.security.model.v2_0_2.io.xpp3.SecurityConfigurationXpp3Reade
 import org.sonatype.security.model.upgrade.AbstractDataUpgrader;
 import org.sonatype.security.model.upgrade.SecurityDataUpgrader;
 
-@Component( role = SecurityDataUpgrader.class, hint = "2.0.1" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("2.0.1")
+@Singleton
 public class SecurityData201Upgrade
     extends AbstractDataUpgrader<Configuration>
     implements SecurityDataUpgrader

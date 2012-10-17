@@ -16,8 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.plugins.lvo.DiscoveryRequest;
 import org.sonatype.nexus.plugins.lvo.DiscoveryResponse;
@@ -29,16 +27,21 @@ import org.sonatype.nexus.proxy.item.StorageItem;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This is a "local" strategy, uses Nexus content for information fetch.
  * 
  * @author cstamas
  */
-@Component( role = DiscoveryStrategy.class, hint = "content-get" )
+@Named("content-get")
+@Singleton
 public class ContentGetDiscoveryStrategy
     extends AbstractDiscoveryStrategy
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     public DiscoveryResponse discoverLatestVersion( DiscoveryRequest request )

@@ -29,12 +29,16 @@ import org.sonatype.nexus.proxy.maven.gav.Gav;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Filters artifact info collection, based on user permissions.
  * 
  * @author cstamas
  */
-@Component( role = IndexArtifactFilter.class )
+@Named
+@Singleton
 public class DefaultIndexArtifactFilter
     extends AbstractLoggingComponent
     implements IndexArtifactFilter

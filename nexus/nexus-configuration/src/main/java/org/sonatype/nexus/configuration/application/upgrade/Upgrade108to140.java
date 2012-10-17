@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
@@ -61,20 +59,26 @@ import org.sonatype.security.configuration.source.SecurityConfigurationSource;
 import org.sonatype.security.realms.XmlAuthenticatingRealm;
 import org.sonatype.security.realms.XmlAuthorizingRealm;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Upgrades configuration model from version 1.0.8 to 1.4.0.
  * 
  * @author cstamas
  */
-@Component( role = SingleVersionUpgrader.class, hint = "1.0.8" )
+@Named("1.0.8")
+@Singleton
 public class Upgrade108to140
     extends AbstractLoggingComponent
     implements SingleVersionUpgrader
 {
-    @Requirement( hint = "file" )
+    @Inject
+    @Named("file" )
     private SecurityConfigurationSource securityConfigurationSource;
 
-    @Requirement
+    @Inject
     private PasswordHelper passwordHelper;
 
     private static final String EXTERNAL_CONFIG = "externalConfiguration";

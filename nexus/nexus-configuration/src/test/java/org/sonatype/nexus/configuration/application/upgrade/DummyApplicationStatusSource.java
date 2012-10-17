@@ -12,12 +12,15 @@
  */
 package org.sonatype.nexus.configuration.application.upgrade;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.SystemState;
 import org.sonatype.nexus.SystemStatus;
 
-@Component(role=ApplicationStatusSource.class)
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DummyApplicationStatusSource
     implements ApplicationStatusSource
 {

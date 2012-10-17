@@ -12,29 +12,32 @@
  */
 package org.sonatype.nexus.notification.events;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.notification.NotificationManager;
 import org.sonatype.nexus.notification.NotificationRequest;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * A "bridge" that funnels events into notifications using the event to notification router.
  * 
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "NotificationEventInspector" )
+@Named("NotificationEventInspector")
+@Singleton
 public class NotificationEventInspector
     extends AbstractEventInspector
 {
     private static final String NOTIFICATION_ROUTE_KEY = "notificationRoute";
 
-    @Requirement
+    @Inject
     private NotificationEventRouter notificationEventRouter;
 
-    @Requirement
+    @Inject
     private NotificationManager notificationManager;
 
     public boolean accepts( Event<?> evt )

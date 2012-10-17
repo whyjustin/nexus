@@ -18,6 +18,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
@@ -27,11 +30,10 @@ import javax.ws.rs.Produces;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
 import org.codehaus.plexus.PlexusConstants;
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.context.ContextException;
 import org.codehaus.plexus.logging.Logger;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.restlet.Context;
 import org.restlet.data.Request;
@@ -60,22 +62,23 @@ import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 /**
  * Resource for user and group mapping testing.
  */
-@Component( role = PlexusResource.class, hint = "LdapUserAndGroupConfigTestPlexusResource" )
 @Path( "/ldap/test_user_conf" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
+@Named
+@Singleton
 public class LdapUserAndGroupConfigTestPlexusResource
     extends AbstractLdapRealmPlexusResource
     implements Contextualizable
 {
 
-    @Requirement
+    @Inject
     private Logger logger;
 
-    @Requirement
+    @Inject
     private LdapConnectionTester ldapConnectionTester;
 
-    @Requirement
+    @Inject
     private ConfigurationValidator configurationValidator;
 
     private PlexusContainer container;

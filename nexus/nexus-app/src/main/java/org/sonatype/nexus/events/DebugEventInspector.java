@@ -14,10 +14,12 @@ package org.sonatype.nexus.events;
 
 import java.lang.management.ManagementFactory;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.codehaus.plexus.component.annotations.Component;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.events.EventInspector;
@@ -33,7 +35,8 @@ import org.sonatype.plexus.appevents.Event;
  * @author cstamas
  * @since 2.1
  */
-@Component( role = EventInspector.class, hint = "DebugEventInspector" )
+@Named("DebugEventInspector")
+@Singleton
 public class DebugEventInspector
     extends AbstractLoggingComponent
     implements EventInspector, Disposable

@@ -12,14 +12,16 @@
  */
 package org.sonatype.nexus.tasks.descriptors.properties;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * 
  * @author Juven Xu
  *
  */
-@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "EmptyOlderThanDays", instantiationStrategy = "per-lookup" )
+@Named
+//@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "EmptyOlderThanDays", instantiationStrategy = "per-lookup" )
 public class EmptyOlderThanDaysPropertyDescriptor
     extends AbstractNumberPropertyDescriptor
 {

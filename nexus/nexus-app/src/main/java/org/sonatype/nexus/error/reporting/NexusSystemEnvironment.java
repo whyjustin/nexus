@@ -15,8 +15,6 @@ package org.sonatype.nexus.error.reporting;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.sisu.pr.SystemEnvironmentContributor;
 

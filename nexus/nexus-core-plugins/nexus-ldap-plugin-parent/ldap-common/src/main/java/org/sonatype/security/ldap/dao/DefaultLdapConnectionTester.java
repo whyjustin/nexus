@@ -14,25 +14,27 @@ package org.sonatype.security.ldap.dao;
 
 import java.util.SortedSet;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.naming.NamingException;
 import javax.naming.ldap.LdapContext;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component( role = LdapConnectionTester.class )
+@Named
+@Singleton
 public class DefaultLdapConnectionTester
     implements LdapConnectionTester
 {
 
-    @Requirement
+    @Inject
     private LdapUserDAO ldapUserDao;
 
-    @Requirement
+    @Inject
     private LdapGroupDAO ldapGroupDAO;
 
     private Logger logger = LoggerFactory.getLogger( getClass() );

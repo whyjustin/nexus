@@ -12,13 +12,15 @@
  */
 package org.sonatype.nexus.security.ldap.realms.test.api;
 
-import org.codehaus.plexus.component.annotations.Component;
-
 import org.sonatype.nexus.security.ldap.realms.DefaultLdapManager;
 import org.sonatype.security.ldap.realms.LdapManager;
 import org.sonatype.security.ldap.realms.persist.LdapConfiguration;
 
-@Component(role=LdapManager.class, hint="TestLdapManager")
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class TestLdapManager extends DefaultLdapManager
 {
     
@@ -33,8 +35,5 @@ public class TestLdapManager extends DefaultLdapManager
     {
         this.ldapConfiguration = ldapConfiguration;
     }
-    
-    
-    
 
 }

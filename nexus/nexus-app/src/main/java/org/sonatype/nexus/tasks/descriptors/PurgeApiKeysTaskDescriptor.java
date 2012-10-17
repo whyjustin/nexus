@@ -12,9 +12,12 @@
  */
 package org.sonatype.nexus.tasks.descriptors;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-@Component( role = ScheduledTaskDescriptor.class, hint = "PurgeApiKeys", description = "Purge Orphaned API Keys" )
+@Named
+@Singleton
+//@Component( role = ScheduledTaskDescriptor.class, hint = "PurgeApiKeys", description = "Purge Orphaned API Keys" )
 public class PurgeApiKeysTaskDescriptor
     extends AbstractScheduledTaskDescriptor
 {

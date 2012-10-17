@@ -20,7 +20,6 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.interpolation.InterpolatorFilterReader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.sonatype.configuration.ConfigurationException;
@@ -28,6 +27,8 @@ import org.sonatype.nexus.configuration.model.Configuration;
 import org.sonatype.nexus.configuration.model.io.xpp3.NexusConfigurationXpp3Reader;
 import org.sonatype.nexus.configuration.model.io.xpp3.NexusConfigurationXpp3Writer;
 import org.sonatype.nexus.util.ApplicationInterpolatorProvider;
+
+import javax.inject.Inject;
 
 /**
  * Abstract class that encapsulates Modello model loading and saving with interpolation.
@@ -41,7 +42,7 @@ public abstract class AbstractApplicationConfigurationSource
     /**
      * The application interpolation provider.
      */
-    @Requirement
+    @Inject
     private ApplicationInterpolatorProvider interpolatorProvider;
 
     /** The configuration. */

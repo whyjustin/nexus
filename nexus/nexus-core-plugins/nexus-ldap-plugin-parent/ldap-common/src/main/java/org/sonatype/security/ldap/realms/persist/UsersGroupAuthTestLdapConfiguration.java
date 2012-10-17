@@ -12,12 +12,15 @@
  */
 package org.sonatype.security.ldap.realms.persist;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.security.ldap.dao.LdapAuthConfiguration;
 
 import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 
-@Component( role = LdapConfiguration.class, hint = "UsersGroupAuthTestLdapConfiguration" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("UsersGroupAuthTestLdapConfiguration")
+@Singleton
 public class UsersGroupAuthTestLdapConfiguration
     extends  DefaultLdapConfiguration
 {

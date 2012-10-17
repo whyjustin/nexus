@@ -12,16 +12,18 @@
  */
 package org.sonatype.security.ldap.dao.password;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.security.ldap.dao.password.hash.MD5Crypt;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.security.NoSuchAlgorithmException;
 
 
 /**
  * @author cstamas
  */
-@Component(role=PasswordEncoder.class, hint="crypt")
+@Named("crypt")
+@Singleton
 public class MD5CryptPasswordEncoder
     implements PasswordEncoder
 {

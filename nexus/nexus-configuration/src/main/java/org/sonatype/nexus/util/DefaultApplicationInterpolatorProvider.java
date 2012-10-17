@@ -12,13 +12,16 @@
  */
 package org.sonatype.nexus.util;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.context.Context;
 import org.codehaus.plexus.context.ContextException;
 import org.codehaus.plexus.interpolation.Interpolator;
 import org.codehaus.plexus.interpolation.MapBasedValueSource;
 import org.codehaus.plexus.interpolation.RegexBasedInterpolator;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * A simple class that holds Regex interpolator and has reference to Plexus context too, to centralize Plexus coupling
@@ -27,7 +30,8 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
  * 
  * @author cstamas
  */
-@Component( role = ApplicationInterpolatorProvider.class )
+@Named
+@Singleton
 public class DefaultApplicationInterpolatorProvider
     implements ApplicationInterpolatorProvider, Contextualizable
 {

@@ -12,14 +12,15 @@
  */
 package org.sonatype.nexus.templates;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
+
+import javax.inject.Inject;
 
 public abstract class AbstractTemplateProvider<T extends Template>
     implements TemplateProvider
 {
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
     public ApplicationConfiguration getApplicationConfiguration()

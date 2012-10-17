@@ -19,12 +19,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-
 import eu.medsea.mimeutil.MimeType;
 import eu.medsea.mimeutil.MimeUtil2;
 import eu.medsea.mimeutil.detector.ExtensionMimeDetector;
 import eu.medsea.mimeutil.detector.MagicMimeMimeDetector;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Default implementation of {@link MimeUtil} component using MimeUtil2 library.
@@ -34,7 +35,8 @@ import eu.medsea.mimeutil.detector.MagicMimeMimeDetector;
  *             deprecated. See the component interface for substitutions.
  */
 @Deprecated
-@Component( role = MimeUtil.class )
+@Named
+@Singleton
 public class DefaultMimeUtil
     implements MimeUtil
 {

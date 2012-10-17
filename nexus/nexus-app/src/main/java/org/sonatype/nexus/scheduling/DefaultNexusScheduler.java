@@ -17,28 +17,31 @@ import java.util.Map;
 import java.util.concurrent.RejectedExecutionException;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.scheduling.NoSuchTaskException;
 import org.sonatype.scheduling.ScheduledTask;
 import org.sonatype.scheduling.Scheduler;
 import org.sonatype.scheduling.schedules.Schedule;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * The Nexus scheduler.
  * 
  * @author cstamas
  */
-@Component( role = NexusScheduler.class )
+@Named
+@Singleton
 public class DefaultNexusScheduler
     extends AbstractLoggingComponent
     implements NexusScheduler
 {
-    @Requirement
+    @Inject
     private Scheduler scheduler;
 
-    @Requirement
+    @Inject
     private PlexusContainer plexusContainer;
 
     protected PlexusContainer getPlexusContainer()

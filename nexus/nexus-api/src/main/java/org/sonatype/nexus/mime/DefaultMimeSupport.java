@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.item.ContentLocator;
 
@@ -30,13 +29,18 @@ import eu.medsea.mimeutil.MimeUtil2;
 import eu.medsea.mimeutil.detector.ExtensionMimeDetector;
 import eu.medsea.mimeutil.detector.MagicMimeMimeDetector;
 
+import javax.enterprise.inject.Typed;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Default implementation of {@link MimeSupport} component using MimeUtil2 library.
  * 
  * @author cstamas
  * @since 2.0
  */
-@Component( role = MimeSupport.class )
+@Named
+@Singleton
 public class DefaultMimeSupport
     extends AbstractLoggingComponent
     implements MimeSupport

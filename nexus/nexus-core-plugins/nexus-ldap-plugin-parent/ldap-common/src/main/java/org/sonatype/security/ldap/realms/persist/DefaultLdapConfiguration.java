@@ -24,8 +24,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.slf4j.Logger;
@@ -40,27 +38,33 @@ import org.sonatype.security.ldap.realms.persist.model.io.xpp3.LdapConfiguration
 import org.sonatype.security.ldap.realms.persist.model.io.xpp3.LdapConfigurationXpp3Writer;
 import org.sonatype.security.ldap.upgrade.cipher.PlexusCipherException;
 
-@Component( role = LdapConfiguration.class, hint = "default", instantiationStrategy = "singleton" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("default")
+@Singleton
 public class DefaultLdapConfiguration
     implements LdapConfiguration
 {
     private Logger logger = LoggerFactory.getLogger( getClass() );
-    
-    @org.codehaus.plexus.component.annotations.Configuration( value = "${application-conf}/ldap.xml" )
+
+    @Inject
+    @Named( value = "${application-conf}/ldap.xml" )
     private File configurationFile;
 
     private Configuration configuration;
 
-    @Requirement( role = ConfigurationValidator.class )
+    @Inject
     private ConfigurationValidator validator;
 
-    @Requirement
+    @Inject
     private PasswordHelper passwordHelper;
     
-    @Requirement
+    @Inject
     private PasswordEncoderManager passwordEncoderManager;
     
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
     private ReentrantLock lock = new ReentrantLock();

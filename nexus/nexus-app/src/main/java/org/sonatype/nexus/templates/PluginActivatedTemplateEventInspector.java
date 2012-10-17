@@ -12,24 +12,27 @@
  */
 package org.sonatype.nexus.templates;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.plugins.events.PluginActivatedEvent;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.plexus.appevents.Event;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * TODO: Not sure how justified is this EventInspector. This is here only to "ping" the TemplateProviders in plugins!
  * 
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "PluginActivatedTemplateEventInspector" )
+@Named
+@Singleton
 public class PluginActivatedTemplateEventInspector
     extends AbstractEventInspector
     implements EventInspector
 {
-    @Requirement
+    @Inject
     private TemplateManager templateManager;
 
     public boolean accepts( Event<?> evt )

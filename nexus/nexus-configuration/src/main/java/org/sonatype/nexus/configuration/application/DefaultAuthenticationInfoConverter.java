@@ -14,7 +14,6 @@ package org.sonatype.nexus.configuration.application;
 
 import java.io.File;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.model.CRemoteAuthentication;
@@ -23,7 +22,11 @@ import org.sonatype.nexus.proxy.repository.NtlmRemoteAuthenticationSettings;
 import org.sonatype.nexus.proxy.repository.RemoteAuthenticationSettings;
 import org.sonatype.nexus.proxy.repository.UsernamePasswordRemoteAuthenticationSettings;
 
-@Component( role = AuthenticationInfoConverter.class )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultAuthenticationInfoConverter
     implements AuthenticationInfoConverter
 {

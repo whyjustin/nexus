@@ -12,18 +12,21 @@
  */
 package org.sonatype.nexus.configuration;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.plexus.components.cipher.PlexusCipher;
 import org.sonatype.plexus.components.cipher.PlexusCipherException;
 
-@Component( role = PasswordHelper.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class PasswordHelper
 {
 
     private static final String ENC = "CMMDwoV";
 
-    @Requirement
+    @Inject
     private PlexusCipher plexusCipher;
 
     public String encrypt( String password )

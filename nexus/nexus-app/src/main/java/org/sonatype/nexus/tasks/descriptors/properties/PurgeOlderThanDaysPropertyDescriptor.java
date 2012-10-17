@@ -12,9 +12,11 @@
  */
 package org.sonatype.nexus.tasks.descriptors.properties;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "PurgeOlderThanDays", instantiationStrategy = "per-lookup" )
+@Named
+//@Component( role = ScheduledTaskPropertyDescriptor.class, hint = "PurgeOlderThanDays", instantiationStrategy = "per-lookup" )
 public class PurgeOlderThanDaysPropertyDescriptor
     extends AbstractNumberPropertyDescriptor
 {

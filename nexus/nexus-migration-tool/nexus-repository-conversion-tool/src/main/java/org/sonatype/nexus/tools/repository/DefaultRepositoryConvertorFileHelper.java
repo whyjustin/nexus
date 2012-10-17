@@ -18,13 +18,16 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.IOUtil;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author Juven Xu
  */
-@Component( role = RepositoryConvertorFileHelper.class )
+@Named
+@Singleton
 public class DefaultRepositoryConvertorFileHelper
     implements RepositoryConvertorFileHelper
 {

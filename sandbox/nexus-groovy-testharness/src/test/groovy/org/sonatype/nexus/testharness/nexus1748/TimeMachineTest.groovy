@@ -12,12 +12,15 @@
  */
 package org.sonatype.nexus.testharness.nexus1748
 
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.codehaus.plexus.component.annotations.*
 import org.testng.annotations.*
 
 import org.sonatype.nexus.groovytest.NexusCompatibility
-import static org.testng.Assert.*@Component(role = TimeMachineTest.class)
+import static org.testng.Assert.*
+
+@Component(role = TimeMachineTest.class)
 public class TimeMachineTest implements Contextualizable {
 
 

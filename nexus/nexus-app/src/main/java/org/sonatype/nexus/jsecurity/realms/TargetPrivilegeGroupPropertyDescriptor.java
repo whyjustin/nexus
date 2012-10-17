@@ -12,10 +12,14 @@
  */
 package org.sonatype.nexus.jsecurity.realms;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.security.realms.privileges.PrivilegePropertyDescriptor;
 
-@Component( role = PrivilegePropertyDescriptor.class, hint = "TargetPrivilegeGroupPropertyDescriptor" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("TargetPrivilegeGroupPropertyDescriptor")
+@Singleton
 public class TargetPrivilegeGroupPropertyDescriptor
     implements PrivilegePropertyDescriptor
 {

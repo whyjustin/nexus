@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
 import org.sonatype.configuration.upgrade.SingleVersionUpgrader;
@@ -25,12 +24,16 @@ import org.sonatype.nexus.configuration.model.v1_4_1.CNotification;
 import org.sonatype.nexus.configuration.model.v1_4_1.upgrade.BasicVersionConverter;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Upgrades configuration model from version 1.4.0 to 1.4.1.
  * 
  * @author bdemers
  */
-@Component( role = SingleVersionUpgrader.class, hint = "1.4.0" )
+@Named("1.4.0")
+@Singleton
 public class Upgrade140to141
     extends AbstractLoggingComponent
     implements SingleVersionUpgrader

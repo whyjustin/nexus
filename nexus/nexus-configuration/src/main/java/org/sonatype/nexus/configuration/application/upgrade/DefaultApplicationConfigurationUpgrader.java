@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.codehaus.plexus.util.xml.Xpp3DomBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -30,18 +28,23 @@ import org.sonatype.configuration.upgrade.UpgradeMessage;
 import org.sonatype.nexus.configuration.model.Configuration;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Default configuration updater, using versioned Modello models. It tried to detect version signature from existing
  * file and apply apropriate modello io stuff to load configuration. It is also aware of changes across model versions.
  * 
  * @author cstamas
  */
-@Component( role = ApplicationConfigurationUpgrader.class )
+@Named
+@Singleton
 public class DefaultApplicationConfigurationUpgrader
     extends AbstractLoggingComponent
     implements ApplicationConfigurationUpgrader
 {
-    @Requirement( role = SingleVersionUpgrader.class )
+    @Inject
     private Map<String, SingleVersionUpgrader> upgraders;
 
     /**

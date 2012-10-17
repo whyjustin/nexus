@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -25,12 +24,16 @@ import org.sonatype.configuration.upgrade.SingleVersionUpgrader;
 import org.sonatype.configuration.upgrade.UpgradeMessage;
 import org.sonatype.nexus.configuration.model.v2_2_0.upgrade.BasicVersionUpgrade;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Upgrades configuration model from version 2.0.0 to 2.2.0.
  * 
  * @author cstamas
  */
-@Component( role = SingleVersionUpgrader.class, hint = "2.0.0" )
+@Named("2.0.0")
+@Singleton
 public class Upgrade200to220
     extends AbstractLogEnabled
     implements SingleVersionUpgrader

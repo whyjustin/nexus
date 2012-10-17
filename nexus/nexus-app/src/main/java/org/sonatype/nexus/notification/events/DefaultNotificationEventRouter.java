@@ -15,8 +15,6 @@ package org.sonatype.nexus.notification.events;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.notification.NotificationCheat;
 import org.sonatype.nexus.notification.NotificationManager;
 import org.sonatype.nexus.notification.NotificationRequest;
@@ -26,6 +24,10 @@ import org.sonatype.nexus.proxy.events.RepositoryEventProxyModeSet;
 import org.sonatype.nexus.proxy.repository.ProxyMode;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This component routes based on Application event. Currently it is hardwired, but we would have some "mediation"
  * happen, and the best would be to have the "routing" of events to notifications saved in Nexus configuration. There
@@ -33,11 +35,12 @@ import org.sonatype.plexus.appevents.Event;
  * 
  * @author cstamas
  */
-@Component( role = NotificationEventRouter.class )
+@Named
+@Singleton
 public class DefaultNotificationEventRouter
     implements NotificationEventRouter
 {
-    @Requirement
+    @Inject
     private NotificationManager notificationManager;
 
     public NotificationRequest getRequestForEvent( Event<?> evt )

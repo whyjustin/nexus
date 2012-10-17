@@ -15,6 +15,9 @@ package org.sonatype.nexus.plugins.rrb;
 import java.net.URLDecoder;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,8 +28,6 @@ import com.ning.http.client.filter.FilterContext;
 import com.ning.http.client.filter.FilterException;
 import com.ning.http.client.filter.RequestFilter;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Reference;
@@ -59,7 +60,8 @@ import com.thoughtworks.xstream.XStream;
 @Path( RemoteBrowserResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
-@Component( role = PlexusResource.class, hint = "org.sonatype.nexus.plugins.rrb.RemoteBrowserResource" )
+@Named
+@Singleton
 public class RemoteBrowserResource
     extends AbstractResourceStoreContentPlexusResource
     implements PlexusResource
@@ -67,10 +69,10 @@ public class RemoteBrowserResource
     public static final String RESOURCE_URI = "/repositories/{" + AbstractRepositoryPlexusResource.REPOSITORY_ID_KEY
         + "}/remotebrowser";
 
-    @Requirement
+    @Inject
     private AhcProvider ahcProvider;
 
-    @Requirement
+    @Inject
     private QueryStringBuilder queryStringBuilder;
 
     private final Logger logger = LoggerFactory.getLogger( RemoteBrowserResource.class );

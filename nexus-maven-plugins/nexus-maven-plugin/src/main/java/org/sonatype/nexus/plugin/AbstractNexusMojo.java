@@ -28,6 +28,7 @@ import org.codehaus.plexus.components.interactivity.Prompter;
 import org.codehaus.plexus.context.Context;
 import org.codehaus.plexus.context.ContextException;
 import org.codehaus.plexus.logging.LoggerManager;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.plugin.discovery.NexusConnectionInfo;

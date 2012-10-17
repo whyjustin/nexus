@@ -15,8 +15,6 @@ package org.sonatype.nexus.jsecurity.realms;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.validation.ValidationMessage;
 import org.sonatype.configuration.validation.ValidationResponse;
@@ -28,23 +26,32 @@ import org.sonatype.security.realms.privileges.PrivilegePropertyDescriptor;
 import org.sonatype.security.realms.privileges.application.ApplicationPrivilegeMethodPropertyDescriptor;
 import org.sonatype.security.realms.validator.SecurityValidationContext;
 
-@Component( role = PrivilegeDescriptor.class, hint = "TargetPrivilegeDescriptor" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("TargetPrivilegeDescriptor")
+@Singleton
 public class TargetPrivilegeDescriptor
     extends AbstractPrivilegeDescriptor
     implements PrivilegeDescriptor
 {
     public static final String TYPE = "target";
-    
-    @Requirement( role = PrivilegePropertyDescriptor.class, hint = "ApplicationPrivilegeMethodPropertyDescriptor" )
+
+    @Inject
+    @Named("ApplicationPrivilegeMethodPropertyDescriptor" )
     private PrivilegePropertyDescriptor methodProperty;
-    
-    @Requirement( role = PrivilegePropertyDescriptor.class, hint = "TargetPrivilegeRepositoryTargetPropertyDescriptor" )
+
+    @Inject
+    @Named("TargetPrivilegeRepositoryTargetPropertyDescriptor" )
     private PrivilegePropertyDescriptor targetProperty;
-    
-    @Requirement( role = PrivilegePropertyDescriptor.class, hint = "TargetPrivilegeRepositoryPropertyDescriptor" )
+
+    @Inject
+    @Named("TargetPrivilegeRepositoryPropertyDescriptor" )
     private PrivilegePropertyDescriptor repositoryProperty;
-    
-    @Requirement( role = PrivilegePropertyDescriptor.class, hint = "TargetPrivilegeGroupPropertyDescriptor" )
+
+    @Inject
+    @Named("TargetPrivilegeGroupPropertyDescriptor" )
     private PrivilegePropertyDescriptor groupProperty;
     
     public String getName()

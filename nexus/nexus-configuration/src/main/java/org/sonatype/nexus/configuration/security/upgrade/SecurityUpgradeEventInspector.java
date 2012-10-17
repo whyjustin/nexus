@@ -14,8 +14,6 @@ package org.sonatype.nexus.configuration.security.upgrade;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
@@ -33,28 +31,35 @@ import org.sonatype.security.model.Configuration;
 import org.sonatype.security.model.source.SecurityModelConfigurationSource;
 import org.sonatype.security.model.upgrade.SecurityDataUpgrader;
 
-@Component( role = EventInspector.class, hint = "SecurityUpgradeEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class SecurityUpgradeEventInspector
     extends AbstractEventInspector
 {
 
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
-    @Requirement( hint = "file" )
+    @Inject
+    @Named("file")
     private SecurityModelConfigurationSource realmConfigSource;
 
-    @Requirement
+    @Inject
     private SecurityConfigurationManager systemConfigManager;
 
     /**
      * Reuse the previous versions upgrader, this is normally run after the module upgrade of 2.0.1, so the module is
      * actually 2.0.2.
      */
-    @Requirement( hint = "2.0.1" )
+    @Inject
+    @Named("2.0.1")
     private SecurityDataUpgrader upgrader;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster eventMulticaster;
 
     public boolean accepts( Event<?> evt )

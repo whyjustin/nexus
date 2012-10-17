@@ -15,14 +15,15 @@ package org.sonatype.nexus.plugins.plugin.console.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Request;
@@ -47,14 +48,15 @@ import com.thoughtworks.xstream.XStream;
 /**
  * Resource publishing Nexus plugin details.
  */
-@Component( role = PlexusResource.class, hint = "PluginInfoListPlexusResource" )
 @Path( "/plugin_console/plugin_infos" )
 @Produces( { "application/xml", "application/json" } )
 @Consumes( { "application/xml", "application/json" } )
+@Named
+@Singleton
 public class PluginInfoListPlexusResource
     extends AbstractNexusPlexusResource
 {
-    @Requirement
+    @Inject
     private PluginConsoleManager pluginConsoleManager;
 
     public PluginInfoListPlexusResource()

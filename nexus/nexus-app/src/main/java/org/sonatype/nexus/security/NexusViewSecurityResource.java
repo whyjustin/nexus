@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.interpolation.util.StringUtils;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.sonatype.nexus.proxy.events.RepositoryRegistryEventAdd;
@@ -41,21 +40,27 @@ import org.sonatype.security.realms.tools.AbstractDynamicSecurityResource;
 import org.sonatype.security.realms.tools.ConfigurationManager;
 import org.sonatype.security.realms.tools.DynamicSecurityResource;
 
-@Component( role = DynamicSecurityResource.class, hint = "NexusViewSecurityResource" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("NexusViewSecurityResource" )
+@Singleton
 public class NexusViewSecurityResource
     extends AbstractDynamicSecurityResource
     implements EventListener, Initializable, DynamicSecurityResource
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repoRegistry;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster eventMulticaster;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repoTypeRegistry;
 
-    @Requirement( hint = "default" )
+    @Inject
+    @Named("default" )
     private ConfigurationManager configManager;
 
     @Override

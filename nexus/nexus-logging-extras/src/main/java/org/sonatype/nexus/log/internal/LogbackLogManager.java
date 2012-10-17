@@ -30,11 +30,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
@@ -71,7 +73,8 @@ import com.google.inject.Injector;
  * @author juven
  * @author adreghiciu@gmail.com
  */
-@Component( role = LogManager.class )
+@Named
+@Singleton
 public class LogbackLogManager
     implements LogManager, Disposable
 {
@@ -91,19 +94,19 @@ public class LogbackLogManager
 
     private static final String LOG_CONF_PROPS_RESOURCE = "/META-INF/log/" + LOG_CONF_PROPS;
 
-    @Requirement
+    @Inject
     private Logger logger;
 
-    @Requirement( role = LogConfigurationParticipant.class )
+    @Inject
     private List<LogConfigurationParticipant> logConfigurationParticipants;
 
-    @Requirement
+    @Inject
     private Injector injector;
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private EventTarget eventTarget;
 
     private ObjectName jmxName;

@@ -18,10 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.ComponentDescriptor;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
@@ -37,21 +36,26 @@ import org.sonatype.plugin.metadata.GAVCoordinate;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author juven
  */
-@Component( role = PluginConsoleManager.class )
+@Named
+@Singleton
 public class DefaultPluginConsoleManager
     extends AbstractLoggingComponent
     implements PluginConsoleManager, Initializable
 {
-    @Requirement
+    @Inject
     private NexusPluginManager pluginManager;
 
-    @Requirement
+    @Inject
     private PlexusContainer plexusContainer;
 
-    @Requirement( role = NexusResourceBundle.class )
+    @Inject
     private List<NexusResourceBundle> resourceBundles;
 
     private Multimap<String, NexusDocumentationBundle> docBundles;

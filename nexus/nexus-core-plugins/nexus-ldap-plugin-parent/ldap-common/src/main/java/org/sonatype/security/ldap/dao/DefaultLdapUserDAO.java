@@ -16,6 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.naming.InvalidNameException;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -26,8 +29,6 @@ import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 import javax.naming.ldap.LdapName;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +38,14 @@ import org.sonatype.security.ldap.dao.password.PasswordEncoderManager;
 /**
  * @author cstamas
  */
-@Component( role = LdapUserDAO.class )
+@Named
+@Singleton
 public class DefaultLdapUserDAO
     implements LdapUserDAO
 {
     private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    @Requirement
+    @Inject
     private PasswordEncoderManager passwordEncoderManager;
 
     protected Logger getLogger()

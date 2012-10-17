@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.component.repository.ComponentDescriptor;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
@@ -30,13 +29,15 @@ import org.sonatype.scheduling.DefaultScheduledTask;
 import org.sonatype.scheduling.ScheduledTask;
 import org.sonatype.scheduling.SchedulerTask;
 
+import javax.inject.Inject;
+
 public abstract class AbstractNexusRepositoriesTask<T>
     extends AbstractNexusTask<T>
 {
-    @Requirement
+    @Inject
     private PlexusContainer plexusContainer;
     
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
     
     @Deprecated

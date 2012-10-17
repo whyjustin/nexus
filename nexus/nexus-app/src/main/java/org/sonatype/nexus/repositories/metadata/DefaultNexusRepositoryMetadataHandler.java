@@ -14,8 +14,6 @@ package org.sonatype.nexus.repositories.metadata;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
@@ -25,15 +23,20 @@ import org.sonatype.nexus.repository.metadata.RepositoryMetadataHandler;
 import org.sonatype.nexus.repository.metadata.model.RepositoryMetadata;
 import org.sonatype.nexus.repository.metadata.restlet.RestletRawTransport;
 
-@Component( role = NexusRepositoryMetadataHandler.class )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultNexusRepositoryMetadataHandler
     extends AbstractLoggingComponent
     implements NexusRepositoryMetadataHandler
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryMetadataHandler repositoryMetadataHandler;
 
     public RepositoryMetadata readRemoteRepositoryMetadata( String url )

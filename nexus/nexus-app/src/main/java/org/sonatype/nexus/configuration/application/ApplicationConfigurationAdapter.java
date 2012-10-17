@@ -15,22 +15,25 @@ package org.sonatype.nexus.configuration.application;
 import java.io.File;
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.configuration.model.Configuration;
 import org.sonatype.nexus.proxy.storage.local.LocalStorageContext;
 import org.sonatype.nexus.proxy.storage.remote.RemoteStorageContext;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Adapter for NexusConfiguration.
  * 
  * @author cstamas
  */
-@Component( role = ApplicationConfiguration.class )
+@Named
+@Singleton
 public class ApplicationConfigurationAdapter
     implements ApplicationConfiguration
 {
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfiguration;
 
     @Deprecated

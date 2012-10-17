@@ -14,7 +14,6 @@ package org.sonatype.nexus.templates.repository;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.application.NexusConfiguration;
 import org.sonatype.nexus.configuration.model.CRepository;
@@ -27,6 +26,8 @@ import org.sonatype.nexus.proxy.storage.remote.RemoteProviderHintFactory;
 import org.sonatype.nexus.templates.AbstractTemplateProvider;
 import org.sonatype.nexus.templates.TemplateSet;
 
+import javax.inject.Inject;
+
 /**
  * An abstract class for template providers that provides templates for Repositories.
  * 
@@ -35,13 +36,13 @@ import org.sonatype.nexus.templates.TemplateSet;
 public abstract class AbstractRepositoryTemplateProvider
     extends AbstractTemplateProvider<RepositoryTemplate>
 {
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfiguration;
 
-    @Requirement
+    @Inject
     private RemoteProviderHintFactory remoteProviderHintFactory;
 
     protected Repository createRepository( CRepository repository )

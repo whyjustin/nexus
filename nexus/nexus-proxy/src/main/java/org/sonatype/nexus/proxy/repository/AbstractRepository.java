@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
@@ -85,6 +84,8 @@ import org.sonatype.nexus.scheduling.DefaultRepositoryTaskActivityDescriptor;
 import org.sonatype.nexus.scheduling.DefaultRepositoryTaskFilter;
 import org.sonatype.nexus.scheduling.RepositoryTaskFilter;
 
+import javax.inject.Inject;
+
 /**
  * <p>
  * A common base for Proximity repository. It defines all the needed properties and main methods as in
@@ -108,37 +109,37 @@ public abstract class AbstractRepository
 {
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    @Requirement
+    @Inject
     private CacheManager cacheManager;
 
-    @Requirement
+    @Inject
     private TargetRegistry targetRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryItemUidFactory repositoryItemUidFactory;
 
-    @Requirement
+    @Inject
     private RepositoryItemUidAttributeManager repositoryItemUidAttributeManager;
 
-    @Requirement
+    @Inject
     private AccessManager accessManager;
 
-    @Requirement
+    @Inject
     private Walker walker;
 
-    @Requirement
+    @Inject
     private MimeUtil mimeUtil;
 
-    @Requirement
+    @Inject
     private MimeSupport mimeSupport;
 
-    @Requirement( role = ContentGenerator.class )
+    @Inject
     private Map<String, ContentGenerator> contentGenerators;
 
-    @Requirement
+    @Inject
     private AttributesHandler attributesHandler;
 
     /** Local storage context to store storage-wide configs. */
@@ -1168,10 +1169,10 @@ public abstract class AbstractRepository
 
     // ===================================================================================
     // Inner stuff
+
     /**
      * Maintains not found cache.
      *
-     * @param path the path
      * @throws ItemNotFoundException the item not found exception
      */
     public void maintainNotFoundCache( ResourceStoreRequest request )
@@ -1219,8 +1220,6 @@ public abstract class AbstractRepository
 
     /**
      * Adds the uid to not found cache.
-     *
-     * @param path the path
      */
     @Override
     public void addToNotFoundCache( ResourceStoreRequest request )
@@ -1238,8 +1237,6 @@ public abstract class AbstractRepository
 
     /**
      * Removes the uid from not found cache.
-     *
-     * @param path the path
      */
     public void removeFromNotFoundCache( ResourceStoreRequest request )
     {
@@ -1258,7 +1255,6 @@ public abstract class AbstractRepository
      * Check conditions, such as availability, permissions, etc.
      *
      * @param request the request
-     * @param permission the permission
      * @return false, if the request should not be processed with response appropriate for current method, or true is
      *         execution should continue as usual.
      * @throws RepositoryNotAvailableException the repository not available exception

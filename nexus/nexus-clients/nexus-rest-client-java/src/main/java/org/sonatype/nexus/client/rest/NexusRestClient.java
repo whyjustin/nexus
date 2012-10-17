@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.logging.Handler;
 import java.util.logging.LogManager;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,9 @@ import org.sonatype.nexus.rest.model.RepositoryResourceResponse;
 import org.sonatype.nexus.rest.model.SearchResponse;
 import org.sonatype.nexus.rest.model.StatusResourceResponse;
 
-@Component(role=NexusClient.class, instantiationStrategy="per-lookup")
+import javax.inject.Named;
+
+@Named
 public class NexusRestClient
     implements NexusClient
 {

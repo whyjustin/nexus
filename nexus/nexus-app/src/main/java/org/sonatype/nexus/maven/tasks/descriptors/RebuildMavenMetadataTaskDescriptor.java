@@ -15,14 +15,18 @@ package org.sonatype.nexus.maven.tasks.descriptors;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.formfields.FormField;
 import org.sonatype.nexus.formfields.RepoOrGroupComboFormField;
 import org.sonatype.nexus.formfields.StringTextFormField;
 import org.sonatype.nexus.tasks.descriptors.AbstractScheduledTaskDescriptor;
 import org.sonatype.nexus.tasks.descriptors.ScheduledTaskDescriptor;
 
-@Component( role = ScheduledTaskDescriptor.class, hint = "RebuildMavenMetadata", description = "Rebuild Maven Metadata Files" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("RebuildMavenMetadata" )
+@Singleton
+//@Component( role = ScheduledTaskDescriptor.class, hint = "RebuildMavenMetadata", description = "Rebuild Maven Metadata Files" )
 public class RebuildMavenMetadataTaskDescriptor
     extends AbstractScheduledTaskDescriptor
 {

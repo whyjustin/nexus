@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.templates.repository;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.proxy.maven.RepositoryPolicy;
 import org.sonatype.nexus.templates.TemplateProvider;
 import org.sonatype.nexus.templates.TemplateSet;
@@ -25,12 +24,16 @@ import org.sonatype.nexus.templates.repository.maven.Maven2HostedRepositoryTempl
 import org.sonatype.nexus.templates.repository.maven.Maven2Maven1ShadowRepositoryTemplate;
 import org.sonatype.nexus.templates.repository.maven.Maven2ProxyRepositoryTemplate;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * A template provider implementation that covers core-supported repositories.
  * 
  * @author cstamas
  */
-@Component( role = TemplateProvider.class, hint = DefaultRepositoryTemplateProvider.PROVIDER_ID )
+@Named(DefaultRepositoryTemplateProvider.PROVIDER_ID )
+@Singleton
 public class DefaultRepositoryTemplateProvider
     extends AbstractRepositoryTemplateProvider
 {

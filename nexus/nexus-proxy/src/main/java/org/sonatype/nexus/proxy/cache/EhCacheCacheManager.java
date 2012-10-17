@@ -14,6 +14,7 @@ package org.sonatype.nexus.proxy.cache;
 
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
+// FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.sisu.ehcache.CacheManagerComponent;

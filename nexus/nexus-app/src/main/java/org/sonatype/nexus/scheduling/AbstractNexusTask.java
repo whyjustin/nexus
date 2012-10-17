@@ -19,7 +19,6 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.scheduling.events.NexusTaskEventStarted;
 import org.sonatype.nexus.scheduling.events.NexusTaskEventStoppedCanceled;
 import org.sonatype.nexus.scheduling.events.NexusTaskEventStoppedDone;
@@ -32,13 +31,15 @@ import org.sonatype.scheduling.TaskInterruptedException;
 import org.sonatype.scheduling.TaskState;
 import org.sonatype.scheduling.TaskUtil;
 
+import javax.inject.Inject;
+
 public abstract class AbstractNexusTask<T>
     extends AbstractSchedulerTask<T>
     implements NexusTask<T>
 {
     public static final long A_DAY = 24L * 60L * 60L * 1000L;
 
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
     protected AbstractNexusTask()

@@ -12,9 +12,11 @@
  */
 package org.sonatype.security.ldap.upgrade.cipher;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-@Component( role = PlexusCipher.class, hint = "test" )
+@Named("test")
+@Singleton
 public class TestPlexusCipher
     extends DefaultPlexusCipher
 {

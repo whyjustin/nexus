@@ -12,20 +12,23 @@
  */
 package org.sonatype.security.ldap.realms.persist;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.security.ldap.upgrade.cipher.PlexusCipher;
 import org.sonatype.security.ldap.upgrade.cipher.PlexusCipherException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-@Component( role = PasswordHelper.class )
+
+@Named
+@Singleton
 public class DefaultPasswordHelper
     implements PasswordHelper
 {
 
     private static final String ENC = "CMMDwoV";
 
-    @Requirement
+    @Inject
     private PlexusCipher plexusCipher;
 
     public String encrypt( String password )

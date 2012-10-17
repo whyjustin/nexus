@@ -12,13 +12,16 @@
  */
 package org.sonatype.nexus.configuration.application;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.configuration.model.CRepository;
 import org.sonatype.nexus.configuration.model.Configuration;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.util.SystemPropertiesHelper;
 
-@Component( role = ConfigurationModifier.class, hint = "NfcConfigurationModifier" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("NfcConfigurationModifier")
+@Singleton
 public class NfcConfigurationModifier
     extends AbstractLoggingComponent
     implements ConfigurationModifier

@@ -12,7 +12,6 @@
  */
 package org.sonatype.security.ldap.realms.persist;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.StringUtils;
 
 import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
@@ -20,7 +19,11 @@ import org.sonatype.security.ldap.realms.persist.model.CUserAndGroupAuthConfigur
 import org.sonatype.security.ldap.realms.persist.model.CUserRoleMapping;
 import org.sonatype.security.ldap.realms.persist.model.Configuration;
 
-@Component( role = ConfigurationValidator.class )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class DefaultLdapConfigurationValidator
     implements ConfigurationValidator
 {

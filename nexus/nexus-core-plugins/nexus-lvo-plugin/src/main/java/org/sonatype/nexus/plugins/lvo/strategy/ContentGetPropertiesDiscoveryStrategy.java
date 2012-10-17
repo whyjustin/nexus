@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.plugins.lvo.DiscoveryRequest;
 import org.sonatype.nexus.plugins.lvo.DiscoveryResponse;
@@ -24,12 +23,16 @@ import org.sonatype.nexus.plugins.lvo.DiscoveryStrategy;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.item.StorageFileItem;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * This is a "local" strategy, uses Nexus content to get a Java properties file and get filtered keys from there.
  * 
  * @author cstamas
  */
-@Component( role = DiscoveryStrategy.class, hint = "content-get-properties" )
+@Named("content-get-properties")
+@Singleton
 public class ContentGetPropertiesDiscoveryStrategy
     extends ContentGetDiscoveryStrategy
 {

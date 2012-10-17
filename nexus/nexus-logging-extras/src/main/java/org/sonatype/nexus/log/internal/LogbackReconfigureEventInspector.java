@@ -12,20 +12,23 @@
  */
 package org.sonatype.nexus.log.internal;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.log.LogManager;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.NexusInitializedEvent;
 import org.sonatype.plexus.appevents.Event;
 
-@Component( role = EventInspector.class, hint = "LogbackReconfigureEventInspector" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("LogbackReconfigureEventInspector" )
+@Singleton
 public class LogbackReconfigureEventInspector
     extends AbstractEventInspector
 {
 
-    @Requirement
+    @Inject
     private LogManager logManager;
 
     public boolean accepts( Event<?> evt )

@@ -14,8 +14,6 @@ package com.sonatype.nexus.plugin.groovyconsole.rest;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -31,12 +29,17 @@ import com.sonatype.nexus.plugin.groovyconsole.rest.dto.GroovyScriptDTO;
 import com.sonatype.nexus.plugin.groovyconsole.rest.dto.GroovyScriptResponseDTO;
 import com.thoughtworks.xstream.XStream;
 
-@Component( role = PlexusResource.class, hint = "GroovyConsole" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class GroovyConsolePlexusResource
     extends AbstractNexusPlexusResource
 {
 
-    @Requirement
+    @Inject
     private GroovyScriptManager manager;
 
     @Override
