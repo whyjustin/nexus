@@ -29,7 +29,6 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,19 +55,10 @@ public class NexusHttpAuthenticationFilter
     private boolean fakeAuthScheme;
 
     @Inject
-    protected PlexusContainer plexusContainer;
-
-    @Inject
     private SecuritySystem securitySystem;
 
     @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
-
-    @Deprecated
-    protected PlexusContainer getPlexusContainer()
-    {
-        return plexusContainer;
-    }
 
     protected SecuritySystem getSecuritySystem()
     {

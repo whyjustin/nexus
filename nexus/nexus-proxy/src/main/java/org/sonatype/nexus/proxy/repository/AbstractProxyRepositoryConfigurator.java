@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.proxy.repository;
 
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
 import org.sonatype.configuration.validation.ValidationMessage;
@@ -31,6 +30,7 @@ import org.sonatype.nexus.proxy.storage.remote.RemoteRepositoryStorage;
 import org.sonatype.nexus.proxy.storage.remote.RemoteStorageContext;
 
 import javax.inject.Inject;
+import java.util.Map;
 
 public abstract class AbstractProxyRepositoryConfigurator
     extends AbstractRepositoryConfigurator
@@ -46,6 +46,9 @@ public abstract class AbstractProxyRepositoryConfigurator
 
     @Inject
     private RemoteProviderHintFactory remoteProviderHintFactory;
+
+    @Inject
+    private Map<String,RemoteRepositoryStorage> remoteRepositoryStorageMap;
 
     @Override
     public void doApplyConfiguration( Repository repository, ApplicationConfiguration configuration,
@@ -198,12 +201,12 @@ public abstract class AbstractProxyRepositoryConfigurator
         {
             final String mungledHint = remoteProviderHintFactory.getRoleHint( remoteUrl, provider );
 
-            return getPlexusContainer().lookup( RemoteRepositoryStorage.class, mungledHint );
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new InvalidConfigurationException( "Repository " + repoId
-                + " have remote storage with unsupported provider: " + provider, e );
+            RemoteRepositoryStorage storage = remoteRepositoryStorageMap.get(mungledHint);
+            if (storage == null) {
+                throw new InvalidConfigurationException( "Repository " + repoId
+                        + " have remote storage with unsupported provider: " + provider);
+            }
+            return storage;
         }
         catch ( IllegalArgumentException e )
         {

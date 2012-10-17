@@ -14,8 +14,6 @@ package org.sonatype.nexus.rest;
 
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.codehaus.plexus.PlexusConstants;
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.restlet.Context;
 import org.restlet.data.Reference;
 import org.restlet.data.Request;
@@ -268,11 +266,6 @@ public abstract class AbstractNexusPlexusResource
     }
 
     // ===
-
-    protected PlexusContainer getPlexusContainer( Context context )
-    {
-        return (PlexusContainer) context.getAttributes().get( PlexusConstants.PLEXUS_KEY );
-    }
 
     protected ErrorResponse getNexusErrorResponse( String id, String msg )
     {

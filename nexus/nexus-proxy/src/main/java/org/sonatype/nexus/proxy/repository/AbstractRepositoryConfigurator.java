@@ -16,8 +16,6 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
@@ -35,16 +33,12 @@ import org.sonatype.nexus.proxy.StorageException;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.registry.RepositoryTypeRegistry;
 import org.sonatype.nexus.proxy.storage.local.LocalRepositoryStorage;
-import org.sonatype.nexus.proxy.storage.remote.RemoteRepositoryStorage;
 
 import javax.inject.Inject;
 
 public abstract class AbstractRepositoryConfigurator
     implements Configurator
 {
-    @Inject
-    private PlexusContainer plexusContainer;
-
     @Inject
     private RepositoryRegistry repositoryRegistry;
 
@@ -53,6 +47,9 @@ public abstract class AbstractRepositoryConfigurator
 
     @Inject
     private Map<String, RepositoryCustomizer> pluginRepositoryConfigurators;
+
+    @Inject
+    private Map<String,LocalRepositoryStorage> localRepositoryStorageMap;
 
     public final void applyConfiguration( Object target, ApplicationConfiguration configuration,
                                           CoreConfiguration config )
@@ -163,11 +160,6 @@ public abstract class AbstractRepositoryConfigurator
 
     // ==
 
-    protected PlexusContainer getPlexusContainer()
-    {
-        return plexusContainer;
-    }
-
     protected RepositoryRegistry getRepositoryRegistry()
     {
         return repositoryRegistry;
@@ -178,41 +170,15 @@ public abstract class AbstractRepositoryConfigurator
         return repositoryTypeRegistry;
     }
 
-    protected boolean existsRepositoryType( Class<?> role, String hint )
-        throws InvalidConfigurationException
-    {
-        return componentExists( role, hint );
-    }
-
-    protected boolean existsLocalRepositoryStorage( String repoId, String provider )
-        throws InvalidConfigurationException
-    {
-        return componentExists( LocalRepositoryStorage.class, provider );
-    }
-
-    protected boolean existsRemoteRepositoryStorage( String repoId, String provider )
-        throws InvalidConfigurationException
-    {
-        return componentExists( RemoteRepositoryStorage.class, provider );
-    }
-
-    protected boolean componentExists( Class<?> role, String hint )
-    {
-        return getPlexusContainer().hasComponent( role, hint );
-    }
-
     protected LocalRepositoryStorage getLocalRepositoryStorage( String repoId, String provider )
         throws InvalidConfigurationException
     {
-        try
-        {
-            return getPlexusContainer().lookup( LocalRepositoryStorage.class, provider );
-        }
-        catch ( ComponentLookupException e )
-        {
+        LocalRepositoryStorage storage = localRepositoryStorageMap.get(provider);
+        if (storage == null) {
             throw new InvalidConfigurationException( "Repository " + repoId
-                + " have local storage with unsupported provider: " + provider, e );
+                + " have local storage with unsupported provider: " + provider);
         }
+        return storage;
     }
 
 }
