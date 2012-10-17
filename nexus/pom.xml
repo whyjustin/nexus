@@ -1244,17 +1244,6 @@
           </exclusion>
         </exclusions>
       </dependency>
-      <dependency>
-        <groupId>org.sonatype.spice</groupId>
-        <artifactId>plexus-encryptor</artifactId>
-        <version>1.0</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-container-default</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
 
       <dependency>
         <groupId>org.codehaus.enunciate</groupId>
