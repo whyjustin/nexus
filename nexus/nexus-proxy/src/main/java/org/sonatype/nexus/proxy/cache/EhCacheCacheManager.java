@@ -49,6 +49,8 @@ public class EhCacheCacheManager
         return new EhCachePathCache( cache, ehCacheManager.getEhcache( SINGLE_PATH_CACHE_NAME ) );
     }
 
+    // FIXME: This dispose is important for tests to run, manually hacking in call to dispose() ATM in AbstractNexusTestEnviroinment
+
     @Override
     public void dispose()
     {

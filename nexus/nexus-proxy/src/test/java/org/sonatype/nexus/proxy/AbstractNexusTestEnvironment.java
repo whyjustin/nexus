@@ -14,6 +14,7 @@ package org.sonatype.nexus.proxy;
 
 import org.sonatype.nexus.mime.MimeUtil;
 import org.sonatype.nexus.proxy.cache.CacheManager;
+import org.sonatype.nexus.proxy.cache.EhCacheCacheManager;
 import org.sonatype.nexus.proxy.item.RepositoryItemUidFactory;
 import org.sonatype.nexus.proxy.item.uid.RepositoryItemUidAttributeManager;
 import org.sonatype.security.SecuritySystem;
@@ -43,6 +44,16 @@ public abstract class AbstractNexusTestEnvironment
         mimeUtil = lookup( MimeUtil.class );
 
         this.lookup( SecuritySystem.class ).setSecurityEnabled( false );
+    }
+
+
+    @Override
+    protected void tearDown() throws Exception {
+        // HACK: lack of lifecycle forces us to manage it ourselves
+        if (cacheManager instanceof EhCacheCacheManager) {
+            ((EhCacheCacheManager)cacheManager).dispose();
+        }
+        super.tearDown();
     }
 
     /**
