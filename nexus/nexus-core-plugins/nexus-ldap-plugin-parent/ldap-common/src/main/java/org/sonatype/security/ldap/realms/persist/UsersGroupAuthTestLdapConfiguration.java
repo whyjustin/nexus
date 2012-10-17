@@ -19,11 +19,13 @@ import org.sonatype.security.ldap.realms.persist.model.CConnectionInfo;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named("UsersGroupAuthTestLdapConfiguration")
+@Named(UsersGroupAuthTestLdapConfiguration.NAME)
 @Singleton
 public class UsersGroupAuthTestLdapConfiguration
     extends  DefaultLdapConfiguration
 {
+
+    public static final String NAME = "UsersGroupAuthTestLdapConfiguration";
 
     private LdapAuthConfiguration ldapAuthConfiguration;
     

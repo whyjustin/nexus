@@ -41,11 +41,14 @@ import javax.inject.Singleton;
  * use the role-hint of MemoryAuthenticationOnlyRealm.
  * 
  */
-@Named("MemoryAuthenticationRealm")
+@Named(MemoryAuthenticationOnlyRealm.NAME)
 @Singleton
 public class MemoryAuthenticationOnlyRealm
     extends AuthorizingRealm
 {
+
+    public static final String NAME = "MemoryAuthenticationOnlyRealm";
+
     // Map containing username/password pairs
     private Map<String,String> authenticationMap = new HashMap<String,String>();
         

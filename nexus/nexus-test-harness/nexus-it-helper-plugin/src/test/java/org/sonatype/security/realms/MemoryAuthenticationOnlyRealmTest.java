@@ -29,7 +29,7 @@ public class MemoryAuthenticationOnlyRealmTest
     {
         super.setUp();
 
-        realm = ( MemoryAuthenticationOnlyRealm ) lookup( Realm.class, "MemoryAuthenticationOnlyRealm" );
+        realm = ( MemoryAuthenticationOnlyRealm ) lookup( Realm.class, MemoryAuthenticationOnlyRealm.NAME );
     }
 
     @Test

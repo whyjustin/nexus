@@ -19,11 +19,13 @@ import org.sonatype.security.ldap.realms.persist.LdapConfiguration;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named
+@Named(TestLdapManager.NAME)
 @Singleton
 public class TestLdapManager extends DefaultLdapManager
 {
-    
+
+    public static final String NAME = "TestLdapManager";
+
     private LdapConfiguration ldapConfiguration;
 
     public LdapConfiguration getLdapConfiguration()
