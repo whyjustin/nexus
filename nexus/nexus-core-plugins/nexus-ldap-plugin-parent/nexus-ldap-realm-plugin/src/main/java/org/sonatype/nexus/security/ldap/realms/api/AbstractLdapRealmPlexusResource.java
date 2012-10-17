@@ -14,7 +14,6 @@ package org.sonatype.nexus.security.ldap.realms.api;
 
 import java.net.MalformedURLException;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.data.Status;
 import org.sonatype.nexus.security.ldap.realms.api.dto.LdapConnectionInfoDTO;
@@ -34,11 +33,13 @@ import org.sonatype.security.rest.AbstractSecurityPlexusResource;
 
 import com.thoughtworks.xstream.XStream;
 
+import javax.inject.Inject;
+
 public abstract class AbstractLdapRealmPlexusResource
     extends AbstractSecurityPlexusResource
     implements LdapRealmPlexusResourceConst
 {
-    @Requirement( role = LdapConfiguration.class )
+    @Inject
     private LdapConfiguration configuration;
 
     public LdapConfiguration getConfiguration()

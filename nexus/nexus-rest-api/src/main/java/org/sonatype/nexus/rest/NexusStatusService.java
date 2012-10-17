@@ -16,8 +16,6 @@ import java.util.HashMap;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.MediaType;
 import org.restlet.data.Request;
@@ -29,20 +27,25 @@ import org.sonatype.nexus.Nexus;
 import org.sonatype.plexus.rest.ReferenceFactory;
 import org.sonatype.plexus.rest.representation.VelocityRepresentation;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Nexus specific status service that simply assembles an "error page" out of a Velocity template but watching to HTML
  * escape any content that might come from external (ie. query param).
  * 
  * @author cstamas
  */
-@Component( role = StatusService.class )
+@Named
+@Singleton
 public class NexusStatusService
     extends StatusService
 {
-    @Requirement
+    @Inject
     private ReferenceFactory referenceFactory;
 
-    @Requirement
+    @Inject
     private Nexus nexus;
     
     public Representation getRepresentation( final Status status, final Request request, final Response response )

@@ -15,12 +15,15 @@ package org.sonatype.nexus.plugin.lucene.ui;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.sonatype.nexus.plugins.rest.AbstractDocumentationNexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
 import org.sonatype.nexus.rest.AbstractIndexerNexusPlexusResource;
 
-@Component( role = NexusResourceBundle.class, hint = "IndexerDocumentationResourceBundle" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("sha1")
+@Singleton
 public class IndexerDocumentationResourceBundle
     extends AbstractDocumentationNexusResourceBundle
 {

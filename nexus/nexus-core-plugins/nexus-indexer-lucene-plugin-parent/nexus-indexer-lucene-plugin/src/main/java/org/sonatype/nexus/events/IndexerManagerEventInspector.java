@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.events;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.index.IndexerManager;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.AsynchronousEventInspector;
@@ -25,12 +23,17 @@ import org.sonatype.nexus.proxy.events.RepositoryItemEventStore;
 import org.sonatype.nexus.util.SystemPropertiesHelper;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Event inspector that maintains indexes.
  * 
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "LuceneIndexerManagerEventInspector" )
+@Named
+@Singleton
 public class IndexerManagerEventInspector
     extends AbstractEventInspector
     implements AsynchronousEventInspector
@@ -38,7 +41,7 @@ public class IndexerManagerEventInspector
     private final boolean enabled = SystemPropertiesHelper.getBoolean(
         "org.sonatype.nexus.events.IndexerManagerEventInspector.enabled", true );
 
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
     protected IndexerManager getIndexerManager()

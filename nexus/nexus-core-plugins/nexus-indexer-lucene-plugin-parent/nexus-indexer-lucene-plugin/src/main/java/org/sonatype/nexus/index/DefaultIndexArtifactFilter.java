@@ -17,8 +17,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.maven.index.ArtifactInfo;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.ResourceStoreRequest;
@@ -29,6 +27,7 @@ import org.sonatype.nexus.proxy.maven.gav.Gav;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -43,10 +42,10 @@ public class DefaultIndexArtifactFilter
     extends AbstractLoggingComponent
     implements IndexArtifactFilter
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private NexusItemAuthorizer nexusItemAuthorizer;
 
     public Collection<ArtifactInfo> filterArtifactInfos( Collection<ArtifactInfo> artifactInfos )

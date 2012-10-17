@@ -19,7 +19,6 @@ import org.apache.maven.index.Field;
 import org.apache.maven.index.MAVEN;
 import org.apache.maven.index.treeview.TreeNode;
 import org.apache.maven.index.treeview.TreeNodeFactory;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Form;
@@ -38,6 +37,8 @@ import org.sonatype.plexus.rest.resource.PlexusResourceException;
 
 import com.thoughtworks.xstream.XStream;
 
+import javax.inject.Inject;
+
 /**
  * Abstract index content resource.
  * 
@@ -52,7 +53,7 @@ public abstract class AbstractIndexContentPlexusResource
 
     private static final String HINT_VERSION = "versionHint";
 
-    @Requirement
+    @Inject
     protected IndexerManager indexerManager;
 
     @Override

@@ -16,7 +16,6 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.codehaus.plexus.PlexusConstants;
 import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Reference;
 import org.restlet.data.Request;
@@ -40,6 +39,8 @@ import org.sonatype.plexus.rest.resource.PlexusResourceException;
 import org.sonatype.plexus.rest.resource.error.ErrorMessage;
 import org.sonatype.plexus.rest.resource.error.ErrorResponse;
 
+import javax.inject.Inject;
+
 public abstract class AbstractNexusPlexusResource
     extends AbstractPlexusResource
     implements PlexusResource
@@ -52,22 +53,24 @@ public abstract class AbstractNexusPlexusResource
 
     public static final String IS_REMOTE_PARAMETER = "isRemote";
 
-    @Requirement
+    @Inject
     private Nexus nexus;
 
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfiguration;
 
-    @Requirement( hint = "protected" )
+    @Inject
+    @Named("protected" )
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement( hint = "default" )
+    @Inject
+    @Named("default" )
     private RepositoryRegistry defaultRepositoryRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryTypeRegistry repoTypeRegistry;
 
-    @Requirement
+    @Inject
     private ReferenceFactory referenceFactory;
 
     protected Nexus getNexus()

@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.rest;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -25,19 +23,24 @@ import org.sonatype.plexus.rest.resource.ManagedPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Resource to redirect to the absolute URI to the index.html.
  */
-@Component( role = ManagedPlexusResource.class, hint = "IndexRedirectingPlexusResource" )
+@Named
+@Singleton
 public class IndexRedirectingPlexusResource
     extends AbstractNexusPlexusResource
     implements ManagedPlexusResource
 {
 
-    @Requirement
+    @Inject
     private Nexus nexus;
 
-    @Requirement( hint = "indexTemplate" )
+    @Inject
+    @Named("indexTemplate" )
     private ManagedPlexusResource indexTemplateResource;
 
     @Override

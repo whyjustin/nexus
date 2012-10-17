@@ -12,22 +12,25 @@
  */
 package org.sonatype.nexus.events;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.configuration.ConfigurationChangeEvent;
 import org.sonatype.nexus.index.IndexerManager;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * @author Juven Xu
  */
-@Component( role = EventInspector.class, hint = "LuceneIndexerConfigurationChangeEventInspector" )
+@Named
+@Singleton
 public class IndexerConfigurationChangeEventInspector
     extends AbstractEventInspector
 {
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
     protected IndexerManager getIndexerManager()

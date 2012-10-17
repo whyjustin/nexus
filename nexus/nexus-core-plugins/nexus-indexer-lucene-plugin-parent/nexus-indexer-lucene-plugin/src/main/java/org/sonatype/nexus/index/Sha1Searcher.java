@@ -21,18 +21,21 @@ import org.apache.maven.index.ArtifactInfoFilter;
 import org.apache.maven.index.FlatSearchResponse;
 import org.apache.maven.index.IteratorSearchResponse;
 import org.apache.maven.index.SearchType;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 
-@Component( role = Searcher.class, hint = "sha1" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("sha1")
+@Singleton
 public class Sha1Searcher
     implements Searcher
 {
     public static final String TERM_SHA1 = "sha1";
 
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
     public boolean canHandle( Map<String, String> terms )

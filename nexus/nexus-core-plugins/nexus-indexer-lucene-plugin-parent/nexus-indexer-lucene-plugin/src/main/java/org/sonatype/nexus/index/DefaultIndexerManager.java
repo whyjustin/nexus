@@ -73,8 +73,6 @@ import org.apache.maven.index.updater.IndexUpdateRequest;
 import org.apache.maven.index.updater.IndexUpdateResult;
 import org.apache.maven.index.updater.IndexUpdater;
 import org.apache.maven.index.updater.ResourceFetcher;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
@@ -117,6 +115,7 @@ import org.sonatype.scheduling.TaskUtil;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -154,37 +153,38 @@ public class DefaultIndexerManager
 
     private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
 
-    @Requirement
+    @Inject
     private NexusIndexer nexusIndexer;
 
-    @Requirement
+    @Inject
     private IndexUpdater indexUpdater;
 
-    @Requirement
+    @Inject
     private IndexPacker indexPacker;
 
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfiguration;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement( hint = "maven2" )
+    @Inject
+    @Named(  "maven2" )
     private ContentClass maven2;
 
-    @Requirement( role = IndexCreator.class )
+    @Inject
     private List<IndexCreator> indexCreators;
 
-    @Requirement
+    @Inject
     private IndexArtifactFilter indexArtifactFilter;
 
-    @Requirement
+    @Inject
     private ArtifactContextProducer artifactContextProducer;
 
-    @Requirement
+    @Inject
     private MimeSupport mimeSupport;
 
-    @Requirement
+    @Inject
     private IndexTreeView indexTreeView;
 
     private File workingDirectory;

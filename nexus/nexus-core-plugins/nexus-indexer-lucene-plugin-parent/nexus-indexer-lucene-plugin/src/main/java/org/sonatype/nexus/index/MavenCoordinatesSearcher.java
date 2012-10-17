@@ -23,17 +23,20 @@ import org.apache.maven.index.IteratorSearchResponse;
 import org.apache.maven.index.MAVEN;
 import org.apache.maven.index.SearchType;
 import org.apache.maven.index.UniqueArtifactFilterPostprocessor;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Searches Lucene index for artifacts based on maven artifact coordinates.
  * 
  * @author Alin Dreghiciu
  */
-@Component( role = Searcher.class, hint = "mavenCoordinates" )
+@Named("mavenCoordinates")
+@Singleton
 public class MavenCoordinatesSearcher
     implements Searcher
 {
@@ -63,7 +66,7 @@ public class MavenCoordinatesSearcher
      */
     public static final String TERM_CLASSIFIER = "c";
 
-    @Requirement
+    @Inject
     private IndexerManager m_lucene;
 
     /**

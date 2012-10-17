@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.events;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
@@ -32,6 +30,10 @@ import org.sonatype.nexus.tasks.RepairIndexTask;
 import org.sonatype.nexus.tasks.UpdateIndexTask;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Listens for events and manages indexes by doing reindexes when needed (on repository configuration updates).
  * <p>
@@ -40,18 +42,19 @@ import org.sonatype.plexus.appevents.Event;
  * @author Toni Menzel
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "IndexingRepositoryRegistryRepositoryAsyncEventInspector" )
+@Named
+@Singleton
 public class IndexingRepositoryRegistryRepositoryAsyncEventInspector
     extends AbstractEventInspector
     implements AsynchronousEventInspector
 {
-    @Requirement
+    @Inject
     private RepositoryRegistry repoRegistry;
 
-    @Requirement
+    @Inject
     private NexusScheduler nexusScheduler;
 
-    @Requirement
+    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
     public boolean accepts( Event<?> evt )

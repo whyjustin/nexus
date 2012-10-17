@@ -12,11 +12,12 @@
  */
 package org.sonatype.nexus.rest.index;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.Context;
 import org.restlet.data.Request;
 import org.restlet.data.Response;
@@ -24,7 +25,8 @@ import org.restlet.resource.ResourceException;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 
-@Component( role = PlexusResource.class, hint = "DefaultIncrementalIndexPlexusResource" )
+@Named
+@Singleton
 @Path( DefaultIncrementalIndexPlexusResource.RESOURCE_URI )
 public class DefaultIncrementalIndexPlexusResource
     extends AbstractIndexPlexusResource

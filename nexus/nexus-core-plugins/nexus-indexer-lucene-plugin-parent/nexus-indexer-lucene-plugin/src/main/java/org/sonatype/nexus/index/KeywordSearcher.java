@@ -21,10 +21,12 @@ import org.apache.maven.index.ArtifactInfoFilter;
 import org.apache.maven.index.FlatSearchResponse;
 import org.apache.maven.index.IteratorSearchResponse;
 import org.apache.maven.index.SearchType;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Searches Lucene index wor artifacts that matches the provided keyword. This search is wrongly named, it should be
@@ -32,7 +34,8 @@ import org.sonatype.nexus.proxy.NoSuchRepositoryException;
  * 
  * @author Alin Dreghiciu
  */
-@Component( role = Searcher.class, hint = "keyword" )
+@Named("keyword")
+@Singleton
 public class KeywordSearcher
     implements Searcher
 {
@@ -42,7 +45,7 @@ public class KeywordSearcher
      */
     public static final String TERM_KEYWORD = "q";
 
-    @Requirement
+    @Inject
     private IndexerManager m_lucene;
 
     /**

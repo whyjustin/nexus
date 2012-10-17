@@ -14,10 +14,11 @@ package org.sonatype.nexus.tasks;
 
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesPathAwareTask;
 import org.sonatype.nexus.tasks.descriptors.AbstractIndexTaskDescriptor;
+
+import javax.inject.Inject;
 
 /**
  * @author cstamas
@@ -30,7 +31,7 @@ public abstract class AbstractIndexerTask
      */
     public static final String ACTION = "REINDEX";
 
-    @Requirement( role = ReindexTaskHandler.class )
+    @Inject
     private List<ReindexTaskHandler> handlers;
 
     private String action;

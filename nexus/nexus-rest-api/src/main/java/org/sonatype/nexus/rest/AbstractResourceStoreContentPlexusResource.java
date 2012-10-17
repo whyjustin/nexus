@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.shiro.subject.Subject;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.ChallengeRequest;
@@ -99,10 +99,10 @@ public abstract class AbstractResourceStoreContentPlexusResource
 
     public static final String OVERRIDE_FILENAME_KEY = "override-filename";
 
-    @Requirement
+    @Inject
     private SecuritySystem securitySystem;
 
-    @Requirement( role = ArtifactViewProvider.class )
+    @Inject
     public Map<String, ArtifactViewProvider> viewProviders;
 
     public AbstractResourceStoreContentPlexusResource()

@@ -12,19 +12,21 @@
  */
 package org.sonatype.nexus.tasks;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.index.IndexerManager;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.nexus.tasks.descriptors.DownloadIndexesTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Publish indexes task.
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = DownloadIndexesTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(DownloadIndexesTaskDescriptor.ID)
 public class DownloadIndexesTask
     extends AbstractNexusRepositoriesTask<Object>
 {
@@ -33,7 +35,7 @@ public class DownloadIndexesTask
      */
     public static final String ACTION = "DOWNLOADINDEX";
 
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
     @Override

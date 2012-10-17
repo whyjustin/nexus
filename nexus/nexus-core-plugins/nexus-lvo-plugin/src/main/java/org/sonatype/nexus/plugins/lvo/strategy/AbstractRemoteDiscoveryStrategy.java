@@ -18,17 +18,18 @@ import java.io.InputStream;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.IOUtil;
 import org.sonatype.nexus.SystemStatus;
 import org.sonatype.nexus.configuration.application.NexusConfiguration;
 import org.sonatype.nexus.plugins.lvo.DiscoveryRequest;
 
+import javax.inject.Inject;
+
 public abstract class AbstractRemoteDiscoveryStrategy
     extends AbstractDiscoveryStrategy
 {
 
-    @Requirement
+    @Inject
     private NexusConfiguration nexusConfig;
 
     /**

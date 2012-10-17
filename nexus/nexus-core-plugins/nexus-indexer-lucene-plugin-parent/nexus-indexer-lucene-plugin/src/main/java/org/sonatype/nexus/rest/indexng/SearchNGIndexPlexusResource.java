@@ -19,6 +19,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -32,8 +35,6 @@ import org.apache.maven.index.MAVEN;
 import org.apache.maven.index.SearchType;
 import org.apache.maven.index.UniqueArtifactFilterPostprocessor;
 import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Form;
@@ -68,7 +69,8 @@ import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.plexus.rest.resource.PlexusResource;
 import org.sonatype.plexus.rest.resource.PlexusResourceException;
 
-@Component( role = PlexusResource.class, hint = "SearchNGIndexPlexusResource" )
+@Named
+@Singleton
 @Path( SearchNGIndexPlexusResource.RESOURCE_URI )
 public class SearchNGIndexPlexusResource
     extends AbstractIndexerNexusPlexusResource
@@ -145,7 +147,7 @@ public class SearchNGIndexPlexusResource
 
     private Logger searchDiagnosticLogger = LoggerFactory.getLogger( "search.ng.diagnostic" );
 
-    @Requirement( role = Searcher.class )
+    @Inject
     private List<Searcher> searchers;
 
     @Override

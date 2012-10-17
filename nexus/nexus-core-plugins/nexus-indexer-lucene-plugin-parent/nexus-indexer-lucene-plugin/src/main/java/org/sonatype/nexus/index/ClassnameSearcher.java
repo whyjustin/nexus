@@ -21,17 +21,20 @@ import org.apache.maven.index.ArtifactInfoFilter;
 import org.apache.maven.index.FlatSearchResponse;
 import org.apache.maven.index.IteratorSearchResponse;
 import org.apache.maven.index.SearchType;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Searches Lucene index for artifacts containing classes with a specified name.
  * 
  * @author Alin Dreghiciu
  */
-@Component( role = Searcher.class, hint = "classname" )
+@Named("classname")
+@Singleton
 public class ClassnameSearcher
     implements Searcher
 {
@@ -41,7 +44,7 @@ public class ClassnameSearcher
      */
     public static final String TERM_CLASSNAME = "cn";
 
-    @Requirement
+    @Inject
     private IndexerManager m_lucene;
 
     /**

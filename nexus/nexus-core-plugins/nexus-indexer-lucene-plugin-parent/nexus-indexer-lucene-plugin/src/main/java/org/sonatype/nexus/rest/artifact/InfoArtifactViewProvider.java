@@ -20,8 +20,6 @@ import java.util.Set;
 
 import org.apache.maven.index.ArtifactInfo;
 import org.apache.maven.index.IteratorSearchResponse;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.data.Request;
 import org.sonatype.nexus.index.IndexerManager;
 import org.sonatype.nexus.proxy.AccessDeniedException;
@@ -43,29 +41,35 @@ import org.sonatype.nexus.rest.model.ArtifactInfoResourceResponse;
 import org.sonatype.nexus.rest.model.RepositoryUrlResource;
 import org.sonatype.plexus.rest.ReferenceFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Artifact info view provider.
  * 
  * @author Velo
  * @author cstamas
  */
-@Component( role = ArtifactViewProvider.class, hint = "info" )
+@Named("info")
+@Singleton
 public class InfoArtifactViewProvider
     extends AbstractArtifactViewProvider
 {
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
-    @Requirement( hint = "protected" )
+    @Inject
+    @Named( "protected" )
     private RepositoryRegistry protectedRepositoryRegistry;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Requirement
+    @Inject
     private ReferenceFactory referenceFactory;
 
-    @Requirement
+    @Inject
     private AccessManager accessManager;
 
     @Override

@@ -15,11 +15,16 @@ package org.sonatype.nexus.tasks.descriptors;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
+import org.sonatype.inject.Description;
 import org.sonatype.nexus.formfields.FormField;
 import org.sonatype.nexus.formfields.RepoOrGroupComboFormField;
 
-@Component( role = ScheduledTaskDescriptor.class, hint = "OptimizeIndex", description = "Optimize Repository Index" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("OptimizeIndex")
+@Singleton
+@Description("Optimize Repository Index" )
 public class OptimizeIndexTaskDescriptor
     extends AbstractScheduledTaskDescriptor
 {

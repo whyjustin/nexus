@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.events;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.index.IndexerManager;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
 import org.sonatype.nexus.proxy.events.AbstractEventInspector;
@@ -27,6 +25,10 @@ import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.plexus.appevents.Event;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Listens for events and manages IndexerManager by adding and removing indexing contexts.
  * <p>
@@ -35,14 +37,15 @@ import org.sonatype.plexus.appevents.Event;
  * @author Toni Menzel
  * @author cstamas
  */
-@Component( role = EventInspector.class, hint = "IndexingRepositoryRegistryRepositoryEventInspector" )
+@Named
+@Singleton
 public class IndexingRepositoryRegistryRepositoryEventInspector
     extends AbstractEventInspector
 {
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
-    @Requirement
+    @Inject
     private RepositoryRegistry repoRegistry;
 
     protected IndexerManager getIndexerManager()

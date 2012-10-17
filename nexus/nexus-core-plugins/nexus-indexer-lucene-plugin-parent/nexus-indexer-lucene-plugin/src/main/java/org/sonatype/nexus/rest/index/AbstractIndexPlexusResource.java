@@ -25,7 +25,6 @@ import org.apache.maven.index.IteratorSearchResponse;
 import org.apache.maven.index.MAVEN;
 import org.apache.maven.index.SearchType;
 import org.apache.maven.index.UniqueArtifactFilterPostprocessor;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.Form;
@@ -51,6 +50,8 @@ import org.sonatype.nexus.scheduling.NexusTask;
 import org.sonatype.nexus.tasks.RepairIndexTask;
 import org.sonatype.nexus.tasks.UpdateIndexTask;
 
+import javax.inject.Inject;
+
 public abstract class AbstractIndexPlexusResource
     extends AbstractIndexerNexusPlexusResource
 {
@@ -66,10 +67,10 @@ public abstract class AbstractIndexPlexusResource
 
     public static final String TARGET_ID = "target";
 
-    @Requirement
+    @Inject
     private NexusScheduler nexusScheduler;
 
-    @Requirement( role = Searcher.class )
+    @Inject
     private List<Searcher> m_searchers;
 
     public AbstractIndexPlexusResource()

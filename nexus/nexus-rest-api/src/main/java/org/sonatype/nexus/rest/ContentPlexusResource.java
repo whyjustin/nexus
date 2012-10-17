@@ -14,7 +14,6 @@ package org.sonatype.nexus.rest;
 
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
 import org.restlet.data.MediaType;
 import org.restlet.data.Request;
 import org.restlet.resource.ResourceException;
@@ -24,7 +23,11 @@ import org.sonatype.nexus.proxy.ResourceStore;
 import org.sonatype.plexus.rest.resource.ManagedPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 
-@Component( role = ManagedPlexusResource.class, hint = "content" )
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named("content")
+@Singleton
 public class ContentPlexusResource
     extends AbstractResourceStoreContentPlexusResource
     implements ManagedPlexusResource

@@ -14,19 +14,21 @@ package org.sonatype.nexus.tasks;
 
 import java.io.IOException;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.index.IndexerManager;
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.nexus.tasks.descriptors.PublishIndexesTaskDescriptor;
 import org.sonatype.scheduling.SchedulerTask;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Publish indexes task.
  * 
  * @author cstamas
  */
-@Component( role = SchedulerTask.class, hint = PublishIndexesTaskDescriptor.ID, instantiationStrategy = "per-lookup" )
+@Named(PublishIndexesTaskDescriptor.ID)
 public class PublishIndexesTask
     extends AbstractNexusRepositoriesTask<Object>
 {
@@ -35,7 +37,7 @@ public class PublishIndexesTask
      */
     public static final String ACTION = "PUBLISHINDEX";
 
-    @Requirement
+    @Inject
     private IndexerManager indexerManager;
 
     @Override

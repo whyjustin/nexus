@@ -14,13 +14,12 @@ package org.sonatype.nexus.rest;
 
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.restlet.Application;
 import org.restlet.Directory;
 import org.restlet.Restlet;
 import org.restlet.Router;
 import org.restlet.service.StatusService;
+import org.sonatype.inject.Nullable;
 import org.sonatype.nexus.error.reporting.ErrorReportingManager;
 import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.StaticResource;
@@ -38,54 +37,68 @@ import org.sonatype.security.web.ProtectedPathManager;
 
 import com.thoughtworks.xstream.XStream;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 /**
  * Nexus REST Application. This will ultimately replace the two applications we have now, and provide us plugin UI
  * extension capability.
  * 
  * @author cstamas
  */
-@Component( role = Application.class, hint = "nexus" )
+@Named("nexus")
+@Singleton
 public class NexusApplication
     extends PlexusRestletApplicationBridge
     implements EventListener
 {
-    @Requirement
+    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
-    @Requirement
+    @Inject
     private ProtectedPathManager protectedPathManager;
 
-    @Requirement( hint = "indexTemplate" )
+    @Inject
+    @Named("indexTemplate" )
     private ManagedPlexusResource indexTemplateResource;
 
-    @Requirement( hint = "licenseTemplate", optional = true )
+    @Inject
+    @Named("licenseTemplate")
+    @Nullable
     private ManagedPlexusResource licenseTemplateResource;
 
-    @Requirement( hint = "enterLicenseTemplate", optional = true )
+    @Inject
+    @Named("enterLicenseTemplate")
+    @Nullable
     private ManagedPlexusResource enterLicenseTemplateResource;
 
-    @Requirement( hint = "IndexRedirectingPlexusResource" )
+    @Inject
+    @Named("IndexRedirectingPlexusResource")
     private ManagedPlexusResource indexRedirectingResource;
 
-    @Requirement( hint = "content" )
+    @Inject
+    @Named("content")
     private ManagedPlexusResource contentResource;
 
-    @Requirement( hint = "StatusPlexusResource" )
+    @Inject
+    @Named("StatusPlexusResource")
     private ManagedPlexusResource statusPlexusResource;
 
-    @Requirement( hint = "CommandPlexusResource" )
+    @Inject
+    @Named("CommandPlexusResource")
     private ManagedPlexusResource commandPlexusResource;
 
-    @Requirement( role = NexusResourceBundle.class )
+    @Inject
     private List<NexusResourceBundle> nexusResourceBundles;
 
-    @Requirement( role = NexusApplicationCustomizer.class )
+    @Inject
     private List<NexusApplicationCustomizer> customizers;
 
-    @Requirement( role = ErrorReportingManager.class )
+    @Inject
     private ErrorReportingManager errorManager;
 
-    @Requirement( role = StatusService.class )
+    @Inject
     private StatusService statusService;
 
     /**

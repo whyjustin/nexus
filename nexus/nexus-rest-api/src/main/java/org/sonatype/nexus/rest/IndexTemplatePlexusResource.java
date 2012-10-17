@@ -24,9 +24,6 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Configuration;
-import org.codehaus.plexus.component.annotations.Requirement;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
@@ -46,19 +43,25 @@ import org.sonatype.plexus.rest.resource.AbstractPlexusResource;
 import org.sonatype.plexus.rest.resource.ManagedPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 
-@Component( role = ManagedPlexusResource.class, hint = "indexTemplate" )
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+@Named
+@Singleton
 public class IndexTemplatePlexusResource
     extends AbstractPlexusResource
     implements ManagedPlexusResource,
         Initializable
 {
-    @Requirement
+    @Inject
     private Nexus nexus;
 
-    @Requirement( role = NexusIndexHtmlCustomizer.class )
+    @Inject
     private Map<String, NexusIndexHtmlCustomizer> bundles;
     
-    @Configuration( value = "${index.template.file}" )
+    @Inject
+    @Named( "${index.template.file}" )
     String templateFilename;
 
     public IndexTemplatePlexusResource()
