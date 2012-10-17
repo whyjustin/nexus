@@ -43,12 +43,12 @@
         <filtering>true</filtering>
       </resource>
     </resources>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-component-metadata</artifactId>
-      </plugin>
-    </plugins>
+    <!--<plugins>-->
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.plexus</groupId>-->
+        <!--<artifactId>plexus-component-metadata</artifactId>-->
+      <!--</plugin>-->
+    <!--</plugins>-->
   </build>
 
 </project>

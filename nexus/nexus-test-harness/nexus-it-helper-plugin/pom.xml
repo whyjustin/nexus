@@ -133,10 +133,10 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-component-metadata</artifactId>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.plexus</groupId>-->
+        <!--<artifactId>plexus-component-metadata</artifactId>-->
+      <!--</plugin>-->
     </plugins>
   </build>
 </project>

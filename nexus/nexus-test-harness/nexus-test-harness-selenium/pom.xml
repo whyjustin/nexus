@@ -45,10 +45,10 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-component-metadata</artifactId>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.plexus</groupId>-->
+        <!--<artifactId>plexus-component-metadata</artifactId>-->
+      <!--</plugin>-->
       <plugin>
         <groupId>org.sonatype.nexus.plugins</groupId>
         <artifactId>nexus-test-environment-maven-plugin</artifactId>

@@ -138,13 +138,13 @@
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>app-lifecycle-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-component-metadata</artifactId>
-        <goals>
-          <goal>generate-test-metadata</goal>
-        </goals>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.plexus</groupId>-->
+        <!--<artifactId>plexus-component-metadata</artifactId>-->
+        <!--<goals>-->
+          <!--<goal>generate-test-metadata</goal>-->
+        <!--</goals>-->
+      <!--</plugin>-->
 
       <plugin>
         <groupId>org.sonatype.nexus.plugins</groupId>
