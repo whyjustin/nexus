@@ -47,12 +47,15 @@ import javax.inject.Singleton;
  * 
  * @author cstamas
  */
-@Named("nexus")
+@Named(NexusApplication.NAME)
 @Singleton
 public class NexusApplication
     extends PlexusRestletApplicationBridge
     implements EventListener
 {
+
+    public static final String NAME = "nexus";
+
     @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 

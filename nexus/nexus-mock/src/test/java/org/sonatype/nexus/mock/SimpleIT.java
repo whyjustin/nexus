@@ -153,7 +153,7 @@ public class SimpleIT
         // Assert.assertEquals( 200, response.getStatus().getCode() );
 
         NexusApplication na =
-            (NexusApplication) mockNexusEnvironment.getPlexusContainer().lookup( Application.class, "nexus" );
+            (NexusApplication) mockNexusEnvironment.getPlexusContainer().lookup( Application.class, NexusApplication.NAME );
 
         XStream xmlXstream = (XStream) na.getContext().getAttributes().get( PlexusRestletApplicationBridge.XML_XSTREAM );
 
