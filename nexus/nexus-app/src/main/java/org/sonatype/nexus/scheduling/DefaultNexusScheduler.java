@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.RejectedExecutionException;
 
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.scheduling.NoSuchTaskException;
 import org.sonatype.scheduling.ScheduledTask;
@@ -40,14 +39,6 @@ public class DefaultNexusScheduler
 {
     @Inject
     private Scheduler scheduler;
-
-    @Inject
-    private PlexusContainer plexusContainer;
-
-    protected PlexusContainer getPlexusContainer()
-    {
-        return plexusContainer;
-    }
 
     @Override
     public void initializeTasks()
