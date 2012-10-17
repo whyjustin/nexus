@@ -40,6 +40,7 @@ import org.sonatype.plexus.rest.resource.error.ErrorMessage;
 import org.sonatype.plexus.rest.resource.error.ErrorResponse;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public abstract class AbstractNexusPlexusResource
     extends AbstractPlexusResource

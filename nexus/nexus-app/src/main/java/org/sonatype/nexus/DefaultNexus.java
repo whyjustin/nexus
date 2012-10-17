@@ -71,6 +71,7 @@ import org.sonatype.nexus.templates.repository.RepositoryTemplate;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 import org.sonatype.security.SecuritySystem;
 
+import javax.enterprise.inject.Typed;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -83,6 +84,7 @@ import javax.inject.Singleton;
  */
 @Named
 @Singleton
+@Typed(Nexus.class) // implementation ApplicationStatusSource in Nexus causes stackoverflow due to sisu-binding to it
 public class DefaultNexus
     extends AbstractLoggingComponent
     implements Nexus, Initializable, Startable

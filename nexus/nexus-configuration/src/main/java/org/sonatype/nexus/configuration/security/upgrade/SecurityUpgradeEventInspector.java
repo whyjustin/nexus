@@ -31,6 +31,7 @@ import org.sonatype.security.model.Configuration;
 import org.sonatype.security.model.source.SecurityModelConfigurationSource;
 import org.sonatype.security.model.upgrade.SecurityDataUpgrader;
 
+import javax.enterprise.inject.Typed;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;

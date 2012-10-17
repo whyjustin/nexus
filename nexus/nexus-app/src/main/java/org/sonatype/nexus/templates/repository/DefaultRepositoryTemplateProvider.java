@@ -24,6 +24,7 @@ import org.sonatype.nexus.templates.repository.maven.Maven2HostedRepositoryTempl
 import org.sonatype.nexus.templates.repository.maven.Maven2Maven1ShadowRepositoryTemplate;
 import org.sonatype.nexus.templates.repository.maven.Maven2ProxyRepositoryTemplate;
 
+import javax.enterprise.inject.Typed;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -34,6 +35,7 @@ import javax.inject.Singleton;
  */
 @Named(DefaultRepositoryTemplateProvider.PROVIDER_ID )
 @Singleton
+//@Typed(DefaultRepositoryTemplateProvider.class)
 public class DefaultRepositoryTemplateProvider
     extends AbstractRepositoryTemplateProvider
 {

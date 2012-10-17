@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -86,15 +87,17 @@ public class GlobalConfigurationPlexusResource
     /** Name denoting default Nexus configuration */
     public static final String DEFAULT_CONFIG_NAME = "default";
 
-    @Requirement
+    @Inject
     private NotificationManager notificationManager;
 
     // DEFAULT CONFIG
     // ==
-    @Requirement( hint = "static" )
+    @Inject
+    @Named( "static" )
     private SecurityConfigurationSource defaultSecurityConfigurationSource;
 
-    @Requirement( hint = "static" )
+    @Inject
+    @Named( "static" )
     private ApplicationConfigurationSource configurationSource;
 
     // ----------------------------------------------------------------------------

@@ -65,7 +65,7 @@ import org.sonatype.plexus.rest.resource.PlexusResourceException;
  * 
  * @author cstamas
  */
-@Named
+@Named("RepositoryListPlexusResource")
 @Singleton
 @Path( RepositoryListPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
@@ -81,7 +81,6 @@ public class RepositoryListPlexusResource
     // UGLY HACK, SEE BELOW
     @Inject
     @Named(DefaultRepositoryTemplateProvider.PROVIDER_ID)
-    @Typed(TemplateProvider.class)
     private DefaultRepositoryTemplateProvider repositoryTemplateProvider;
 
     public RepositoryListPlexusResource()
