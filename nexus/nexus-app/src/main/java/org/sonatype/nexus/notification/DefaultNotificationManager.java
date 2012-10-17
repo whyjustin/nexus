@@ -15,7 +15,8 @@ package org.sonatype.nexus.notification;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.AbstractConfigurable;
 import org.sonatype.nexus.configuration.Configurator;
@@ -25,7 +26,6 @@ import org.sonatype.nexus.configuration.application.NexusConfiguration;
 import org.sonatype.nexus.configuration.model.CNotification;
 import org.sonatype.nexus.configuration.model.CNotificationConfiguration;
 import org.sonatype.nexus.configuration.model.CNotificationTarget;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,7 +37,7 @@ public class DefaultNotificationManager
     extends AbstractConfigurable
     implements NotificationManager
 {
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger( getClass() );
 
     @Inject
     private NexusConfiguration nexusConfig;

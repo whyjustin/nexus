@@ -73,12 +73,12 @@ import org.apache.maven.index.updater.IndexUpdateRequest;
 import org.apache.maven.index.updater.IndexUpdateResult;
 import org.apache.maven.index.updater.IndexUpdater;
 import org.apache.maven.index.updater.ResourceFetcher;
-import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.configuration.application.NexusConfiguration;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.maven.tasks.SnapshotRemover;
 import org.sonatype.nexus.mime.MimeSupport;
 import org.sonatype.nexus.proxy.IllegalOperationException;
@@ -151,7 +151,7 @@ public class DefaultIndexerManager
 
     private static final Map<String, ReadWriteLock> locks = new HashMap<String, ReadWriteLock>();
 
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private NexusIndexer nexusIndexer;

@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.micromailer.Address;
 import org.sonatype.micromailer.MailRequest;
 import org.sonatype.nexus.email.NexusEmailer;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.security.SecuritySystem;
 import org.sonatype.security.usermanagement.User;
 import org.sonatype.security.usermanagement.UserNotFoundException;
@@ -38,7 +38,7 @@ public class EmailCarrier
 {
     public static final String KEY = "email";
 
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private NexusEmailer nexusEmailer;

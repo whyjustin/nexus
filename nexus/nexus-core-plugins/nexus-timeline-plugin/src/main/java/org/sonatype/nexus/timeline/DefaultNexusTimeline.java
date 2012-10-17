@@ -18,15 +18,15 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.logging.Logger;
 // FIXME: Kill these...
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.StartingException;
 import org.codehaus.plexus.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.timeline.Timeline;
 import org.sonatype.timeline.TimelineConfiguration;
 import org.sonatype.timeline.TimelineException;
@@ -51,7 +51,7 @@ public class DefaultNexusTimeline
 
     private static final String TIMELINE_BASEDIR = "timeline";
 
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private Timeline timeline;

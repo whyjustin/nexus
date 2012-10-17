@@ -21,8 +21,8 @@ import java.util.Set;
 import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.codehaus.plexus.component.repository.exception.ComponentLifecycleException;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.codehaus.plexus.logging.Logger;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.plugins.RepositoryType;
 import org.sonatype.nexus.proxy.maven.maven1.M1GroupRepository;
 import org.sonatype.nexus.proxy.maven.maven1.M1LayoutedM2ShadowRepository;
@@ -46,7 +46,7 @@ import javax.inject.Singleton;
 public class DefaultRepositoryTypeRegistry
     implements RepositoryTypeRegistry
 {
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private PlexusContainer container;

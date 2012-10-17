@@ -15,10 +15,10 @@ package org.sonatype.nexus.proxy.wastebasket;
 import java.io.File;
 import java.io.IOException;
 
-import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.scheduling.TaskUtil;
 
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ public abstract class AbstractRepositoryFolderCleaner
 {
     public static final String GLOBAL_TRASH_KEY = "trash";
 
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private ApplicationConfiguration applicationConfiguration;

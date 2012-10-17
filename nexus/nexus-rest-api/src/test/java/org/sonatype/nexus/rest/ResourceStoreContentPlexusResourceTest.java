@@ -143,6 +143,7 @@ public class ResourceStoreContentPlexusResourceTest
             @Override
             protected Logger getLogger()
             {
+                // FIXME: Remove need for Plexus loggers
                 return new Slf4jPlexusLogger( LoggerFactory.getLogger( ResourceStoreContentPlexusResourceTest.class ) );
             }
 

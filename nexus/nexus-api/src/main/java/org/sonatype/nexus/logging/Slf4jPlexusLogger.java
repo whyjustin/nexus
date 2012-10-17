@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author: cstamas
  */
+@Deprecated
 public class Slf4jPlexusLogger
     implements org.codehaus.plexus.logging.Logger
 {

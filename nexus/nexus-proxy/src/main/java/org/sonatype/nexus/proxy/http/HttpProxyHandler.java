@@ -12,14 +12,14 @@
  */
 package org.sonatype.nexus.proxy.http;
 
+import org.slf4j.Logger;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
-
-import org.codehaus.plexus.logging.Logger;
 
 /**
  * The proxy handler handles one incoming HTTP request connection. Since this is not a generic HTTP Proxy, and we

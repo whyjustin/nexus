@@ -12,9 +12,10 @@
  */
 package org.sonatype.nexus.logging;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.codehaus.plexus.logging.Logger;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Plexus' AbstractLogEnabled in compatibility way.
@@ -26,11 +27,11 @@ import org.codehaus.plexus.logging.Logger;
 public class AbstractPlexusLoggingComponent
 {
 
-    private final Logger plexusLogger;
+    private final Logger logger;
 
     protected AbstractPlexusLoggingComponent()
     {
-        this.plexusLogger = checkNotNull( createLogger() );
+        this.logger = checkNotNull( createLogger() );
     }
 
     /**
@@ -41,7 +42,7 @@ public class AbstractPlexusLoggingComponent
      */
     protected Logger createLogger()
     {
-        return Slf4jPlexusLogger.getPlexusLogger( getClass() );
+        return LoggerFactory.getLogger(getClass());
     }
 
     /**
@@ -51,7 +52,7 @@ public class AbstractPlexusLoggingComponent
      */
     protected Logger getLogger()
     {
-        return plexusLogger;
+        return logger;
     }
 
 }

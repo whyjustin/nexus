@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.codehaus.plexus.logging.Logger;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.mime.MimeSupport;
 
 import javax.inject.Inject;
@@ -31,7 +31,7 @@ import javax.inject.Inject;
 public abstract class AbstractDocumentationNexusResourceBundle
     implements NexusDocumentationBundle
 {
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private MimeSupport mimeSupport;

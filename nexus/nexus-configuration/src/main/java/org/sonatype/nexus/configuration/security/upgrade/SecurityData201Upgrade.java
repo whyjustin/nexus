@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.IOUtil;
 import org.codehaus.plexus.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.security.model.v2_0_2.CPrivilege;
 import org.sonatype.security.model.v2_0_2.CProperty;
 import org.sonatype.security.model.v2_0_2.CRole;
@@ -45,7 +45,7 @@ public class SecurityData201Upgrade
     implements SecurityDataUpgrader
 {
 
-    private Logger logger = Slf4jPlexusLogger.getPlexusLogger( getClass() );
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public void doUpgrade( Configuration configuration )

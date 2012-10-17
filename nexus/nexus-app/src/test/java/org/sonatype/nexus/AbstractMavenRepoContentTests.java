@@ -17,7 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
-import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.DirectoryWalkListener;
 import org.codehaus.plexus.util.DirectoryWalker;
 import org.codehaus.plexus.util.FileUtils;
@@ -56,7 +55,7 @@ public abstract class AbstractMavenRepoContentTests
     {
         super.setUp();
 
-        getLoggerManager().setThresholds( Logger.LEVEL_DEBUG );
+        getLoggerManager().setThresholds( 0 /* DEBUG */ );
 
         defaultNexus = (DefaultNexus) lookup( Nexus.class );
 

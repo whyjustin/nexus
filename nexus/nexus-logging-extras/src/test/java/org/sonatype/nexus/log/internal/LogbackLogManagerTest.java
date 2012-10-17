@@ -27,7 +27,6 @@ import org.sonatype.nexus.AbstractNexusTestCase;
 import org.sonatype.nexus.log.DefaultLogConfiguration;
 import org.sonatype.nexus.log.LogConfiguration;
 import org.sonatype.nexus.log.LogManager;
-import org.sonatype.nexus.log.internal.LogbackLogManager;
 
 /**
  * @author juven
@@ -39,8 +38,6 @@ public class LogbackLogManagerTest
 {
     private LogManager manager;
 
-    private org.codehaus.plexus.logging.Logger logger;
-
     @Override
     public void setUp()
         throws Exception
@@ -49,7 +46,6 @@ public class LogbackLogManagerTest
 
         manager = lookup( LogManager.class );
         manager.configure();
-        logger = this.getLoggerManager().getLoggerForComponent( LogbackLogManagerTest.class.getName() );
     }
 
     @Override
