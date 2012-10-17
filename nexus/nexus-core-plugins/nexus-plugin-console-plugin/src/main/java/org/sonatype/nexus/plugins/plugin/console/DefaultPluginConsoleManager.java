@@ -20,9 +20,6 @@ import java.util.Map;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.component.repository.ComponentDescriptor;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.plugins.NexusPluginManager;
 import org.sonatype.nexus.plugins.PluginResponse;
@@ -47,23 +44,22 @@ import javax.inject.Singleton;
 @Singleton
 public class DefaultPluginConsoleManager
     extends AbstractLoggingComponent
-    implements PluginConsoleManager, Initializable
+    implements PluginConsoleManager
 {
-    @Inject
-    private NexusPluginManager pluginManager;
+    private final NexusPluginManager pluginManager;
+
+    private final PlexusContainer plexusContainer;
+
+    private final Multimap<String, NexusDocumentationBundle> docBundles;
 
     @Inject
-    private PlexusContainer plexusContainer;
-
-    @Inject
-    private List<NexusResourceBundle> resourceBundles;
-
-    private Multimap<String, NexusDocumentationBundle> docBundles;
-
-    public void initialize()
-        throws InitializationException
+    public DefaultPluginConsoleManager(final NexusPluginManager pluginManager,
+                                       final PlexusContainer plexusContainer,
+                                       final List<NexusResourceBundle> resourceBundles)
     {
-        docBundles = LinkedHashMultimap.create();
+        this.pluginManager = pluginManager;
+        this.plexusContainer = plexusContainer;
+        this.docBundles = LinkedHashMultimap.create();
 
         for ( NexusResourceBundle rb : resourceBundles )
         {
