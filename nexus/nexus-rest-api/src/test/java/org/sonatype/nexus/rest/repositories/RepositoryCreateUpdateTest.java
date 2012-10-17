@@ -150,7 +150,7 @@ public class RepositoryCreateUpdateTest
         proxyAuthSettings.setUsername( "username2-new" );
 
         RepositoryPlexusResource plexusResource =
-            (RepositoryPlexusResource) this.lookup( PlexusResource.class, "RepositoryPlexusResource" );
+            (RepositoryPlexusResource) this.lookup( PlexusResource.class, RepositoryPlexusResource.NAME );
 
         Request request = buildRequest();
         Response response = new Response( request );
@@ -277,7 +277,7 @@ public class RepositoryCreateUpdateTest
         proxyAuthSettings.setUsername( "username2" );
 
         RepositoryListPlexusResource plexusResource =
-            (RepositoryListPlexusResource) this.lookup( PlexusResource.class, "RepositoryListPlexusResource" );
+            (RepositoryListPlexusResource) this.lookup( PlexusResource.class, RepositoryListPlexusResource.NAME );
 
         Request request = buildRequest();
         Response response = new Response( request );
@@ -329,7 +329,7 @@ public class RepositoryCreateUpdateTest
         authSettings.setUsername( "username" );
 
         RepositoryListPlexusResource plexusResource =
-            (RepositoryListPlexusResource) this.lookup( PlexusResource.class, "RepositoryListPlexusResource" );
+            (RepositoryListPlexusResource) this.lookup( PlexusResource.class, RepositoryListPlexusResource.NAME );
 
         Request request = buildRequest();
         Response response = new Response( request );
@@ -346,7 +346,7 @@ public class RepositoryCreateUpdateTest
 
         // now do an update and test again
         RepositoryPlexusResource updateResource =
-            (RepositoryPlexusResource) this.lookup( PlexusResource.class, "RepositoryPlexusResource" );
+            (RepositoryPlexusResource) this.lookup( PlexusResource.class, RepositoryPlexusResource.NAME );
 
         request.getAttributes().put( AbstractRepositoryPlexusResource.REPOSITORY_ID_KEY, result.getId() );
 
@@ -375,7 +375,7 @@ public class RepositoryCreateUpdateTest
         originalResource.setOverrideLocalStorageUrl( newlocalStorage );
 
         RepositoryPlexusResource plexusResource =
-            (RepositoryPlexusResource) this.lookup( PlexusResource.class, "RepositoryPlexusResource" );
+            (RepositoryPlexusResource) this.lookup( PlexusResource.class, RepositoryPlexusResource.NAME );
 
         Request request = buildRequest();
         Response response = new Response( request );

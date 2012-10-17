@@ -66,7 +66,7 @@ import org.sonatype.plexus.rest.resource.error.ErrorResponse;
  * 
  * @author cstamas
  */
-@Named
+@Named(RepositoryPlexusResource.NAME)
 @Singleton
 @Path( RepositoryPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
@@ -75,6 +75,8 @@ public class RepositoryPlexusResource
     extends AbstractRepositoryPlexusResource
 {
     public static final String RESOURCE_URI = "/repositories/{" + REPOSITORY_ID_KEY + "}";
+
+    public static final String NAME = "RepositoryPlexusResource";
 
     public RepositoryPlexusResource()
     {

@@ -65,7 +65,7 @@ import org.sonatype.plexus.rest.resource.PlexusResourceException;
  * 
  * @author cstamas
  */
-@Named("RepositoryListPlexusResource")
+@Named(RepositoryListPlexusResource.NAME)
 @Singleton
 @Path( RepositoryListPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
@@ -75,13 +75,17 @@ public class RepositoryListPlexusResource
 {
     public static final String RESOURCE_URI = "/repositories";
 
+    public static final String NAME = "RepositoryListPlexusResource";
+
     @Inject
     private RemoteProviderHintFactory remoteProviderHintFactory;
 
-    // UGLY HACK, SEE BELOW
-    @Inject
-    @Named(DefaultRepositoryTemplateProvider.PROVIDER_ID)
+    // HACK: We required the specific api on the default impl, but we have to inject as generic (due to poorly designed api usage)
     private DefaultRepositoryTemplateProvider repositoryTemplateProvider;
+    @Inject
+    public void setTemplateProvider(final @Named(DefaultRepositoryTemplateProvider.PROVIDER_ID) TemplateProvider provider) {
+        this.repositoryTemplateProvider = (DefaultRepositoryTemplateProvider)provider;
+    }
 
     public RepositoryListPlexusResource()
     {
@@ -173,7 +177,7 @@ public class RepositoryListPlexusResource
      * Converting REST DTO + possible App model to App model. If app model is given, "update" happens, otherwise if
      * target is null, "create".
      * 
-     * @param model
+     * @param resource
      * @param target
      * @return app model, merged or created
      * @throws ResourceException
