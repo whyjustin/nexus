@@ -15,7 +15,7 @@ package org.sonatype.nexus.rest;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.codehaus.plexus.PlexusConstants;
-import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.restlet.Context;
 import org.restlet.data.Reference;
 import org.restlet.data.Request;

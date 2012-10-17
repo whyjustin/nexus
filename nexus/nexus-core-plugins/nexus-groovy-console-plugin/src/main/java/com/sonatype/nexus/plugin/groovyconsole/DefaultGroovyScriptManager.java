@@ -19,7 +19,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.plexus.appevents.Event;
 import com.sonatype.nexus.plugin.groovyconsole.rest.dto.GroovyScriptDTO;

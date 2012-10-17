@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Constructor;
 
-import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.codehaus.plexus.classworlds.launcher.Launcher;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.sonatype.appbooter.PlexusAppBooter;

@@ -17,7 +17,7 @@ import groovy.lang.GroovyShell;
 import groovy.util.AntBuilder;
 
 import org.codehaus.groovy.control.CompilerConfiguration;
-import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.sonatype.nexus.scheduling.AbstractNexusRepositoriesTask;
 import org.sonatype.scheduling.SchedulerTask;
 

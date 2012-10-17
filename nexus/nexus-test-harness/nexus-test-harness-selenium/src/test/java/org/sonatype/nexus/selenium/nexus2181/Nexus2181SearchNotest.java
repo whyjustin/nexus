@@ -17,7 +17,7 @@ import static org.testng.AssertJUnit.assertEquals;
 import java.util.Collections;
 
 import org.apache.maven.index.FlatSearchResponse;
-import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.index.Searcher;
