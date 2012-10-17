@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.proxy.IllegalOperationException;
 import org.sonatype.nexus.proxy.ItemNotFoundException;
 import org.sonatype.nexus.proxy.NoSuchRepositoryException;
@@ -237,7 +236,7 @@ public class DefaultSnapshotRemover
             repository.expireNotFoundCaches( new ResourceStoreRequest( RepositoryItemUid.PATH_ROOT ) );
 
             RecreateMavenMetadataWalkerProcessor metadataRebuildProcessor =
-                new RecreateMavenMetadataWalkerProcessor( Slf4jPlexusLogger.getPlexusLogger( getLogger() ),
+                new RecreateMavenMetadataWalkerProcessor( getLogger(),
                     getDeleteOperation( request ) );
 
             for ( String path : parentOMatic.getMarkedPaths() )

@@ -15,18 +15,18 @@ package org.sonatype.nexus.logging;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Wrapper that wraps SLF4J logger into a Plexus Logger interface to be used with Legacy Plexus components.
  *
  * @author: cstamas
+ *
+ * @deprecated To be removed, use slf4j instead, have to remove use of AbstractLogEnabled first
  */
 @Deprecated
 public class Slf4jPlexusLogger
     implements org.codehaus.plexus.logging.Logger
 {
-
     private final Logger logger;
 
     public Slf4jPlexusLogger( final Logger logger )
@@ -159,30 +159,4 @@ public class Slf4jPlexusLogger
     {
         return logger.getName();
     }
-
-    // ==
-
-    /**
-     * Factory method for Plexus Logger instances, that uses the good old {@code LoggerFactory.getLogger(owner)} way
-     * to obtain Slf4l Logger to have it wrapped into Slf4jPlexusLogger instance.
-     *
-     * @param owner
-     * @return
-     */
-    public static org.codehaus.plexus.logging.Logger getPlexusLogger( final Class<?> owner )
-    {
-        return getPlexusLogger( LoggerFactory.getLogger( owner ) );
-    }
-
-    /**
-     * Factory method for Plexus Logger instances, that wraps existing Slf4j Logger instances.
-     *
-     * @param logger
-     * @return
-     */
-    public static org.codehaus.plexus.logging.Logger getPlexusLogger( final Logger logger )
-    {
-        return new Slf4jPlexusLogger( logger );
-    }
-
 }

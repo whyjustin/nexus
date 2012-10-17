@@ -30,7 +30,6 @@ import org.sonatype.nexus.configuration.CoreConfiguration;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.configuration.model.CHttpProxyCoreConfiguration;
 import org.sonatype.nexus.configuration.model.CHttpProxySettings;
-import org.sonatype.nexus.logging.Slf4jPlexusLogger;
 import org.sonatype.nexus.threads.NexusThreadFactory;
 
 import javax.inject.Inject;
@@ -256,7 +255,7 @@ public class DefaultHttpProxyService
         {
             this.service = service;
 
-            this.handlerLogger = getLogger().getChildLogger( "handler" );
+            this.handlerLogger = LoggerFactory.getLogger(getLogger().getName() + ".handler");
         }
 
         public void run()

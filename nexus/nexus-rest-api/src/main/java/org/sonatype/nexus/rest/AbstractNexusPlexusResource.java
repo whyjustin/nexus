@@ -44,6 +44,9 @@ public abstract class AbstractNexusPlexusResource
     extends AbstractPlexusResource
     implements PlexusResource
 {
+    // FIXME: Sort out getLogger(), this will return a Plexus Logger, due to extending from AbstractLogEnabled
+    // FIXME: Need to update the restlet bridge in order to change this
+
     public static final String NEXUS_INSTANCE_LOCAL = "local";
 
     public static final String PASSWORD_PLACE_HOLDER = "|$|N|E|X|U|S|$|";
