@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.Ignore;
 import org.sonatype.nexus.AbstractNexusTestCase;
 import org.sonatype.nexus.Nexus;
+import org.sonatype.nexus.configuration.security.upgrade.SecurityUpgradeEventInspector;
 import org.sonatype.nexus.proxy.events.EventInspector;
 
 public class SecurityConfigurationUpgradeTest
@@ -44,7 +45,7 @@ public class SecurityConfigurationUpgradeTest
     public void testLoadComponent()
         throws Exception
     {
-        Assert.assertNotNull( this.lookup( EventInspector.class, "SecurityUpgradeEventInspector" ) );
+        Assert.assertNotNull( this.lookup( EventInspector.class, SecurityUpgradeEventInspector.NAME ) );
     }
 
     @Test

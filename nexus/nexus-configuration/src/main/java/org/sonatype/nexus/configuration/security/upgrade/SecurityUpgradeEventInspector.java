@@ -36,11 +36,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named
+@Named(SecurityUpgradeEventInspector.NAME)
 @Singleton
+@Typed(EventInspector.class)
 public class SecurityUpgradeEventInspector
     extends AbstractEventInspector
 {
+
+    public static final String NAME = "SecurityUpgradeEventInspector";
 
     @Inject
     private ApplicationStatusSource applicationStatusSource;
