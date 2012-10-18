@@ -19,8 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 // FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.StartingException;
 import org.codehaus.plexus.util.FileUtils;
@@ -46,37 +44,31 @@ import javax.inject.Singleton;
 @Named
 @Singleton
 public class DefaultNexusTimeline
-    implements NexusTimeline, Initializable, Startable
+    implements NexusTimeline, Startable
 {
 
     private static final String TIMELINE_BASEDIR = "timeline";
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Inject
+    //@Inject
     private Timeline timeline;
 
-    @Inject
+    //@Inject
     private ApplicationConfiguration applicationConfiguration;
 
-    protected Logger getLogger()
+    @Inject
+    public DefaultNexusTimeline(final Timeline timeline,
+                                final ApplicationConfiguration applicationConfiguration)
+        throws IOException
     {
-        return logger;
-    }
+        this.timeline = timeline;
+        this.applicationConfiguration = applicationConfiguration;
+        
+        logger.info( "Initializing Nexus Timeline..." );
+        moveLegacyTimeline();
 
-    public void initialize()
-        throws InitializationException
-    {
-        try
-        {
-            getLogger().info( "Initializing Nexus Timeline..." );
-
-            moveLegacyTimeline();
-        }
-        catch ( IOException e )
-        {
-            throw new InitializationException( "Unable to move legacy Timeline!", e );
-        }
+        // TODO: Can probably implement start() here, and the use an event to invoke stop() to get ride of Startable use
     }
 
     public void start()
@@ -84,7 +76,7 @@ public class DefaultNexusTimeline
     {
         try
         {
-            getLogger().info( "Starting Nexus Timeline..." );
+            logger.info( "Starting Nexus Timeline..." );
 
             updateConfiguration();
         }
@@ -96,7 +88,7 @@ public class DefaultNexusTimeline
 
     public void stop()
     {
-        getLogger().info( "Stopping Nexus Timeline..." );
+        logger.info( "Stopping Nexus Timeline..." );
 
         timeline.stop();
     }
@@ -128,7 +120,7 @@ public class DefaultNexusTimeline
             return;
         }
 
-        getLogger().info(
+        logger.info(
             "Moving legacy timeline index from '" + legacyIndexDir.getAbsolutePath() + "' to '"
                 + newIndexDir.getAbsolutePath() + "'." );
 
@@ -163,7 +155,7 @@ public class DefaultNexusTimeline
         }
         catch ( Exception e )
         {
-            getLogger().info( "Failed to add a timeline record", e );
+            logger.info( "Failed to add a timeline record", e );
         }
     }
 
