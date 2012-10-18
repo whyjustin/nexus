@@ -13,7 +13,6 @@
 
 package org.sonatype.nexus.user;
 
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.sonatype.configuration.validation.InvalidConfigurationException;
 import org.sonatype.security.SecuritySystem;
 import org.sonatype.security.authorization.AuthorizationException;
@@ -33,7 +32,6 @@ import javax.inject.Singleton;
 @Named
 @Singleton
 public class DefaultUserAccountManager
-    extends AbstractLogEnabled
     implements UserAccountManager
 {
     @Inject

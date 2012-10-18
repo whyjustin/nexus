@@ -15,8 +15,9 @@ package org.sonatype.nexus.tools.metadata;
 import java.io.File;
 import java.net.URI;
 
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,14 +25,15 @@ import javax.inject.Singleton;
 
 @Named
 @Singleton
-public class DefaultMetadataRebuilder extends AbstractLogEnabled
+public class DefaultMetadataRebuilder
     implements MetadataRebuilder
 {
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private String repo;
 
     @Inject
-    private FSMetadataHelper fSMetadataHelper = new FSMetadataHelper( getLogger() );
+    private FSMetadataHelper fSMetadataHelper = new FSMetadataHelper( log );
 
     public void rebuildMetadata( String repo )
     {

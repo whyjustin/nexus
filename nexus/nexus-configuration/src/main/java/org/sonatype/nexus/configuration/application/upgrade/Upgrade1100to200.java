@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.sonatype.configuration.upgrade.ConfigurationIsCorruptedException;
 import org.sonatype.configuration.upgrade.SingleVersionUpgrader;
@@ -35,7 +34,6 @@ import javax.inject.Singleton;
 @Named("1.10.0")
 @Singleton
 public class Upgrade1100to200
-    extends AbstractLogEnabled
     implements SingleVersionUpgrader
 {
 
