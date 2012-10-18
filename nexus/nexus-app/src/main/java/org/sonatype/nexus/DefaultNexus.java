@@ -23,12 +23,9 @@ import java.util.Map;
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.httpclient.CustomMultiThreadedHttpConnectionManager;
 // FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.StartingException;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.StoppingException;
-import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.ConfigurationChangeEvent;
@@ -87,73 +84,91 @@ import javax.inject.Singleton;
 @Typed(Nexus.class) // implementation ApplicationStatusSource in Nexus causes stackoverflow due to sisu-binding to it
 public class DefaultNexus
     extends AbstractLoggingComponent
-    implements Nexus, Initializable, Startable
+    implements Nexus, Startable
 {
 
-    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
-    @Inject
     private NexusPluginManager nexusPluginManager;
 
     /**
      * The nexus configuration.
      */
-    @Inject
     private NexusConfiguration nexusConfiguration;
 
     /**
      * The repository registry.
      */
-    @Inject
     private RepositoryRegistry repositoryRegistry;
 
     /**
      * The Scheduler.
      */
-    @Inject
     private NexusScheduler nexusScheduler;
 
     /**
      * The snapshot remover component.
      */
-    @Inject
     private SnapshotRemover snapshotRemover;
 
     /**
      * The SecurityConfiguration component.
      */
-    @Inject
     private RepositoryRouter rootRepositoryRouter;
 
     /**
      * Template manager.
      */
-    @Inject
     private TemplateManager templateManager;
 
     /**
      * The event inspector host.
      */
-    @Inject
     private EventInspectorHost eventInspectorHost;
 
     /**
      * The status holding component.
      */
-    @Inject
     private ApplicationStatusSource applicationStatusSource;
 
     /**
      * Security component
      */
-    @Inject
     private SecuritySystem securitySystem;
 
-    @Inject
     private ArtifactPackagingMapper artifactPackagingMapper;
 
     private static final String MAPPING_PROPERTIES_FILE = "packaging2extension-mapping.properties";
+
+    @Inject
+    public DefaultNexus(final ApplicationEventMulticaster applicationEventMulticaster,
+                        final NexusPluginManager nexusPluginManager,
+                        final NexusConfiguration nexusConfiguration,
+                        final RepositoryRegistry repositoryRegistry,
+                        final NexusScheduler nexusScheduler,
+                        final SnapshotRemover snapshotRemover,
+                        final RepositoryRouter rootRepositoryRouter,
+                        final TemplateManager templateManager,
+                        final EventInspectorHost eventInspectorHost,
+                        final ApplicationStatusSource applicationStatusSource,
+                        final SecuritySystem securitySystem,
+                        final ArtifactPackagingMapper artifactPackagingMapper)
+    {
+        this.applicationEventMulticaster = applicationEventMulticaster;
+        this.nexusPluginManager = nexusPluginManager;
+        this.nexusConfiguration = nexusConfiguration;
+        this.repositoryRegistry = repositoryRegistry;
+        this.nexusScheduler = nexusScheduler;
+        this.snapshotRemover = snapshotRemover;
+        this.rootRepositoryRouter = rootRepositoryRouter;
+        this.templateManager = templateManager;
+        this.eventInspectorHost = eventInspectorHost;
+        this.applicationStatusSource = applicationStatusSource;
+        this.securitySystem = securitySystem;
+        this.artifactPackagingMapper = artifactPackagingMapper;
+
+        init();
+    }
 
     // ----------------------------------------------------------------------------------------------------------
     // SystemStatus
@@ -366,8 +381,7 @@ public class DefaultNexus
     // ===========================
     // Nexus Application lifecycle
 
-    public void initialize()
-        throws InitializationException
+    private void init()
     {
         logInitialize();
 
@@ -407,7 +421,7 @@ public class DefaultNexus
      * Logs a message indicating initialization of this component
      */
     @VisibleForTesting
-    protected void logInitialize(){
+    protected void logInitialize() {
         final StringBuilder sysInfoLog = new StringBuilder();
         sysInfoLog.append( "\n-------------------------------------------------\n\n" );
         sysInfoLog.append( "Initializing " ).append(getNexusNameForLogs());
