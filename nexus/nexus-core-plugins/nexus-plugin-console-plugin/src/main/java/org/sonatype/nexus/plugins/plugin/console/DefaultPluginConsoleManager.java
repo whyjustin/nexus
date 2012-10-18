@@ -43,17 +43,13 @@ public class DefaultPluginConsoleManager
 {
     private final NexusPluginManager pluginManager;
 
-    private final PlexusContainer plexusContainer;
-
     private final Multimap<String, NexusDocumentationBundle> docBundles;
 
     @Inject
     public DefaultPluginConsoleManager(final NexusPluginManager pluginManager,
-                                       final PlexusContainer plexusContainer,
                                        final List<NexusResourceBundle> resourceBundles)
     {
         this.pluginManager = pluginManager;
-        this.plexusContainer = plexusContainer;
         this.docBundles = LinkedHashMultimap.create();
 
         for ( NexusResourceBundle rb : resourceBundles )
