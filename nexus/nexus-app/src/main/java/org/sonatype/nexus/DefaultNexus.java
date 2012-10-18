@@ -583,6 +583,7 @@ public class DefaultNexus
 
         applicationStatusSource.getSystemStatus().setState( SystemState.STOPPED );
 
+        // FIXME: This would have been better as an NexusStoppedEvent handler
         // Now a cleanup, to kill dangling thread of HttpClients
         CustomMultiThreadedHttpConnectionManager.shutdownAll();
 
