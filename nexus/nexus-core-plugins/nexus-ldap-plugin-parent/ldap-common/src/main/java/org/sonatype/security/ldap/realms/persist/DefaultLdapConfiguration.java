@@ -42,7 +42,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named("default")
+@Named
 @Singleton
 public class DefaultLdapConfiguration
     implements LdapConfiguration
