@@ -15,10 +15,6 @@ package org.sonatype.nexus.proxy.http;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.codehaus.plexus.context.Context;
-import org.codehaus.plexus.context.ContextException;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.proxy.registry.RepositoryRegistry;
 import org.sonatype.nexus.proxy.repository.ProxyRepository;
@@ -39,11 +35,8 @@ import javax.inject.Singleton;
 @Singleton
 public class DefaultNexusURLResolver
     extends AbstractLoggingComponent
-    implements NexusURLResolver, Contextualizable
+    implements NexusURLResolver
 {
-
-    public static final String APPLICATION_PORT = "applicationPort";
-
     @Inject
     private RepositoryRegistry repositoryRegistry;
 
@@ -54,15 +47,6 @@ public class DefaultNexusURLResolver
     @Inject
     @Named("${DefaultNexusURLResolver.nexusPort:-8081}")
     private int nexusPort;
-
-    public void contextualize( Context ctx )
-        throws ContextException
-    {
-        if ( ctx.contains( APPLICATION_PORT ) )
-        {
-            nexusPort = Integer.parseInt( (String) ctx.get( APPLICATION_PORT ) );
-        }
-    }
 
     public URL resolve( URL url )
     {
