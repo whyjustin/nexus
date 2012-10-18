@@ -26,12 +26,15 @@ import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named("content")
+@Named(ContentPlexusResource.NAME)
 @Singleton
 public class ContentPlexusResource
     extends AbstractResourceStoreContentPlexusResource
     implements ManagedPlexusResource
 {
+
+    public static final String NAME = "content";
+
     @Override
     public Object getPayloadInstance()
     {

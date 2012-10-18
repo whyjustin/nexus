@@ -25,6 +25,8 @@ import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
 import org.sonatype.nexus.plugins.rest.StaticResource;
 import org.sonatype.nexus.proxy.events.NexusStartedEvent;
 import org.sonatype.nexus.proxy.events.NexusStoppedEvent;
+import org.sonatype.nexus.rest.status.CommandPlexusResource;
+import org.sonatype.nexus.rest.status.StatusPlexusResource;
 import org.sonatype.plexus.appevents.ApplicationEventMulticaster;
 import org.sonatype.plexus.appevents.Event;
 import org.sonatype.plexus.appevents.EventListener;
@@ -63,7 +65,7 @@ public class NexusApplication
     private ProtectedPathManager protectedPathManager;
 
     @Inject
-    @Named("indexTemplate" )
+    @Named(IndexTemplatePlexusResource.NAME)
     private ManagedPlexusResource indexTemplateResource;
 
     @Inject
@@ -77,19 +79,19 @@ public class NexusApplication
     private ManagedPlexusResource enterLicenseTemplateResource;
 
     @Inject
-    @Named("IndexRedirectingPlexusResource")
+    @Named(IndexRedirectingPlexusResource.NAME)
     private ManagedPlexusResource indexRedirectingResource;
 
     @Inject
-    @Named("content")
+    @Named(ContentPlexusResource.NAME)
     private ManagedPlexusResource contentResource;
 
     @Inject
-    @Named("StatusPlexusResource")
+    @Named(StatusPlexusResource.NAME)
     private ManagedPlexusResource statusPlexusResource;
 
     @Inject
-    @Named("CommandPlexusResource")
+    @Named(CommandPlexusResource.NAME)
     private ManagedPlexusResource commandPlexusResource;
 
     @Inject

@@ -29,7 +29,7 @@ import org.sonatype.nexus.rest.AbstractNexusPlexusResource;
 import org.sonatype.plexus.rest.resource.ManagedPlexusResource;
 import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 
-@Named
+@Named(CommandPlexusResource.NAME)
 @Singleton
 @Path( CommandPlexusResource.RESOURCE_URI )
 @Consumes( { "application/xml", "application/json" } )
@@ -37,7 +37,9 @@ public class CommandPlexusResource
     extends AbstractNexusPlexusResource
     implements ManagedPlexusResource
 {
-    public static final String RESOURCE_URI = "/status/command"; 
+    public static final String RESOURCE_URI = "/status/command";
+
+    public static final String NAME = "CommandPlexusResource";
 
     public CommandPlexusResource()
     {

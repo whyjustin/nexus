@@ -30,18 +30,20 @@ import javax.inject.Singleton;
 /**
  * Resource to redirect to the absolute URI to the index.html.
  */
-@Named
+@Named(IndexRedirectingPlexusResource.NAME)
 @Singleton
 public class IndexRedirectingPlexusResource
     extends AbstractNexusPlexusResource
     implements ManagedPlexusResource
 {
 
+    public static final String NAME = "IndexRedirectingPlexusResource";
+
     @Inject
     private Nexus nexus;
 
     @Inject
-    @Named("indexTemplate" )
+    @Named(IndexTemplatePlexusResource.NAME)
     private ManagedPlexusResource indexTemplateResource;
 
     @Override

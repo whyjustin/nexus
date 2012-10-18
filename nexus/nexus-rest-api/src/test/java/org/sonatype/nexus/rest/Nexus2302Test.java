@@ -29,7 +29,7 @@ public class Nexus2302Test
     {
         super.setUp();
 
-        contentResource = (ContentPlexusResource) lookup( ManagedPlexusResource.class, "content" );
+        contentResource = (ContentPlexusResource) lookup( ManagedPlexusResource.class, ContentPlexusResource.NAME );
     }
 
     public void doTestPathEncoding( final String uri )

@@ -47,13 +47,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named
+@Named(IndexTemplatePlexusResource.NAME)
 @Singleton
 public class IndexTemplatePlexusResource
     extends AbstractPlexusResource
     implements ManagedPlexusResource,
         Initializable
 {
+
+    public static final String NAME = "indexTemplate";
+
     @Inject
     private Nexus nexus;
 

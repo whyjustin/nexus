@@ -38,7 +38,7 @@ import org.sonatype.plexus.rest.resource.PathProtectionDescriptor;
 import org.sonatype.security.rest.authentication.AbstractUIPermissionCalculatingPlexusResource;
 import org.sonatype.security.rest.model.AuthenticationClientPermissions;
 
-@Named
+@Named(StatusPlexusResource.NAME)
 @Singleton
 @Path( StatusPlexusResource.RESOURCE_URI )
 @Produces( { "application/xml", "application/json" } )
@@ -47,6 +47,8 @@ public class StatusPlexusResource
     implements ManagedPlexusResource
 {
     public static final String RESOURCE_URI = "/status";
+
+    public static final String NAME = "StatusPlexusResource";
 
     @Inject
     private Nexus nexus;
