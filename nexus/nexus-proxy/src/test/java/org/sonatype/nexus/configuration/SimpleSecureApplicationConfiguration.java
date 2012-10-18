@@ -13,10 +13,22 @@
 package org.sonatype.nexus.configuration;
 
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
+import org.sonatype.nexus.configuration.application.GlobalHttpProxySettings;
+import org.sonatype.nexus.configuration.application.GlobalRemoteConnectionSettings;
 
-public class SimpleSecureApplicationConfiguration extends SimpleProxyApplicationConfiguration
+import javax.inject.Inject;
+
+public class SimpleSecureApplicationConfiguration
+    extends SimpleProxyApplicationConfiguration
     implements ApplicationConfiguration
 {
+    @Inject
+    public SimpleSecureApplicationConfiguration(final GlobalRemoteConnectionSettings globalRemoteConnectionSettings,
+                                                final GlobalHttpProxySettings globalHttpProxySettings)
+    {
+        super(globalRemoteConnectionSettings, globalHttpProxySettings);
+    }
+
     public boolean isSecurityEnabled()
     {
         return true;

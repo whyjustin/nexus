@@ -14,11 +14,9 @@ package org.sonatype.nexus.configuration;
 
 import com.google.common.base.Throwables;
 import org.sonatype.configuration.ConfigurationException;
-import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.configuration.application.GlobalHttpProxySettings;
 import org.sonatype.nexus.configuration.application.GlobalRemoteConnectionSettings;
 import org.sonatype.nexus.configuration.application.SimpleApplicationConfiguration;
-import org.sonatype.nexus.configuration.model.CRemoteConnectionSettings;
 import org.sonatype.nexus.configuration.model.CRepositoryGrouping;
 import org.sonatype.nexus.configuration.model.CRouting;
 import org.sonatype.nexus.configuration.model.Configuration;
