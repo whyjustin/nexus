@@ -45,7 +45,6 @@ public class PluginListErrorReportBundleContentContributor
 
         XStream xs = new XStream();
         xs.alias( "PluginInfo", PluginInfo.class );
-        xs.omitField( PluginInfo.class, "restInfos" );
         xs.toXML( l, bos );
 
         return new ErrorReportBundleEntry[] {//

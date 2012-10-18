@@ -17,18 +17,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
-import org.codehaus.plexus.component.repository.ComponentDescriptor;
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.sonatype.nexus.logging.AbstractLoggingComponent;
 import org.sonatype.nexus.plugins.NexusPluginManager;
 import org.sonatype.nexus.plugins.PluginResponse;
 import org.sonatype.nexus.plugins.plugin.console.model.DocumentationLink;
 import org.sonatype.nexus.plugins.plugin.console.model.PluginInfo;
-import org.sonatype.nexus.plugins.plugin.console.model.RestInfo;
 import org.sonatype.nexus.plugins.rest.NexusDocumentationBundle;
 import org.sonatype.nexus.plugins.rest.NexusResourceBundle;
-import org.sonatype.plexus.rest.resource.PlexusResource;
 import org.sonatype.plugin.metadata.GAVCoordinate;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -124,38 +119,6 @@ public class DefaultPluginConsoleManager
         if ( !pluginResponse.isSuccessful() )
         {
             result.setFailureReason( pluginResponse.formatAsString( false ) );
-        }
-
-        // FIXME: The following is Plexus specific, and does not actually appear to be used (RestInfo details are not displayed on the console AFAICT)
-        // FIXME: Validate if this is actually used, nuke if not... otherwise need to sort out how to make this Plexus-free.
-
-        // WARN
-        // dirty hack here, the logic here should be moved into PluginManger
-        if ( pluginResponse.isSuccessful() )
-        {
-            List<String> exportedClassnames = pluginResponse.getPluginDescriptor().getExportedClassnames();
-
-            for ( ComponentDescriptor<?> componentDescriptor : this.plexusContainer.getComponentDescriptorList( PlexusResource.class.getName() ) )
-            {
-                if ( exportedClassnames.contains( componentDescriptor.getImplementation() ) )
-                {
-                    try
-                    {
-                        PlexusResource resource =
-                            plexusContainer.lookup( PlexusResource.class, componentDescriptor.getRoleHint() );
-
-                        RestInfo restInfo = new RestInfo();
-                        restInfo.setUri( resource.getResourceUri() );
-
-                        result.addRestInfo( restInfo );
-                    }
-                    catch ( ComponentLookupException e )
-                    {
-                        getLogger().warn(
-                            "Unable to find PlexusResource '" + componentDescriptor.getImplementation() + "'.", e );
-                    }
-                }
-            }
         }
 
         return result;
