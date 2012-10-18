@@ -22,10 +22,6 @@ import java.util.Map;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.httpclient.CustomMultiThreadedHttpConnectionManager;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.StartingException;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.StoppingException;
 import org.slf4j.Logger;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.ConfigurationChangeEvent;
@@ -84,7 +80,7 @@ import javax.inject.Singleton;
 @Typed(Nexus.class) // implementation ApplicationStatusSource in Nexus causes stackoverflow due to sisu-binding to it
 public class DefaultNexus
     extends AbstractLoggingComponent
-    implements Nexus, Startable
+    implements Nexus
 {
 
     private ApplicationEventMulticaster applicationEventMulticaster;
@@ -193,7 +189,7 @@ public class DefaultNexus
 
                 return true;
             }
-            catch ( StartingException e )
+            catch ( Exception e )
             {
                 getLogger().error( "Could not start Nexus! (currentState=" + currentState.toString() + ")", e );
             }
@@ -209,7 +205,7 @@ public class DefaultNexus
 
                 return true;
             }
-            catch ( StoppingException e )
+            catch ( Exception e )
             {
                 getLogger().error( "Could not stop STARTED Nexus! (currentState=" + currentState.toString() + ")", e );
             }
@@ -441,30 +437,16 @@ public class DefaultNexus
         return msg.toString();
     }
 
-    public void start()
-        throws StartingException
+    @Override
+    public void start() throws Exception
     {
-        try
-        {
-            startService();
-        }
-        catch ( Exception e )
-        {
-            throw new StartingException( "Could not start Nexus!", e );
-        }
+        startService();
     }
 
-    public void stop()
-        throws StoppingException
+    @Override
+    public void stop() throws Exception
     {
-        try
-        {
-            stopService();
-        }
-        catch ( Exception e )
-        {
-            throw new StoppingException( "Could not stop Nexus!", e );
-        }
+        stopService();
     }
 
     protected void startService()
@@ -551,7 +533,7 @@ public class DefaultNexus
 
             getLogger().error( "Could not start Nexus, bad IO exception!", e );
 
-            throw new StartingException( "Could not start Nexus!", e );
+            throw new Exception( "Could not start Nexus!", e );
         }
         catch ( ConfigurationException e )
         {
@@ -561,7 +543,7 @@ public class DefaultNexus
 
             getLogger().error( "Could not start Nexus, user configuration exception!", e );
 
-            throw new StartingException( "Could not start Nexus!", e );
+            throw new Exception( "Could not start Nexus!", e );
         }
     }
 

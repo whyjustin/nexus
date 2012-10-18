@@ -92,6 +92,10 @@ public interface Nexus
     // Maintenance
     // ----------------------------------------------------------------------------
 
+    void start() throws Exception;
+
+    void stop() throws Exception;
+
     NexusStreamResponse getConfigurationAsStream()
         throws IOException;
 

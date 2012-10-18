@@ -26,14 +26,15 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.codehaus.plexus.PlexusConstants;
-import org.codehaus.plexus.PlexusContainer; // FIXME: Kill this
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+import com.google.inject.Injector;
 import org.slf4j.bridge.SLF4JBridgeHandler;
+
+import static com.google.common.base.Preconditions.checkState;
 
 public class LogConfigListener
     implements ServletContextListener
 {
+    // FIXME: Sort out why there is this class and Slf4jBooterListener
 
     private Handler[] originalHandlers;
 
@@ -54,6 +55,9 @@ public class LogConfigListener
      */
     private void setUpJULHandlerSLF4J()
     {
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        // FIXME: Remove this and use SLF4JBridgeHandler.removeHandlersForRootLogger(); and really this should all be handled by container/bootstrap that runs Nexus
+
         Logger julLogger = LogManager.getLogManager().getLogger( "" );
 
         originalHandlers = julLogger.getHandlers();
@@ -83,24 +87,11 @@ public class LogConfigListener
 
     private void configureLogManager( ServletContext sc )
     {
-        try
-        {
-            PlexusContainer plexusContainer = (PlexusContainer) sc.getAttribute( PlexusConstants.PLEXUS_KEY );
-            if ( plexusContainer == null )
-            {
-                throw new IllegalStateException( "Could not find Plexus container in servlet context" );
-            }
+        Injector injector = (Injector) sc.getAttribute(Injector.class.getName());
+        checkState(injector != null, "ServletContext is missing Injector");
+        org.sonatype.nexus.log.LogManager logManager = injector.getInstance( org.sonatype.nexus.log.LogManager.class );
 
-            org.sonatype.nexus.log.LogManager logManager =
-                plexusContainer.lookup( org.sonatype.nexus.log.LogManager.class );
-
-            logManager.configure();
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new IllegalStateException( "Could not lookup LogConfigurationParticipants" );
-        }
-
+        logManager.configure();
     }
 
 }
