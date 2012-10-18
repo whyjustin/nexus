@@ -381,7 +381,8 @@ public class DefaultNexus
     // ===========================
     // Nexus Application lifecycle
 
-    private void init()
+    @VisibleForTesting
+    void init()
     {
         logInitialize();
 

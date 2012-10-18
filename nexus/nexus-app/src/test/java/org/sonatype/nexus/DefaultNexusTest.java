@@ -134,7 +134,7 @@ public class DefaultNexusTest
     public void initializeLogsApplicationInitialize()
         throws Exception
     {
-        spyDefaultNexus.initialize();
+        spyDefaultNexus.init();
         verify( spyDefaultNexus, times( 1 ) ).logInitialize();
     }
 
