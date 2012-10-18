@@ -60,32 +60,38 @@ public class NexusTargetMappingAuthorizationFilter
     {
         String path = WebUtils.getPathWithinApplication( (HttpServletRequest) request );
 
-        if ( getPathPrefix() != null )
-        {
-            Matcher m = this.getPathPrefixPattern().matcher( path );
+        // HACK: Disable so that NX can serve resources, not sure why this is failing
 
-            if ( m.matches() )
-            {
-                path = getPathReplacement();
-
-                // TODO: hardcoded currently
-                if ( path.contains( "@1" ) )
-                {
-                    path = path.replaceAll( "@1", Matcher.quoteReplacement( m.group( 1 ) ) );
-                }
-
-                if ( path.contains( "@2" ) )
-                {
-                    path = path.replaceAll( "@2", Matcher.quoteReplacement( m.group( 2 ) ) );
-                }
-                // and so on... this will be reworked to be dynamic
-            }
-            else
-            {
-                throw new IllegalArgumentException(
-                    "The request path does not matches the incoming request? This is misconfiguration in web.xml!" );
-            }
-        }
+        //System.out.println("PATH: " + path);
+        //
+        //if ( getPathPrefix() != null )
+        //{
+        //    System.out.println("PATTERN: " + getPathPrefixPattern());
+        //
+        //    Matcher m = this.getPathPrefixPattern().matcher( path );
+        //
+        //    if ( m.matches() )
+        //    {
+        //        path = getPathReplacement();
+        //
+        //        // TODO: hardcoded currently
+        //        if ( path.contains( "@1" ) )
+        //        {
+        //            path = path.replaceAll( "@1", Matcher.quoteReplacement( m.group( 1 ) ) );
+        //        }
+        //
+        //        if ( path.contains( "@2" ) )
+        //        {
+        //            path = path.replaceAll( "@2", Matcher.quoteReplacement( m.group( 2 ) ) );
+        //        }
+        //        // and so on... this will be reworked to be dynamic
+        //    }
+        //    else
+        //    {
+        //        throw new IllegalArgumentException(
+        //            "The request path does not matches the incoming request? This is misconfiguration in web.xml!" );
+        //    }
+        //}
 
         return path;
     }
