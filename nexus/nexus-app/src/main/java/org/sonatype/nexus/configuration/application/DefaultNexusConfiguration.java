@@ -26,9 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.StringUtils;
 import org.sonatype.configuration.ConfigurationException;
@@ -98,9 +95,8 @@ import javax.inject.Singleton;
 @Singleton
 public class DefaultNexusConfiguration
     extends AbstractLoggingComponent
-    implements NexusConfiguration, Initializable
+    implements NexusConfiguration
 {
-    @Inject
     private ApplicationEventMulticaster applicationEventMulticaster;
 
     /**
@@ -109,12 +105,9 @@ public class DefaultNexusConfiguration
      * nexus-app module onwards) does "awake" this component, and hence, by having this reference here, we actually pull
      * and have Plexus manage the "lifecycle" of CacheManager component (and indirectly, EhCacheManager lifecycle).
      */
-    @Inject
     @SuppressWarnings( "unused" )
     private CacheManager pathCache;
 
-    @Inject
-    @Named("file")
     private ApplicationConfigurationSource configurationSource;
 
     /** The global local storage context. */
@@ -123,41 +116,30 @@ public class DefaultNexusConfiguration
     /** The global remote storage context. */
     private RemoteStorageContext globalRemoteStorageContext;
 
-    @Inject
     private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
 
-    @Inject
     private GlobalHttpProxySettings globalHttpProxySettings;
 
     /**
      * The config validator.
      */
-    @Inject
     private ApplicationConfigurationValidator configurationValidator;
 
     /**
      * The runtime configuration builder.
      */
-    @Inject
     private ApplicationRuntimeConfigurationBuilder runtimeConfigurationBuilder;
 
-    @Inject
     private RepositoryTypeRegistry repositoryTypeRegistry;
 
-    @Inject
     private RepositoryRegistry repositoryRegistry;
 
-    @Inject
     private List<ScheduledTaskDescriptor> scheduledTaskDescriptors;
 
-    @Inject
     private SecuritySystem securitySystem;
 
-    @Inject
-    @Named("${nexus-work}")
     private File workingDirectory;
 
-    @Inject
     private VetoFormatter vetoFormatter;
 
     /** The config dir */
@@ -175,8 +157,57 @@ public class DefaultNexusConfiguration
     /** The map with per-repotype limitations */
     private Map<RepositoryTypeDescriptor, Integer> repositoryMaxInstanceCountLimits;
 
-    @Inject
     private List<ConfigurationModifier> configurationModifiers;
+
+    @Inject
+    public DefaultNexusConfiguration(final ApplicationEventMulticaster applicationEventMulticaster,
+                                     final CacheManager pathCache,
+                                     final @Named("file") ApplicationConfigurationSource configurationSource,
+                                     final GlobalRemoteConnectionSettings globalRemoteConnectionSettings,
+                                     final GlobalHttpProxySettings globalHttpProxySettings,
+                                     final ApplicationConfigurationValidator configurationValidator,
+                                     final ApplicationRuntimeConfigurationBuilder runtimeConfigurationBuilder,
+                                     final RepositoryTypeRegistry repositoryTypeRegistry,
+                                     final RepositoryRegistry repositoryRegistry,
+                                     final List<ScheduledTaskDescriptor> scheduledTaskDescriptors,
+                                     final SecuritySystem securitySystem,
+                                     final @Named("${nexus-work}") File workingDirectory,
+                                     final VetoFormatter vetoFormatter,
+                                     final List<ConfigurationModifier> configurationModifiers)
+    {
+        this.applicationEventMulticaster = applicationEventMulticaster;
+        this.pathCache = pathCache;
+        this.configurationSource = configurationSource;
+        this.globalRemoteConnectionSettings = globalRemoteConnectionSettings;
+        this.globalHttpProxySettings = globalHttpProxySettings;
+        this.configurationValidator = configurationValidator;
+        this.runtimeConfigurationBuilder = runtimeConfigurationBuilder;
+        this.repositoryTypeRegistry = repositoryTypeRegistry;
+        this.repositoryRegistry = repositoryRegistry;
+        this.scheduledTaskDescriptors = scheduledTaskDescriptors;
+        this.securitySystem = securitySystem;
+        this.workingDirectory = workingDirectory;
+        this.vetoFormatter = vetoFormatter;
+        this.configurationModifiers = configurationModifiers;
+
+        this.workingDirectory = canonicalize( workingDirectory );
+        if ( !this.workingDirectory.isDirectory() )
+        {
+            forceMkdir( this.workingDirectory );
+        }
+
+        this.temporaryDirectory = canonicalize( new File( System.getProperty( "java.io.tmpdir" ) ) );
+        if ( !this.temporaryDirectory.isDirectory() )
+        {
+            forceMkdir( this.temporaryDirectory );
+        }
+
+        this.configurationDirectory = canonicalize( new File( getWorkingDirectory(), "conf" ) );
+        if ( !this.configurationDirectory.isDirectory() )
+        {
+            forceMkdir( this.configurationDirectory );
+        }
+    }
 
     // ==
 
@@ -218,29 +249,6 @@ public class DefaultNexusConfiguration
                     + "******************************************************************************";
             getLogger().error( message );
             throw Throwables.propagate( e );
-        }
-    }
-
-    @Override
-    public void initialize()
-        throws InitializationException
-    {
-        workingDirectory = canonicalize( workingDirectory );
-        if ( !workingDirectory.isDirectory() )
-        {
-            forceMkdir( workingDirectory );
-        }
-
-        temporaryDirectory = canonicalize( new File( System.getProperty( "java.io.tmpdir" ) ) );
-        if ( !temporaryDirectory.isDirectory() )
-        {
-            forceMkdir( temporaryDirectory );
-        }
-
-        configurationDirectory = canonicalize( new File( getWorkingDirectory(), "conf" ) );
-        if ( !configurationDirectory.isDirectory() )
-        {
-            forceMkdir( configurationDirectory );
         }
     }
 

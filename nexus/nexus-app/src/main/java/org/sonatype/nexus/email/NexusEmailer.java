@@ -34,6 +34,8 @@ public interface NexusEmailer
      */
     EMailer getEMailer();
 
+    void stop();
+
     /**
      * Returns the system-wide default mail type used as default mailType for outgoing mails.
      * 

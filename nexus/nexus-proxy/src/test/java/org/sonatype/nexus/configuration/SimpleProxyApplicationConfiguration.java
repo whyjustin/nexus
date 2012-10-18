@@ -12,9 +12,7 @@
  */
 package org.sonatype.nexus.configuration;
 
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import com.google.common.base.Throwables;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.configuration.application.ApplicationConfiguration;
 import org.sonatype.nexus.configuration.application.GlobalHttpProxySettings;
@@ -35,18 +33,12 @@ import javax.inject.Singleton;
 @Singleton
 public class SimpleProxyApplicationConfiguration
     extends SimpleApplicationConfiguration
-        implements Initializable
 {
     private RemoteStorageContext remoteStorageContext = null;
-    
+
     @Inject
-    private GlobalRemoteConnectionSettings globalRemoteConnectionSettings;
-    
-    @Inject
-    private GlobalHttpProxySettings globalHttpProxySettings;
-    
-    public void initialize()
-        throws InitializationException
+    public SimpleProxyApplicationConfiguration(final GlobalRemoteConnectionSettings globalRemoteConnectionSettings,
+                                               final GlobalHttpProxySettings globalHttpProxySettings)
     {
         Configuration configuration = getConfigurationModel();
 
@@ -71,7 +63,7 @@ public class SimpleProxyApplicationConfiguration
         }
         catch ( ConfigurationException e )
         {
-            throw new InitializationException( "Error configuring nexus!", e );
+            throw Throwables.propagate(e);
         }   
     }
     

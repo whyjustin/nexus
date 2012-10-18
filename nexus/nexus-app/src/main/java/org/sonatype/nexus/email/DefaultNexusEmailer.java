@@ -12,8 +12,6 @@
  */
 package org.sonatype.nexus.email;
 
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Startable;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.micromailer.Address;
 import org.sonatype.micromailer.EMailer;
@@ -38,7 +36,7 @@ import javax.inject.Singleton;
 @Singleton
 public class DefaultNexusEmailer
     extends AbstractConfigurable
-    implements NexusEmailer, Startable
+    implements NexusEmailer
 {
     /**
      * The "name" of Nexus instance, as displayed on sent mails.
@@ -60,12 +58,8 @@ public class DefaultNexusEmailer
     private EMailer eMailer;
 
     // ==
-    
-    public void start()
-    {
-        // nop
-    }
-    
+
+    @Override
     public void stop()
     {
         getEMailer().shutdown();

@@ -19,9 +19,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.codehaus.plexus.interpolation.util.StringUtils;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.sonatype.nexus.proxy.events.RepositoryRegistryEventAdd;
 import org.sonatype.nexus.proxy.events.RepositoryRegistryEventRemove;
 import org.sonatype.nexus.proxy.registry.ContentClass;
@@ -44,24 +41,33 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Named("NexusViewSecurityResource" )
+@Named(NexusViewSecurityResource.NAME)
 @Singleton
 public class NexusViewSecurityResource
     extends AbstractDynamicSecurityResource
-    implements EventListener, Initializable, DynamicSecurityResource
+    implements EventListener, DynamicSecurityResource
 {
-    @Inject
-    private RepositoryRegistry repoRegistry;
 
-    @Inject
-    private ApplicationEventMulticaster eventMulticaster;
+    public static final String NAME = "NexusViewSecurityResource";
 
-    @Inject
-    private RepositoryTypeRegistry repoTypeRegistry;
+    private final RepositoryRegistry repoRegistry;
 
-    @Inject
-    @Named("default" )
+    private final RepositoryTypeRegistry repoTypeRegistry;
+
     private ConfigurationManager configManager;
+
+    @Inject
+    public NexusViewSecurityResource(final RepositoryRegistry repoRegistry,
+                                     final RepositoryTypeRegistry repoTypeRegistry,
+                                     final @Named("default") ConfigurationManager configManager,
+                                     final ApplicationEventMulticaster eventMulticaster)
+    {
+        this.repoRegistry = repoRegistry;
+        this.repoTypeRegistry = repoTypeRegistry;
+        this.configManager = configManager;
+
+        eventMulticaster.addEventListener(this);
+    }
 
     @Override
     public Configuration doGetConfiguration()
@@ -168,11 +174,4 @@ public class NexusViewSecurityResource
             configManager.cleanRemovedPrivilege( createPrivilegeId( repoId ) );
         }
     }
-
-    public void initialize()
-        throws InitializationException
-    {
-        this.eventMulticaster.addEventListener( this );
-    }
-
 }
