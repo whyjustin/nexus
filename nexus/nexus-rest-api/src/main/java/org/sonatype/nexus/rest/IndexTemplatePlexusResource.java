@@ -24,9 +24,6 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-// FIXME: Kill these...
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.codehaus.plexus.util.StringUtils;
 import org.restlet.Context;
 import org.restlet.data.MediaType;
@@ -51,8 +48,7 @@ import javax.inject.Singleton;
 @Singleton
 public class IndexTemplatePlexusResource
     extends AbstractPlexusResource
-    implements ManagedPlexusResource,
-        Initializable
+    implements ManagedPlexusResource
 {
 
     public static final String NAME = "indexTemplate";
@@ -64,7 +60,7 @@ public class IndexTemplatePlexusResource
     private Map<String, NexusIndexHtmlCustomizer> bundles;
     
     @Inject
-    @Named( "${index.template.file}" )
+    @Named( "${index.template.file:-templates/index.vm}" )
     String templateFilename;
 
     public IndexTemplatePlexusResource()
@@ -255,16 +251,6 @@ public class IndexTemplatePlexusResource
                     "Got ResourceNotFoundException exception during Velocity invocation!",
                     e );
             }
-        }
-    }
-    
-    public void initialize()
-        throws InitializationException
-    {
-        //Hasn't been interpolated
-        if ( "${index.template.file}".equals( templateFilename ) )
-        {
-            templateFilename = "templates/index.vm";
         }
     }
 }
