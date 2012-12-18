@@ -99,6 +99,6 @@ define('nexus/util/observable', ['extjs', 'nexus'], function(Ext, Nexus) {
     });
   };
   Ext.extend(Nexus.util.Observable, Ext.util.Observable);
-  return Nexus;
+  return Nexus.util.Observable;
 });
 

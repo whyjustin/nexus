@@ -41,7 +41,7 @@ define('repoServer',
     'repoServer/UserBrowserPanel',
     'repoServer/UserEditPanel',
     'repoServer/UserPrivilegeBrowserPanel'
-  ], function() {
-
+  ], function(repoServer) {
+        return repoServer;
       }
 );

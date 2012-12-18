@@ -14,6 +14,7 @@
 /*jslint eqeq: true*/
 ///* jslint bitwise: true, eqeq: true*/
 define('sonatype/lib',['../extjs', 'sonatype'], function(Ext, Sonatype) {
+  Ext.namespace('Sonatype.lib');
 
   Sonatype.lib.Permissions = {
     READ : 1, // 0001
@@ -240,4 +241,5 @@ define('sonatype/lib',['../extjs', 'sonatype'], function(Ext, Sonatype) {
     }
   };
 
+  return Sonatype.lib;
 });

@@ -12,12 +12,12 @@
  */
 
 /*global define*/
-define('repoServer/RepoServer',['extjs', 'sonatype', 'sonatype/lib', 'nexus/config', 'sonatype/utils', 'sonatype/view', 'nexus/navigation'], function(Ext, Sonatype){
+define('repoServer/RepoServer',['extjs', 'sonatype', 'sonatype/lib', 'nexus/config', 'sonatype/utils', 'sonatype/view', 'nexus/navigation'], function(Ext, Sonatype, Lib){
+  Ext.namespace('Sonatype.repoServer');
+
   // Repository main Controller(conglomerate) Singleton
   Sonatype.repoServer.RepoServer = (function() {
-    var cfg = Sonatype.config.repos,
-        sp = Sonatype.lib.Permissions,
-          lastFormHeight = -1;
+    var sp = Lib.Permissions, lastFormHeight = -1;
 
     // ************************************
     return {
@@ -583,4 +583,5 @@ define('repoServer/RepoServer',['extjs', 'sonatype', 'sonatype/lib', 'nexus/conf
     };
   })();
 
+  return Sonatype.repoServer;
 });

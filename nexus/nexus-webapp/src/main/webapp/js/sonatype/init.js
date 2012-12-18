@@ -11,7 +11,7 @@
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
 /*global define*/
-define('sonatype/init',['extjs', 'sonatype', 'nexus/util/observable', 'sonatype'], function(Ext, Sonatype, Nexus) {
+define('sonatype/init',['extjs', 'sonatype', 'sonatype/events'], function(Ext, Sonatype) {
   Ext.apply(Sonatype, {
           init : function() {
             Ext.QuickTips.init();
@@ -36,8 +36,6 @@ define('sonatype/init',['extjs', 'sonatype', 'nexus/util/observable', 'sonatype'
           }
         }
   );
-
-  Sonatype.Events = new Nexus.util.Observable();
 
   // FIXME circular dependency sonatype -> sonatype/view -> sonatype/headlinks, but headlinks needs 'Sonatype'
   Sonatype.headLinks = Ext.emptyFn;
