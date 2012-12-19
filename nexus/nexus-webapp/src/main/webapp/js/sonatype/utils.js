@@ -215,12 +215,11 @@ define('sonatype/utils',['../extjs', 'nexus/config', 'nexus/util/Format'], funct
         }
       }
 
-      if (Sonatype.repoServer.RepoServer.loginWindow.isVisible() && (response.status == 403 || response.status == 401))
-      {
-        if (Sonatype.repoServer.RepoServer.loginWindow.isVisible())
+      function handleLoginFailure() {
+        if (Sonatype.repoServer.RepoServer.loginWindow.isVisible() && (response.status === 403 || response.status === 401))
         {
           var nexusReason = response.getResponseHeader['X-Nexus-Reason'];
-          if (nexusReason && nexusReason.substring(0, 7) == 'expired')
+          if (nexusReason && nexusReason.substring(0, 7) === 'expired')
           {
             Sonatype.repoServer.RepoServer.loginWindow.hide();
             Sonatype.utils.changePassword(Sonatype.repoServer.RepoServer.loginForm.find('name', 'username')[0].getValue());
@@ -228,25 +227,27 @@ define('sonatype/utils',['../extjs', 'nexus/config', 'nexus/util/Format'], funct
           else
           {
             Sonatype.MessageBox.show({
-                  title : 'Login Error',
-                  msg : 'Incorrect username, password or no permission to use the Nexus User Interface.<br />Try again.' + serverMessage,
-                  buttons : Sonatype.MessageBox.OK,
-                  icon : Sonatype.MessageBox.ERROR,
-                  animEl : 'mb3',
-                  fn : this.focusPassword
-                });
+              title : 'Login Error',
+              msg : 'Incorrect username, password or no permission to use the Nexus User Interface.<br />Try again.' + serverMessage,
+              buttons : Sonatype.MessageBox.OK,
+              icon : Sonatype.MessageBox.ERROR,
+              animEl : 'mb3',
+              fn : this.focusPassword
+            });
           }
         }
+
+        return true;
       }
-      else
-      {
-        if (message == null)
-        {
-          message = '';
-        }
+
+      // offer password renew etc.
+      if (handleLoginFailure()) {
+        return;
+      }
+
         if (serverMessage)
         {
-          message += serverMessage;
+          message = (message || '') + serverMessage;
         }
 
         var responseStatus = response.status;
@@ -262,25 +263,38 @@ define('sonatype/utils',['../extjs', 'nexus/config', 'nexus/util/Format'], funct
         //
         // <retry message> (optional)
 
-        var displayMessage =
-                    // caller provided message + serverMessage
-                    // status == -1 is request timed out (?), don't show message then
-                    (message && (responseStatus != -1) ? message : '') + (
-                          // show response text if requested (and makes sense, status 400)
-                          responseStatus == 400 && showResponseText ?  ('<br /><br />' + response.responseText) :
-                          // otherwise show statusLine if not requested to hide and we have a serverMessage
-                          // (we want to always provide some kind of server message, either error msg or status line)
-                          (
-                            (options.hideErrorStatus && serverMessage ) ? '' :
-                              (
-                                (responseStatus && responseStatus != -1 ) ? // hide the "-1 status"
-                                '<br/><br/>Nexus returned an error: ERROR ' + responseStatus + ': ' + responseStatusText :
-                                '<br/><br/>There was an error communicating with the server: request timed out.'
-                              )
-                            )
-                          )
-                          // FIXME offerRestart is never used (?)
-                          + (offerRestart ? '<br /><br />Click OK to reload the console or CANCEL if you wish to retry the same action in a little while.' : '');
+        function statusLine() {
+          if (options.hideErrorStatus && serverMessage ) {
+            return '';
+          }
+
+          if (responseStatus && responseStatus === -1 ) {
+            // hide the "-1 status"
+            return '<br/><br/>There was an error communicating with the server: request timed out.';
+          }
+
+          return '<br/><br/>Nexus returned an error: ERROR ' + responseStatus + ': ' + responseStatusText;
+        }
+
+        var displayMessage = '';
+
+        if (message && responseStatus !== -1) {
+          // caller provided message + serverMessage
+          // status == -1 is request timed out (?), don't show message then
+          displayMessage += message;
+        }
+
+        if (responseStatus === 400 && showResponseText) {
+          displayMessage += '<br /><br />' + response.responseText;
+        } else {
+          displayMessage += statusLine();
+        }
+
+        if (offerRestart) {
+          // FIXME offerRestart is never used (?)
+          displayMessage +=  '<br /><br />Click OK to reload the console or CANCEL if you wish to retry the same action in a little while.';
+        }
+
         Sonatype.MessageBox.show({
           title : "Error",
           msg : displayMessage,
@@ -294,7 +308,6 @@ define('sonatype/utils',['../extjs', 'nexus/config', 'nexus/util/Format'], funct
                 }
               }
             });
-      }
     },
     /**
      * Call this after the error signing in dialog appears. Otherwise focus

@@ -29,8 +29,9 @@
   #end
   ## Plugin pre HEAD contributions ends here
 
-  <link rel="stylesheet" href="ext-3.4.0/resources/css/ext-all.css" type="text/css" media="screen" charset="utf-8">
-  <link rel="stylesheet" href="ext-3.4.0/resources/css/xtheme-gray.css" type="text/css" media="screen" charset="utf-8">
+    ## FIXME should not be *js*/lib/.../ext-all.*css*
+  <link rel="stylesheet" href="js/lib/ext-3.4.0/resources/css/ext-all.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="js/lib/ext-3.4.0/resources/css/xtheme-gray.css" type="text/css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="style/$buildQualifier/sonatype-all.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
 ##  <script src="js/sonatype-all.js?$nexusVersion" type="text/javascript" charset="utf-8"></script>
@@ -44,13 +45,13 @@
     <script src="js/lib/require-2.1.1.js" type="text/javascript" charset="utf-8"></script>
 
   #if ($debug)
-      <script src="ext-3.4.0/adapter/ext/ext-base-debug.js" type="text/javascript" charset="utf-8"></script>
-      <script src="ext-3.4.0/ext-all-debug.js" type="text/javascript" charset="utf-8"></script>
+      <script src="js/lib/ext-3.4.0/adapter/ext/ext-base-debug.js" type="text/javascript" charset="utf-8"></script>
+      <script src="js/lib/ext-3.4.0/ext-all-debug.js" type="text/javascript" charset="utf-8"></script>
       ## omit sonatype-all.js to pick up single file modules
   #else
       ## load aggregated/minified files
-      <script src="ext-3.4.0/adapter/ext/ext-base.js" type="text/javascript" charset="utf-8"></script>
-      <script src="ext-3.4.0/ext-all.js" type="text/javascript" charset="utf-8"></script>
+      <script src="js/lib/ext-3.4.0/adapter/ext/ext-base.js" type="text/javascript" charset="utf-8"></script>
+      <script src="js/lib/ext-3.4.0/ext-all.js" type="text/javascript" charset="utf-8"></script>
       <script src="js/$buildQualifier/sonatype-all.js" type="text/javascript" charset="utf-8"></script>
   #end
 

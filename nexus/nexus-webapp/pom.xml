@@ -154,6 +154,49 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>com.github.searls</groupId>
+        <artifactId>jasmine-maven-plugin</artifactId>
+        <version>1.2.0.0</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>prepare</id>
+            <goals>
+              <goal>resources</goal>
+              <goal>testResources</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!--<webDriverClassName>org.openqa.selenium.firefox.FirefoxDriver</webDriverClassName>-->
+          <jsSrcDir>${project.build.directory}/${project.artifactId}-${project.version}/js</jsSrcDir>
+          <jsTestSrcDir>src/test/jasmine</jsTestSrcDir>
+          <!--<sourceIncludes>-->
+            <!--<include></include>-->
+          <!--</sourceIncludes>-->
+          <sourceExcludes>
+            <!-- pulling in source files via requirejs -->
+            <sourceExclude>**/*</sourceExclude>
+          </sourceExcludes>
+          <preloadSources>
+            <source>ext-3.4.0/adapter/ext/ext-base-debug.js</source>
+            <source>ext-3.4.0/ext-all-debug.js</source>
+            <!-- need to reference war sources directly here ... jasmine adds it for ext-3.4.0, but not for js/lib/... ??? -->
+            <!--<source>js/lib/require-2.1.1.js</source>-->
+          </preloadSources>
+          <specRunnerTemplate>REQUIRE_JS</specRunnerTemplate>
+          <scriptLoaderPath>lib/require-2.1.1.js</scriptLoaderPath>
+          <customRunnerTemplate>${project.build.testOutputDirectory}/RequireJsSpecRunner.htmltemplate</customRunnerTemplate>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
@@ -326,13 +369,13 @@
         <configuration>
           <warSourceIncludes>
             *,
-            ext-3.4.0/adapter/ext/ext-base-debug.js,
-            ext-3.4.0/ext-all-debug.js,
-            ext-3.4.0/adapter/ext/ext-base.js,
-            ext-3.4.0/ext-all.js,
-            ext-3.4.0/resources/css/ext-all.css,
-            ext-3.4.0/resources/css/xtheme-gray.css,
-            ext-3.4.0/resources/images/**,
+            js/lib/ext-3.4.0/adapter/ext/ext-base-debug.js,
+            js/lib/ext-3.4.0/ext-all-debug.js,
+            js/lib/ext-3.4.0/adapter/ext/ext-base.js,
+            js/lib/ext-3.4.0/ext-all.js,
+            js/lib/ext-3.4.0/resources/css/ext-all.css,
+            js/lib/ext-3.4.0/resources/css/xtheme-gray.css,
+            js/lib/ext-3.4.0/resources/images/**,
             images/**,
             WEB-INF/*,
             js/lib/*,
