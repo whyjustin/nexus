@@ -10,28 +10,36 @@
  * of Sonatype, Inc. Apache Maven is a trademark of the Apache Software Foundation. M2eclipse is a trademark of the
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
-define(['nexus/util/observable'], function(underTest) {
+define(['nexus/util/observable'], function(Observable) {
   describe('Nexus.util.Observable', function() {
+
+    var underTest;
+    var event;
+    var handler;
+
+    beforeEach(function() {
+      underTest = new Observable();
+      event = {};
+      handler = function(arg) {
+        event.arg = arg;
+      };
+    });
+
     it('should be defined', function() {
       expect(underTest).toBeTruthy();
     });
 
-    var handler = {
-      expect : function(id) {
-        var arg = "notcalled";
-        var real = function(a) {
-          arg = a;
-        };
-        real.verify = function() {
-          return id === arg;
-        };
-        return real;
-      }
-    };
 
     it('should be able to add listeners', function() {
-      underTest.addListener('test', handler.expect('arg'), 'arg');
-      expect(handler.verify()).toBe(true);
+      underTest.addListener('test', handler);
+      underTest.fireEvent('test', 'arg');
+      expect(event.arg).toBe('arg');
+    });
+
+    it('should not call listeners not registered for the event', function() {
+      underTest.addListener('test', handler);
+      underTest.fireEvent('anothertest', 'arg');
+      expect(event.arg).toBeUndefined();
     });
   });
 });
