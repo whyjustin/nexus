@@ -16,7 +16,8 @@ define('ext/all',
         'ext/layout', 'ext/lib', 'ext/tree', 'ext/component', 
         'ext/string', 'ext/tooltip', 'ext/util', 'ext/element'],
       function(Ext) {
-        Ext.BLANK_IMAGE_URL = "ext-3.4.0/resources/images/default/s.gif";
+        // FIXME why is this path hardcoded here?
+        Ext.BLANK_IMAGE_URL = "js/lib/ext-3.4.0/resources/images/default/s.gif";
         return Ext;
       }
 );
