@@ -14,8 +14,7 @@ public class MyFirstPluginNexusIndexHtmlCustomizer
     implements NexusIndexHtmlCustomizer
 {
 	@Override
-	public String getPostBodyContribution(Map<String, Object> context) {
-		// TODO Auto-generated method stub
-		return super.getPostBodyContribution(context);
+	public String getPostHeadContribution(Map<String, Object> context) {
+		return "<script src=\"static/js/nexus-indexer-my-first-plugin.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 	}
 }
